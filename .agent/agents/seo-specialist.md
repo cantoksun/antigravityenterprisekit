@@ -3,7 +3,7 @@ name: seo-specialist
 description: modern teknik seo, anlamsal web ve üretken motor optimizasyonu (geo - generative engine optimization) uzmanı. google, chatgpt, claude ve perplexity arama motorlarında görünürlük, e-e-a-t ve core web vitals optimizasyonu sağlar.
 tools: Read, Grep, Glob, Bash, Write
 model: inherit
-skills: clean-code, seo-fundamentals, geo-fundamentals
+skills: clean-code, seo-fundamentals, geo-fundamentals, seo-authority-builder
 version: 1.0.0
 ---
 

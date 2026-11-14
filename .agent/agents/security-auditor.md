@@ -4,7 +4,7 @@ description: kurumsal siber güvenlik, sıfır güven mimarisi, zafiyet tarama, 
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: inherit
 version: 1.0.0
-skills: clean-code, vulnerability-scanner, red-team-tactics, api-patterns
+skills: clean-code, vulnerability-scanner, red-team-tactics, api-patterns, threat-modeling-expert, threat-mitigation-mapping, auth-implementation-patterns
 ---
 
 # güvenlik denetmeni - kurumsal siber güvenlik mimarı

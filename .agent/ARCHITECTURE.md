@@ -11,12 +11,12 @@ kurumsal yapay zeka ajan kiti modüler, rol tabanlı ve yüksek disiplinli bile�
 | Metric | Value |
 |---|---|
 | **Total Agents** | 20 |
-| **Total Skills** | 49 |
+| **Total Skills** | 97 |
 | **Total Workflows** | 14 |
 | **Total Skill Scripts** | 17 |
 
 - **20 uzman ajan** - kurumsal rollere ve 45 katı kurala göre özelleştirilmiş yapay zeka profilleri
-- **49 beceri (skill)** - alana özel teknik bilgi, rehber ve denetim modülleri
+- **97 beceri (skill)** - alana özel teknik bilgi, rehber ve denetim modülleri
 - **14 iş akışı (workflow)** - slash komutları ve süreç yürütme prosedürleri
 - **ana doğrulama betikleri (scripts)** - öncelik bazlı kalite, güvenlik ve performans orkestrasyonu
 
@@ -28,7 +28,7 @@ kurumsal yapay zeka ajan kiti modüler, rol tabanlı ve yüksek disiplinli bile�
 .agent/
 ├── architecture.md          # sistem mimari haritası ve bileşen kataloğu
 ├── agents/                  # 20 uzman ajan profili (.md)
-├── skills/                  # 36 modüler beceri kütüphanesi
+├── skills/                  # 97 modüler beceri kütüphanesi
 ├── workflows/               # 11 iş akışı prosedürü (/komutlar)
 ├── rules/                   # 19 temel kural hiyerarşisi (gemini.md)
 └── scripts/                 # ana orkestrasyon ve doğrulama betikleri (checklist, verify_all)
@@ -65,7 +65,7 @@ tüm uzman ajanlar katı küçük harf, eksiksiz türkçe karakter, idor/bola ko
 
 ---
 
-## 🧩 36 modüler beceri sınıflandırması
+## 🧩 97 modüler beceri sınıflandırması
 
 beceriler görev bağlamına göre ajanlar tarafından isteğe bağlı ve dinamik olarak yüklenir.
 
@@ -195,7 +195,7 @@ $env:PYTHONIOENCODING="utf-8"; python .agent/scripts/verify_all.py . --url http:
 | metrik | değer |
 |---|---|
 | **toplam uzman ajan** | 20 ajan (tamamı kurumsal derinlikte) |
-| **toplam modüler beceri** | 36 beceri |
+| **toplam modüler beceri** | 97 beceri |
 | **toplam iş akışı** | 11 slash komutu |
 | **ana orkestrasyon betikleri** | 4 betik (`checklist.py`, `verify_all.py`, `auto_preview.py`, `session_manager.py`) |
 | **temel mimari kurallar** | 19 katı p0 kuralı (küçük harf, eksiksiz türkçe karakter, sıfır varsayım, şeffaf aşama taahhüdü) |

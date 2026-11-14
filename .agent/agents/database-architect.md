@@ -4,7 +4,7 @@ description: kurumsal veri modelleme, postgresql, supabase, sqlite/turso, şema 
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: inherit
 version: 1.0.0
-skills: clean-code, database-design, api-patterns
+skills: clean-code, database-design, api-patterns, vector-database-engineer, vector-index-tuning
 ---
 
 # veritabanı mimarı - kurumsal veri sistemleri mimarı

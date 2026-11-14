@@ -7,14 +7,17 @@
       "requires": {
         "skills": {
           "api-patterns": "^2.0.0",
+          "auth-implementation-patterns": "^1.0.0",
           "bash-linux": "^2.0.0",
           "clean-code": "^1.0.0",
           "database-design": "^2.1.0",
+          "golang-pro": "^1.0.0",
           "lint-and-validate": "^2.0.0",
           "mcp-builder": "^2.0.0",
           "nodejs-best-practices": "^2.0.0",
           "powershell-windows": "^2.0.0",
-          "python-patterns": "^2.0.0"
+          "python-patterns": "^2.0.0",
+          "rag-implementation": "^1.0.0"
         }
       },
       "tools": [
@@ -53,7 +56,9 @@
         "skills": {
           "api-patterns": "^2.0.0",
           "clean-code": "^1.0.0",
-          "database-design": "^2.1.0"
+          "database-design": "^2.1.0",
+          "vector-database-engineer": "^1.0.0",
+          "vector-index-tuning": "^1.0.0"
         }
       },
       "tools": [
@@ -94,8 +99,12 @@
           "bash-linux": "^2.0.0",
           "clean-code": "^1.0.0",
           "deployment-procedures": "^2.0.0",
+          "helm-chart-scaffolding": "^1.0.0",
+          "k8s-manifest-generator": "^1.0.0",
+          "k8s-security-policies": "^1.0.0",
           "powershell-windows": "^2.0.0",
-          "server-management": "^2.0.0"
+          "server-management": "^2.0.0",
+          "terraform-specialist": "^1.0.0"
         }
       },
       "tools": [
@@ -362,8 +371,11 @@
       "requires": {
         "skills": {
           "api-patterns": "^2.0.0",
+          "auth-implementation-patterns": "^1.0.0",
           "clean-code": "^1.0.0",
           "red-team-tactics": "^2.0.0",
+          "threat-mitigation-mapping": "^1.0.0",
+          "threat-modeling-expert": "^1.0.0",
           "vulnerability-scanner": "^2.1.0"
         }
       },
@@ -384,6 +396,7 @@
         "skills": {
           "clean-code": "^1.0.0",
           "geo-fundamentals": "^2.0.0",
+          "seo-authority-builder": "^1.0.0",
           "seo-fundamentals": "^2.0.0"
         }
       },
@@ -491,6 +504,53 @@
   },
   "schemaVersion": "1.0.0",
   "skills": {
+    "ai-engineer": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/ai-engineer/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "airflow-dag-patterns": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep"
+      ],
+      "path": "skills/airflow-dag-patterns/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "anti-reversing-techniques": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/anti-reversing-techniques/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "api-mocking": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/api-mocking/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "api-patterns": {
       "allowedTools": [
         "Read",
@@ -519,6 +579,17 @@
       "scripts": [],
       "version": "1.0.0"
     },
+    "architect-review": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/architect-review/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "architecture": {
       "allowedTools": [
         "Read",
@@ -531,6 +602,98 @@
       "path": "skills/architecture/SKILL.md",
       "scripts": [],
       "version": "2.0.0"
+    },
+    "architecture-decision-records": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep"
+      ],
+      "path": "skills/architecture-decision-records/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "architecture-patterns": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/architecture-patterns/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "arm-cortex-expert": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "path": "skills/arm-cortex-expert/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "async-python-patterns": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep"
+      ],
+      "path": "skills/async-python-patterns/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "attack-tree-construction": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/attack-tree-construction/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "auth-implementation-patterns": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep"
+      ],
+      "path": "skills/auth-implementation-patterns/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "backend-security-coder": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/backend-security-coder/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "backtesting-frameworks": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep"
+      ],
+      "path": "skills/backtesting-frameworks/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
     },
     "bash-linux": {
       "allowedTools": [
@@ -558,6 +721,19 @@
       "scripts": [],
       "version": "1.0.0"
     },
+    "bazel-build-optimization": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "path": "skills/bazel-build-optimization/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "behavioral-modes": {
       "allowedTools": [
         "Read",
@@ -568,6 +744,42 @@
         "Edit"
       ],
       "path": "skills/behavioral-modes/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "billing-automation": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep"
+      ],
+      "path": "skills/billing-automation/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "binary-analysis-patterns": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "path": "skills/binary-analysis-patterns/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "blockchain-developer": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/blockchain-developer/SKILL.md",
       "scripts": [],
       "version": "1.0.0"
     },
@@ -584,6 +796,102 @@
       "scripts": [],
       "version": "1.0.0"
     },
+    "c-pro": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "path": "skills/c-pro/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "c4-architecture": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/c4-architecture/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "c4-code": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/c4-code/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "c4-component": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/c4-component/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "c4-container": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/c4-container/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "c4-context": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/c4-context/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "changelog-automation": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep"
+      ],
+      "path": "skills/changelog-automation/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "cicd-automation": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/cicd-automation/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "clean-code": {
       "allowedTools": [
         "Read",
@@ -594,6 +902,17 @@
         "Edit"
       ],
       "path": "skills/clean-code/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "cloud-architect": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/cloud-architect/SKILL.md",
       "scripts": [],
       "version": "1.0.0"
     },
@@ -739,6 +1058,18 @@
       ],
       "version": "2.5.0"
     },
+    "frontend-security-coder": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/frontend-security-coder/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "game-development": {
       "allowedTools": [
         "Read",
@@ -767,6 +1098,42 @@
       ],
       "version": "2.0.0"
     },
+    "gitops-workflow": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/gitops-workflow/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "golang-pro": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/golang-pro/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "helm-chart-scaffolding": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob"
+      ],
+      "path": "skills/helm-chart-scaffolding/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "i18n-localization": {
       "allowedTools": [
         "Read",
@@ -794,6 +1161,28 @@
       "path": "skills/intelligent-routing/SKILL.md",
       "scripts": [],
       "version": "2.0.0"
+    },
+    "k8s-manifest-generator": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob"
+      ],
+      "path": "skills/k8s-manifest-generator/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "k8s-security-policies": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob"
+      ],
+      "path": "skills/k8s-security-policies/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
     },
     "lint-and-validate": {
       "allowedTools": [
@@ -850,6 +1239,18 @@
       ],
       "version": "2.0.0"
     },
+    "mobile-security-coder": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/mobile-security-coder/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "nextjs-react-expert": {
       "allowedTools": [
         "Read",
@@ -878,6 +1279,18 @@
       "path": "skills/nodejs-best-practices/SKILL.md",
       "scripts": [],
       "version": "2.0.0"
+    },
+    "observability-engineer": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/observability-engineer/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
     },
     "parallel-agents": {
       "allowedTools": [
@@ -933,6 +1346,19 @@
       "scripts": [],
       "version": "2.0.0"
     },
+    "protocol-reverse-engineering": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "path": "skills/protocol-reverse-engineering/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "python-patterns": {
       "allowedTools": [
         "Read",
@@ -945,6 +1371,17 @@
       "path": "skills/python-patterns/SKILL.md",
       "scripts": [],
       "version": "2.0.0"
+    },
+    "rag-implementation": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep"
+      ],
+      "path": "skills/rag-implementation/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
     },
     "red-team-tactics": {
       "allowedTools": [
@@ -987,6 +1424,54 @@
       "scripts": [],
       "version": "1.0.0"
     },
+    "security-requirement-extraction": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/security-requirement-extraction/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "security-scanning-security-hardening": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "path": "skills/security-scanning-security-hardening/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "security-scanning-security-sast": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "path": "skills/security-scanning-security-sast/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "seo-authority-builder": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep"
+      ],
+      "path": "skills/seo-authority-builder/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "seo-fundamentals": {
       "allowedTools": [
         "Read",
@@ -1015,6 +1500,18 @@
       "scripts": [],
       "version": "2.0.0"
     },
+    "service-mesh-observability": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/service-mesh-observability/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "simplify-code": {
       "allowedTools": [
         "Read",
@@ -1035,6 +1532,18 @@
         "Grep"
       ],
       "path": "skills/skillify/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "solidity-security": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/solidity-security/SKILL.md",
       "scripts": [],
       "version": "1.0.0"
     },
@@ -1077,6 +1586,18 @@
       "scripts": [],
       "version": "2.0.0"
     },
+    "terraform-specialist": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Bash"
+      ],
+      "path": "skills/terraform-specialist/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
     "testing-patterns": {
       "allowedTools": [
         "Read",
@@ -1091,6 +1612,51 @@
         "skills/testing-patterns/scripts/test_runner.py"
       ],
       "version": "2.0.0"
+    },
+    "threat-mitigation-mapping": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/threat-mitigation-mapping/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "threat-modeling-expert": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/threat-modeling-expert/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "vector-database-engineer": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep"
+      ],
+      "path": "skills/vector-database-engineer/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
+    },
+    "vector-index-tuning": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Bash"
+      ],
+      "path": "skills/vector-index-tuning/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
     },
     "verify-changes": {
       "allowedTools": [
@@ -1117,6 +1683,18 @@
         "skills/vulnerability-scanner/scripts/security_scan.py"
       ],
       "version": "2.1.0"
+    },
+    "wcag-accessibility": {
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Grep",
+        "Glob"
+      ],
+      "path": "skills/wcag-accessibility/SKILL.md",
+      "scripts": [],
+      "version": "1.0.0"
     },
     "web-design-guidelines": {
       "allowedTools": [
