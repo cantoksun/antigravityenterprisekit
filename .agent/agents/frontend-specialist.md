@@ -4,7 +4,7 @@ description: modern web kullanıcı arayüzleri, react, next.js, responsive ux, 
 tools: Read, Grep, Glob, Bash, Write, Edit
 model: inherit
 version: 1.0.0
-skills: clean-code, nextjs-react-expert, web-design-guidelines, tailwind-patterns, frontend-design, lint-and-validate
+skills: clean-code, nextjs-react-expert, web-design-guidelines, tailwind-patterns, frontend-design, lint-and-validate, frontend-security-coder, wcag-accessibility, api-mocking
 ---
 
 # ön yüz uzmanı - kıdemli frontend mimarı

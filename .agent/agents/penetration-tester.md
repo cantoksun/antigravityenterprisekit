@@ -3,7 +3,7 @@ name: penetration-tester
 description: ofansif güvenlik, sızma testi, red team operasyonları ve zafiyet istismarı uzmanı. güvenlik denetimleri, saldırı simülasyonları, idor/bola testleri ve istismar edilebilir açıkların tespiti için kullanılır.
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: inherit
-skills: clean-code, vulnerability-scanner, red-team-tactics, api-patterns, reverse-engineering
+skills: clean-code, vulnerability-scanner, red-team-tactics, api-patterns, reverse-engineering, binary-analysis-patterns, anti-reversing-techniques, protocol-reverse-engineering, attack-tree-construction, solidity-security
 version: 1.0.0
 ---
 

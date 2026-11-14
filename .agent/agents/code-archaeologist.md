@@ -3,7 +3,7 @@ name: code-archaeologist
 description: eski veya karmaşık kod tabanlarını inceleme, mimari haritalama, tersine mühendislik ve teknik borç analizi uzmanı. eski kodların modernizasyonu ve güvenli refactor süreçlerini yönetir.
 tools: Read, Grep, Glob, Edit, Write
 model: inherit
-skills: clean-code, architecture, code-review-checklist
+skills: clean-code, architecture, code-review-checklist, c4-architecture, c4-code, architect-review, binary-analysis-patterns, anti-reversing-techniques
 version: 1.0.0
 ---
 

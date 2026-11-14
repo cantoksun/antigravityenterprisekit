@@ -185,14 +185,24 @@ flowchart LR
   A_backend_specialist --> S_golang_pro
   A_backend_specialist --> S_rag_implementation
   A_backend_specialist --> S_auth_implementation_patterns
+  A_backend_specialist --> S_backend_security_coder
+  A_backend_specialist --> S_ai_engineer
+  A_backend_specialist --> S_async_python_patterns
+  A_backend_specialist --> S_api_mocking
   A_code_archaeologist --> S_clean_code
   A_code_archaeologist --> S_architecture
   A_code_archaeologist --> S_code_review_checklist
+  A_code_archaeologist --> S_c4_architecture
+  A_code_archaeologist --> S_c4_code
+  A_code_archaeologist --> S_architect_review
+  A_code_archaeologist --> S_binary_analysis_patterns
+  A_code_archaeologist --> S_anti_reversing_techniques
   A_database_architect --> S_clean_code
   A_database_architect --> S_database_design
   A_database_architect --> S_api_patterns
   A_database_architect --> S_vector_database_engineer
   A_database_architect --> S_vector_index_tuning
+  A_database_architect --> S_architecture_patterns
   A_debugger --> S_clean_code
   A_debugger --> S_systematic_debugging
   A_debugger --> S_testing_patterns
@@ -205,6 +215,9 @@ flowchart LR
   A_devops_engineer --> S_k8s_security_policies
   A_devops_engineer --> S_helm_chart_scaffolding
   A_devops_engineer --> S_terraform_specialist
+  A_devops_engineer --> S_changelog_automation
+  A_devops_engineer --> S_gitops_workflow
+  A_devops_engineer --> S_cicd_automation
   A_documentation_writer --> S_clean_code
   A_documentation_writer --> S_documentation_templates
   A_explorer_agent --> S_clean_code
@@ -217,11 +230,16 @@ flowchart LR
   A_frontend_specialist --> S_tailwind_patterns
   A_frontend_specialist --> S_frontend_design
   A_frontend_specialist --> S_lint_and_validate
+  A_frontend_specialist --> S_frontend_security_coder
+  A_frontend_specialist --> S_wcag_accessibility
+  A_frontend_specialist --> S_api_mocking
   A_game_developer --> S_clean_code
   A_game_developer --> S_game_development
   A_game_developer --> S_performance_profiling
   A_mobile_developer --> S_clean_code
   A_mobile_developer --> S_mobile_design
+  A_mobile_developer --> S_mobile_security_coder
+  A_mobile_developer --> S_wcag_accessibility
   A_orchestrator --> S_clean_code
   A_orchestrator --> S_parallel_agents
   A_orchestrator --> S_behavioral_modes
@@ -236,9 +254,16 @@ flowchart LR
   A_penetration_tester --> S_red_team_tactics
   A_penetration_tester --> S_api_patterns
   A_penetration_tester --> S_reverse_engineering
+  A_penetration_tester --> S_binary_analysis_patterns
+  A_penetration_tester --> S_anti_reversing_techniques
+  A_penetration_tester --> S_protocol_reverse_engineering
+  A_penetration_tester --> S_attack_tree_construction
+  A_penetration_tester --> S_solidity_security
   A_performance_optimizer --> S_clean_code
   A_performance_optimizer --> S_performance_profiling
   A_performance_optimizer --> S_nextjs_react_expert
+  A_performance_optimizer --> S_observability_engineer
+  A_performance_optimizer --> S_bazel_build_optimization
   A_product_manager --> S_plan_writing
   A_product_manager --> S_brainstorming
   A_product_manager --> S_clean_code
@@ -249,11 +274,19 @@ flowchart LR
   A_project_planner --> S_app_builder
   A_project_planner --> S_plan_writing
   A_project_planner --> S_architecture
+  A_project_planner --> S_c4_architecture
+  A_project_planner --> S_c4_context
+  A_project_planner --> S_c4_container
+  A_project_planner --> S_c4_component
+  A_project_planner --> S_c4_code
+  A_project_planner --> S_architecture_decision_records
   A_qa_automation_engineer --> S_webapp_testing
   A_qa_automation_engineer --> S_testing_patterns
   A_qa_automation_engineer --> S_web_design_guidelines
   A_qa_automation_engineer --> S_clean_code
   A_qa_automation_engineer --> S_lint_and_validate
+  A_qa_automation_engineer --> S_api_mocking
+  A_qa_automation_engineer --> S_wcag_accessibility
   A_security_auditor --> S_clean_code
   A_security_auditor --> S_vulnerability_scanner
   A_security_auditor --> S_red_team_tactics
@@ -261,6 +294,10 @@ flowchart LR
   A_security_auditor --> S_threat_modeling_expert
   A_security_auditor --> S_threat_mitigation_mapping
   A_security_auditor --> S_auth_implementation_patterns
+  A_security_auditor --> S_security_scanning_security_hardening
+  A_security_auditor --> S_security_scanning_security_sast
+  A_security_auditor --> S_security_requirement_extraction
+  A_security_auditor --> S_attack_tree_construction
   A_seo_specialist --> S_clean_code
   A_seo_specialist --> S_seo_fundamentals
   A_seo_specialist --> S_geo_fundamentals

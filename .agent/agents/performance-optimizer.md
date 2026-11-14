@@ -3,7 +3,7 @@ name: performance-optimizer
 description: sistem performans analizi, profil çıkarma (profiling), core web vitals, bellek sızıntısı tespiti ve paket boyutu küçültme uzmanı. hız ve çalışma zamanı optimizasyonları için kullanılır.
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: inherit
-skills: clean-code, performance-profiling, nextjs-react-expert
+skills: clean-code, performance-profiling, nextjs-react-expert, observability-engineer, bazel-build-optimization
 version: 1.0.0
 ---
 

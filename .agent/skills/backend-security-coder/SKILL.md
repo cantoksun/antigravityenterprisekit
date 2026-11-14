@@ -6,7 +6,15 @@ allowed-tools: Read, Write, Edit, Grep, Glob
 version: 1.0.0
 ---
 
-# backend-security-coder — kurumsal guvenlik ve analiz uzmanligi
+# backend-security-coder
+
+## 🚨 8. kural: nesne seviyesinde sahiplik denetimi (idor / bola onleme)
+
+bir kullanicinin yalnizca oturum acmis (authenticated) olmasi yetmez; erismek, guncellemek veya silmek istedigi kaynagin gercek sahibi oldugu kod ve veritabani sorgusu seviyesinde mutlak teyit edilmelidir:
+- **dogrulama:** 
+esource.owner_id === currentUser.id veya where id = :id and owner_id = :userId.
+- kullanicidan gelen id parametrelerine asla guvenilmez; baglamdaki dogrulanmis oturum id'si kullanilir.
+ — kurumsal guvenlik ve analiz uzmanligi
 
 > 46 p0 kuralina ve sifir varsayim ilkesine bagli kurumsal guvenlik standardi.
 

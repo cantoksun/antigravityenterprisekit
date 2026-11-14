@@ -6,8 +6,12 @@
       "path": "agent/backend-specialist.md",
       "requires": {
         "skills": {
+          "ai-engineer": "^1.0.0",
+          "api-mocking": "^1.0.0",
           "api-patterns": "^2.0.0",
+          "async-python-patterns": "^1.0.0",
           "auth-implementation-patterns": "^1.0.0",
+          "backend-security-coder": "^1.0.0",
           "bash-linux": "^2.0.0",
           "clean-code": "^1.0.0",
           "database-design": "^2.1.0",
@@ -35,7 +39,12 @@
       "path": "agent/code-archaeologist.md",
       "requires": {
         "skills": {
+          "anti-reversing-techniques": "^1.0.0",
+          "architect-review": "^1.0.0",
           "architecture": "^2.0.0",
+          "binary-analysis-patterns": "^1.0.0",
+          "c4-architecture": "^1.0.0",
+          "c4-code": "^1.0.0",
           "clean-code": "^1.0.0",
           "code-review-checklist": "^2.0.0"
         }
@@ -55,6 +64,7 @@
       "requires": {
         "skills": {
           "api-patterns": "^2.0.0",
+          "architecture-patterns": "^1.0.0",
           "clean-code": "^1.0.0",
           "database-design": "^2.1.0",
           "vector-database-engineer": "^1.0.0",
@@ -97,8 +107,11 @@
       "requires": {
         "skills": {
           "bash-linux": "^2.0.0",
+          "changelog-automation": "^1.0.0",
+          "cicd-automation": "^1.0.0",
           "clean-code": "^1.0.0",
           "deployment-procedures": "^2.0.0",
+          "gitops-workflow": "^1.0.0",
           "helm-chart-scaffolding": "^1.0.0",
           "k8s-manifest-generator": "^1.0.0",
           "k8s-security-policies": "^1.0.0",
@@ -160,11 +173,14 @@
       "path": "agent/frontend-specialist.md",
       "requires": {
         "skills": {
+          "api-mocking": "^1.0.0",
           "clean-code": "^1.0.0",
           "frontend-design": "^2.5.0",
+          "frontend-security-coder": "^1.0.0",
           "lint-and-validate": "^2.0.0",
           "nextjs-react-expert": "^2.0.0",
           "tailwind-patterns": "^2.0.0",
+          "wcag-accessibility": "^1.0.0",
           "web-design-guidelines": "^2.2.0"
         }
       },
@@ -204,7 +220,9 @@
       "requires": {
         "skills": {
           "clean-code": "^1.0.0",
-          "mobile-design": "^2.0.0"
+          "mobile-design": "^2.0.0",
+          "mobile-security-coder": "^1.0.0",
+          "wcag-accessibility": "^1.0.0"
         }
       },
       "tools": [
@@ -249,10 +267,15 @@
       "path": "agent/penetration-tester.md",
       "requires": {
         "skills": {
+          "anti-reversing-techniques": "^1.0.0",
           "api-patterns": "^2.0.0",
+          "attack-tree-construction": "^1.0.0",
+          "binary-analysis-patterns": "^1.0.0",
           "clean-code": "^1.0.0",
+          "protocol-reverse-engineering": "^1.0.0",
           "red-team-tactics": "^2.0.0",
           "reverse-engineering": "^1.0.0",
+          "solidity-security": "^1.0.0",
           "vulnerability-scanner": "^2.1.0"
         }
       },
@@ -271,8 +294,10 @@
       "path": "agent/performance-optimizer.md",
       "requires": {
         "skills": {
+          "bazel-build-optimization": "^1.0.0",
           "clean-code": "^1.0.0",
           "nextjs-react-expert": "^2.0.0",
+          "observability-engineer": "^1.0.0",
           "performance-profiling": "^2.0.0"
         }
       },
@@ -329,6 +354,12 @@
         "skills": {
           "app-builder": "^1.0.0",
           "architecture": "^2.0.0",
+          "architecture-decision-records": "^1.0.0",
+          "c4-architecture": "^1.0.0",
+          "c4-code": "^1.0.0",
+          "c4-component": "^1.0.0",
+          "c4-container": "^1.0.0",
+          "c4-context": "^1.0.0",
           "clean-code": "^1.0.0",
           "plan-writing": "^2.0.0"
         }
@@ -348,9 +379,11 @@
       "path": "agent/qa-automation-engineer.md",
       "requires": {
         "skills": {
+          "api-mocking": "^1.0.0",
           "clean-code": "^1.0.0",
           "lint-and-validate": "^2.0.0",
           "testing-patterns": "^2.0.0",
+          "wcag-accessibility": "^1.0.0",
           "web-design-guidelines": "^2.2.0",
           "webapp-testing": "^2.0.0"
         }
@@ -371,9 +404,13 @@
       "requires": {
         "skills": {
           "api-patterns": "^2.0.0",
+          "attack-tree-construction": "^1.0.0",
           "auth-implementation-patterns": "^1.0.0",
           "clean-code": "^1.0.0",
           "red-team-tactics": "^2.0.0",
+          "security-requirement-extraction": "^1.0.0",
+          "security-scanning-security-hardening": "^1.0.0",
+          "security-scanning-security-sast": "^1.0.0",
           "threat-mitigation-mapping": "^1.0.0",
           "threat-modeling-expert": "^1.0.0",
           "vulnerability-scanner": "^2.1.0"

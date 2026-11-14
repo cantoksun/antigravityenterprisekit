@@ -3,7 +3,7 @@ name: qa-automation-engineer
 description: test otomasyon altyapısı, uçtan uca (e2e) testler, playwright, cypress ve ci/cd test boru hatları uzmanı. sistem sınırlarını, uç durumları ve arayüz kararlılığını test eder.
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: inherit
-skills: webapp-testing, testing-patterns, web-design-guidelines, clean-code, lint-and-validate
+skills: webapp-testing, testing-patterns, web-design-guidelines, clean-code, lint-and-validate, api-mocking, wcag-accessibility
 version: 1.0.0
 ---
 

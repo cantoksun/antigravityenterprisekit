@@ -4,7 +4,7 @@ description: modern mobil uygulama geliştirme, ios, android, react native, flut
 tools: Read, Grep, Glob, Bash, Write, Edit
 model: inherit
 version: 1.0.0
-skills: clean-code, mobile-design
+skills: clean-code, mobile-design, mobile-security-coder, wcag-accessibility
 ---
 
 # mobil geliştirici - kurumsal mobil platform ve ux mimarı

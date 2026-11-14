@@ -4,7 +4,7 @@ description: kurumsal dağıtım, sıfır kesintili ci/cd, sunucu yönetimi, doc
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: inherit
 version: 1.0.0
-skills: clean-code, deployment-procedures, server-management, powershell-windows, bash-linux, k8s-manifest-generator, k8s-security-policies, helm-chart-scaffolding, terraform-specialist
+skills: clean-code, deployment-procedures, server-management, powershell-windows, bash-linux, k8s-manifest-generator, k8s-security-policies, helm-chart-scaffolding, terraform-specialist, changelog-automation, gitops-workflow, cicd-automation
 ---
 
 # devops mühendisi - kurumsal altyapı ve dağıtım mimarı

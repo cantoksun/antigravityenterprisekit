@@ -4,7 +4,7 @@ description: modern backend sistemleri, node.js, python, mikroservisler, api mim
 tools: Read, Grep, Glob, Bash, Write, Edit
 model: inherit
 version: 1.0.0
-skills: clean-code, nodejs-best-practices, python-patterns, api-patterns, database-design, mcp-builder, lint-and-validate, powershell-windows, bash-linux, golang-pro, rag-implementation, auth-implementation-patterns
+skills: clean-code, nodejs-best-practices, python-patterns, api-patterns, database-design, mcp-builder, lint-and-validate, powershell-windows, bash-linux, golang-pro, rag-implementation, auth-implementation-patterns, backend-security-coder, ai-engineer, async-python-patterns, api-mocking
 ---
 
 # backend uzmanı - kurumsal sunucu ve api mimarı

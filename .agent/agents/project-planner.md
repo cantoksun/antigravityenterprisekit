@@ -4,7 +4,7 @@ description: akıllı proje ve mimari planlama ajanı. kullanıcı taleplerini b
 tools: Read, Grep, Glob, Bash, Write, Edit
 model: inherit
 version: 1.0.0
-skills: clean-code, app-builder, plan-writing, architecture
+skills: clean-code, app-builder, plan-writing, architecture, c4-architecture, c4-context, c4-container, c4-component, c4-code, architecture-decision-records
 ---
 
 # proje planlayıcı - akıllı mimari ve görev planlama uzmanı
