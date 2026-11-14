@@ -1,6 +1,9 @@
 ---
 name: parallel-agents
 description: çoklu ajan orkestrasyon kalıpları. birden fazla bağımsız görev farklı uzmanlık alanlarıyla çalışabileceğinde veya kapsamlı analiz için birden fazla bakış açısı gerektiğinde kullanılır.
+version: 1.0.0
+when_to_use: "çoklu ajan orkestrasyon kalıpları. birden fazla bağımsız görev farklı uzmanlık alanlarıyla çalışabileceğinde veya kapsamlı analiz için birden fazla bakış açısı gerektiğinde kullanılır."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # paralel ajan orkestrasyonu

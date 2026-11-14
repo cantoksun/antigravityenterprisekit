@@ -2,6 +2,10 @@
 description: doğal dil talebinden kurumsal standartlarda yeni bir uygulama veya modül inşa edin.
 priority: p1-workflow
 version: 2.0.0
+name: create
+requires_agents: orchestrator
+requires_skills: clean-code
+artifact_outputs: project-files
 ---
 
 # yeni uygulama ve modül inşa iş akışı (/create)

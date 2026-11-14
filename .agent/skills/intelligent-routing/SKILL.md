@@ -3,6 +3,8 @@ name: intelligent-routing
 description: otomatik ajan seçimi ve akıllı görev yönlendirmesi. kullanıcı isteklerini analiz ederek açıkça belirtilmese bile en uygun uzman ajanı belirler.
 priority: p0-core
 version: 2.0.0
+when_to_use: "otomatik ajan seçimi ve akıllı görev yönlendirmesi. kullanıcı isteklerini analiz ederek açıkça belirtilmese bile en uygun uzman ajanı belirler."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # akıllı ajan yönlendirmesi ve karar matrisi
@@ -13,7 +15,7 @@ bu beceri, gelen her kullanıcı isteğini sessizce analiz ederek görevi en yet
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 3 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz, mantıklı adımlarla doğrudan icra edilir.
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır.

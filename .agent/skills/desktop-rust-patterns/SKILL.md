@@ -1,6 +1,9 @@
 ---
 name: desktop-rust-patterns
 description: kurumsal masaüstü uygulama mimarisi ve rust ekosistemi standartları. slint, egui, iced ile saf yerel arayüzler ve tauri ile hafif webview hibrit kalıpları, bellek yönetimi ve sistem güvenliği ilkeleri.
+version: 1.0.0
+when_to_use: "kurumsal masaüstü uygulama mimarisi ve rust ekosistemi standartları. slint, egui, iced ile saf yerel arayüzler ve tauri ile hafif webview hibrit kalıpları, bellek yönetimi ve sistem güvenliği ilkeleri."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # 🦀 masaüstü geliştirme ve kurumsal rust standartları (desktop-rust-patterns)

@@ -3,6 +3,8 @@ name: plan-writing
 description: açık kırılımlar, bağımlılıklar ve doğrulama kriterleri içeren yapılandırılmış görev planlaması.
 priority: p1-structural
 version: 2.0.0
+when_to_use: "açık kırılımlar, bağımlılıklar ve doğrulama kriterleri içeren yapılandırılmış görev planlaması."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal yapılandırılmış planlama ve görev kırılım standartları
@@ -13,7 +15,7 @@ bu beceri; karmaşık yazılım geliştirme süreçlerini mantıksal, bağımsı
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 16 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır (1. kural).
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz (2. kural).
    - adım adım aşamalı yürütülür; her turda tek bir bağımsız modül/aşama tamamlanır (3. kural).

@@ -1,5 +1,10 @@
 ---
 description: karmaşık ve çok disiplinli görevlerde birden fazla uzman ajanın koordinasyonu, modüler iş bölümü ve aşamalı yürütme prosedürü.
+name: orchestrate
+version: 1.0.0
+requires_agents: orchestrator
+requires_skills: coordinator-mode
+artifact_outputs: orchestration-result
 ---
 
 # 🎼 çoklu ajan orkestrasyonu (multi-agent orchestration)

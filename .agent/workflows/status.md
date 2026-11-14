@@ -2,6 +2,10 @@
 description: projenin genel sağlık durumunu, kod kalitesini, güvenlik ve mimari uyumunu özetleyin.
 priority: p1-workflow
 version: 2.0.0
+name: status
+requires_agents: orchestrator
+requires_skills: clean-code
+artifact_outputs: system-status
 ---
 
 # proje durum ve sağlık değerlendirme iş akışı (/status)

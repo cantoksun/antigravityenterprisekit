@@ -3,6 +3,8 @@ name: architecture
 description: kurumsal mimari karar verme çerçevesi. gereksinim analizi, ödünleşim (trade-off) değerlendirmesi ve adr dokümantasyonu.
 priority: p1-structural
 version: 2.0.0
+when_to_use: "kurumsal mimari karar verme çerçevesi. gereksinim analizi, ödünleşim (trade-off) değerlendirmesi ve adr dokümantasyonu."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal mimari karar çerçevesi (architecture)
@@ -13,7 +15,7 @@ bu beceri, sistem mimarisinin tasarlanması, teknoloji seçimleri, bileşen sın
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 3 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz, mantıklı adımlarla doğrudan icra edilir.
    - adım adım aşamalı yürütülür; her seferinde tek bir mimari modül tamamlanır.

@@ -1,5 +1,10 @@
 ---
 description: sistematik hata ayıklama, kök neden analizi ve kalıcı çözüm prosedürü.
+name: debug
+version: 1.0.0
+requires_agents: debugger
+requires_skills: systematic-debugging
+artifact_outputs: debug-report
 ---
 
 # 🔍 /debug - sistematik hata ayıklama ve kök neden analizi iş akışı

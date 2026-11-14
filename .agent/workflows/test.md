@@ -2,6 +2,10 @@
 description: projedeki birim, entegrasyon ve uçtan uca (e2e) testleri kurumsal standartlarda çalıştırın ve doğrulayın.
 priority: p1-workflow
 version: 2.0.0
+name: test
+requires_agents: test-engineer
+requires_skills: testing-patterns
+artifact_outputs: test-report
 ---
 
 # kurumsal test çalıştırma ve doğrulama iş akışı (/test)

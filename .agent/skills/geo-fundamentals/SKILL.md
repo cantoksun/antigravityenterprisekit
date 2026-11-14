@@ -3,6 +3,8 @@ name: geo-fundamentals
 description: yapay zeka arama motorları (chatgpt, claude, perplexity) için üretken motor optimizasyonu (generative engine optimization) ilkeleri.
 priority: p2-specialized
 version: 2.0.0
+when_to_use: "yapay zeka arama motorları (chatgpt, claude, perplexity) için üretken motor optimizasyonu (generative engine optimization) ilkeleri."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # üretken motor optimizasyonu (geo) ve yapay zeka indeksleme standartları
@@ -13,7 +15,7 @@ bu beceri; web sitelerinin, dokümantasyonların ve kurumsal içeriklerin modern
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 15 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır.

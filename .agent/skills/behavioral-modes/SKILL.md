@@ -1,6 +1,9 @@
 ---
 name: behavioral-modes
 description: yapay zeka operasyonel davranış modları (beyin fırtınası, geliştirme, hata ayıklama, inceleme, öğretme, dağıtım, orkestrasyon). görev türüne göre davranışı uyarlamak için kullanılır.
+version: 1.0.0
+when_to_use: "yapay zeka operasyonel davranış modları (beyin fırtınası, geliştirme, hata ayıklama, inceleme, öğretme, dağıtım, orkestrasyon). görev türüne göre davranışı uyarlamak için kullanılır."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # operasyonel davranış modları

@@ -3,6 +3,8 @@ name: nextjs-react-expert
 description: react ve next.js performans optimizasyonu, sunucu bileşenleri, veri getirme mimarileri ve demet küçültme.
 priority: p1-visual
 version: 2.0.0
+when_to_use: "react ve next.js performans optimizasyonu, sunucu bileşenleri, veri getirme mimarileri ve demet küçültme."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # modern react ve next.js kurumsal performans ve mimari standartları
@@ -13,7 +15,7 @@ bu beceri; react 19, next.js (app router), sunucu bileşenleri (rsc), sıfır ş
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 14 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır.

@@ -8,9 +8,16 @@
 
 kurumsal yapay zeka ajan kiti modüler, rol tabanlı ve yüksek disiplinli bileşenlerden oluşur:
 
-- **20 uzman ajan** - kurumsal rollere ve 19 katı kurala göre özelleştirilmiş yapay zeka profilleri
-- **36 beceri (skill)** - alana özel teknik bilgi, rehber ve denetim modülleri
-- **11 iş akışı (workflow)** - slash komutları ve süreç yürütme prosedürleri
+| Metric | Value |
+|---|---|
+| **Total Agents** | 20 |
+| **Total Skills** | 49 |
+| **Total Workflows** | 14 |
+| **Total Skill Scripts** | 17 |
+
+- **20 uzman ajan** - kurumsal rollere ve 45 katı kurala göre özelleştirilmiş yapay zeka profilleri
+- **49 beceri (skill)** - alana özel teknik bilgi, rehber ve denetim modülleri
+- **14 iş akışı (workflow)** - slash komutları ve süreç yürütme prosedürleri
 - **ana doğrulama betikleri (scripts)** - öncelik bazlı kalite, güvenlik ve performans orkestrasyonu
 
 ---

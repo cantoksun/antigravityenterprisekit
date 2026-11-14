@@ -3,6 +3,8 @@ name: documentation-templates
 description: kurumsal teknik dokümantasyon şablonları. readme, mimari karar kayıtları (adr), api dokümantasyonu ve kod yorum standartları.
 priority: p2-specialized
 version: 2.0.0
+when_to_use: "kurumsal teknik dokümantasyon şablonları. readme, mimari karar kayıtları (adr), api dokümantasyonu ve kod yorum standartları."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal teknik dokümantasyon ve standartlar kılavuzu
@@ -13,7 +15,7 @@ bu beceri; projelerin kurulum rehberlerini, mimari karar kayıtlarını (adr), a
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 15 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir dokümantasyon modülü tamamlanır.

@@ -3,6 +3,8 @@ name: mobile-design
 description: ios ve android uygulamaları için mobil öncelikli tasarım ve karar mekanizmaları. dokunma etkileşimi, performans kalıpları ve platform konvansiyonları.
 priority: p1-visual
 version: 2.0.0
+when_to_use: "ios ve android uygulamaları için mobil öncelikli tasarım ve karar mekanizmaları. dokunma etkileşimi, performans kalıpları ve platform konvansiyonları."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal mobil tasarım ve etkileşim standartları
@@ -13,7 +15,7 @@ bu beceri; ios, android, react native ve flutter platformlarında mobil öncelik
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 14 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır.

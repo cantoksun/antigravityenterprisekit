@@ -2,6 +2,9 @@
 name: clean-code
 description: yalın, anlaşılır ve kurumsal standartlarda kodlama ilkeleri. aşırı mühendislik ve gereksiz yorum satırlarını engeller.
 priority: p0-core
+version: 1.0.0
+when_to_use: "yalın, anlaşılır ve kurumsal standartlarda kodlama ilkeleri. aşırı mühendislik ve gereksiz yorum satırlarını engeller."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal yalın ve sade kod standartları (clean code)
@@ -12,16 +15,16 @@ bu beceri, tüm uzman ajanlar ve kodlama süreçleri için temel kurumsal kod, i
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 42 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır (1. kural).
-   - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz (2. kural).
-   - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır (3. kural).
+   - **sorgusuz modüler planlama ve icra (2. kural):** gereksiz sorular sorulmadan, doğrudan mantıklı aşamalara bölünerek ilerlenir.
+   - **adım adım aşamalı yürütme ve şeffaf aşama bildirimi - tek tur / tek modül (3. kural):** her turda yalnızca tek bir modül tamamlanır ve durulur.
    - sadelik ve modern trend teknolojiler (4. kural).
    - yalın veritabanı modellemesi (5. kural).
    - katı api güvenliği (6. kural), hassas veri koruması (7. kural) ve idor/bola önleme (8. kural).
    - bellek yönetimi (9. kural), sızıntı analizi (10. kural), sayfalama (11. kural), rls 42501 (12. kural).
    - paginasyon/lazy loading (13. kural), owasp oturum denetimi (14. kural), responsive ux ayrımı (15. kural), font disiplini (16. kural).
-   - kullanıcıyı yormama ve doğrudan icra (17. kural).
+   - kullanıcıyı yormama ve doğrudan icra - zero friction (17. kural).
    - **18. kural (kesin varlık doğrulaması ve sıfır varsayım - zero assumptions):** çağrılan fonksiyonun, değişkenin, tablonun veya prop'un varlığı kod tabanında doğrulanmadan koda eklenemez.
    - **19. kural (kapsam şeffaflığı ve proaktif tamamlama):** iş bölündüğünde tamamlanan ve kalan aşamalar kullanıcıya açıkça raporlanır.
    - **20. kural (idempotency):** mükerrer api işlemlerini önlemek için `idempotency-key` ve arka yüz kilidi uygulanır.
@@ -47,6 +50,10 @@ bu beceri, tüm uzman ajanlar ve kodlama süreçleri için temel kurumsal kod, i
    - **40. kural (özellik bayrakları & kill switch):** yeni özellikler varsayılan kapalı feature flag ile yayına alınır.
    - **41. kural (token bucket hız sınırlama):** user_id ve ip bazlı token bucket / sliding window algoritması uygulanır.
    - **42. kural (otonom dağıtım konfigürasyonu - automated deploy config):** projede eksik olan dockerfile/compose/vercel/render dosyaları proaktif olarak hazırlanır veya önerilir.
+   - **43. kural (delile dayalı tersine mühendislik & clean-room):** kapalı sistemler delile dayandırılır, tescilli kod doğrudan kopyalanamaz, iki ajanlı clean-room airgap uygulanır.
+   - **44. kural (otonom hesap ve kimlik doğrulama kolaylığı - frictionless credentials):** sandbox/test ortamları için geçici test hesapları otonom yapılandırılır.
+   - **45. kural (otonom çalışma alanı hijyeni - auto-teardown):** test scriptleri, kukla veriler ve geçici paketler iş bitince anında silinir.
+   - **46. kural (derin planlama, derin analiz ve derin entegrasyon):** asla yüzeysel özetlerle geçiştirilmez; mimari kök nedenler ve etki alanları somut ölçümlerle derinlemesine işlenir.
 2. **p1 (küresel kurallar):** `.agent/rules/gemini.md` yönergeleri.
 3. **p2 (ajan kuralları):** aktif uzman ajanın `.agent/agents/{ajan}.md` dosyası.
 4. **p3 (beceri kuralları):** bu dokümanda yer alan teknik standartlar.
@@ -361,3 +368,11 @@ if (!allowed) throw new TooManyRequestsException('kota aşıldı, lütfen bekley
   - docker tabanlı mimariler için çok aşamalı (multi-stage) hafif `Dockerfile` ve `docker-compose.yml`.
   - serverless / edge için `vercel.json` veya `render.yaml`.
   - ortam değişkenleri için eksiksiz `.env.example` şablonu.
+
+
+## 🛑 sokratik kapı ve karar disiplini
+
+herhangi bir koda başlamadan önce:
+1. **asla varsayımla hareket etmeyin**: eksik, çelişkili veya uç durumları önceden netleştirin.
+2. **ödünleşim değerlendirmesi**: performans, okunabilirlik ve bellek bütçesi arasındaki dengeyi kurun.
+3. **mor yasağı ve şablon yasağı**: tasarım dokunuşlarında kurumsal ve özgün çizgiyi koruyun.

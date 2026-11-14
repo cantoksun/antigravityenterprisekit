@@ -3,6 +3,8 @@ name: lint-and-validate
 description: otomatik kalite kontrolü, linting ve statik analiz prosedürleri. sözdizimi doğruluğunu ve proje standartlarını sağlamak için her kod değişikliğinden sonra kullanılır.
 priority: p1-quality
 version: 2.0.0
+when_to_use: "otomatik kalite kontrolü, linting ve statik analiz prosedürleri. sözdizimi doğruluğunu ve proje standartlarını sağlamak için her kod değişikliğinden sonra kullanılır."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # otomatik kalite kontrolü, linting ve statik analiz standartları
@@ -13,7 +15,7 @@ bu beceri; kod tabanında sözdizimi hatalarını, tip uyumsuzluklarını, kodla
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 16 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir doğrulama modülü tamamlanır.

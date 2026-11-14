@@ -3,6 +3,8 @@ name: frontend-design
 description: modern web arayüz tasarım ilkeleri. dinamik renk armonisi, 3 renk kuralı, buton ve modal sadeliği (gereksiz x butonu yasağı), tipografi disiplini ve lazy loading analizleri.
 priority: p1-visual
 version: 2.5.0
+when_to_use: "modern web arayüz tasarım ilkeleri. dinamik renk armonisi, 3 renk kuralı, buton ve modal sadeliği (gereksiz x butonu yasağı), tipografi disiplini ve lazy loading analizleri."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal ön yüz tasarım, renk dengesi ve etkileşim sadeliği standartları
@@ -13,7 +15,7 @@ bu beceri; modern web arayüzlerinde kullanıcı deneyimi, renk disiplini (maksi
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 18 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır (1. kural).
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz (2. kural).
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır (3. kural).

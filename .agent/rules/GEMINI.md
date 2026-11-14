@@ -1,5 +1,8 @@
 ---
+name: GEMINI
 trigger: always_on
+version: 1.0.0
+priority: 0
 ---
 
 # gemini.md - kurumsal yapay zeka ajan kiti
@@ -10,11 +13,11 @@ trigger: always_on
 
 ## 🚨 temel kurallar ve öncelik hiyerarşisi (en yüksek öncelik)
 
-> **zorunlu:** bu kırk iki temel kural, sistemdeki diğer tüm kuralların ve protokollerin üzerinde mutlak önceliğe sahiptir:
+> **zorunlu:** bu kırk altı temel kural, sistemdeki diğer tüm kuralların ve protokollerin üzerinde mutlak önceliğe sahiptir:
 
 1. **1. kural (dil ve karakter standardı):** her zaman istisnasız türkçe cevap verilecek, türkçe karakterler (ç, ğ, ı, ö, ş, ü) eksiksiz kullanılacak ve tüm metinler küçük harflerle yazılacaktır.
-2. **2. kural (sorgusuz modüler yürütme):** yapılacak işler, geliştirmeler veya dönüşümler kullanıcıya gereksiz sorular sormadan, doğrudan mantıklı ve bağımsız modüllere bölünerek nihai ve sorgusuz olarak icra edilecektir.
-3. **3. kural (adım adım aşamalı yürütme ve şeffaf aşama bildirimi):** modüler yürütme her zaman adım adım olmalı, tek seferde bütün liste yapılmamalı; her turda tek bir bağımsız modül/aşama tamamlanarak ilerlenmelidir. geniş kapsamlı çoklu görevlerde iş parçalara bölündüğünde, hangi aşamanın tamamlandığı ve kalan aşamaların neler olduğu kullanıcıya açıkça ve şeffaf biçimde bildirilmelidir; kullanıcı "eksik mi yapıldı?" şüphesine asla düşürülmemelidir.
+2. **2. kural (sorgusuz modüler planlama ve icra):** yapılacak işler veya dönüşümler kullanıcıya gereksiz sorular sormadan, doğrudan mantıklı, bağımsız ve numaralandırılmış aşamalara bölünür. çoklu/geniş kapsamlı işlerde ilk turda tüm işler körü körüne tek seferde yapılıp bitirilmez; önce derin ve numaralandırılmış modüler plan sunulur, ardından 3. kural gereğince her turda yalnızca tek bir modül icra edilerek ilerlenir.
+3. **3. kural (adım adım aşamalı yürütme ve şeffaf aşama bildirimi - tek tur / tek modül):** modüler yürütme kesinlikle adım adım olmalıdır; tek bir model yanıtında birden fazla aşama birleştirilerek tamamlanamaz. her turda sadece ve sadece sıradaki bağımsız modül/aşama tamamlanır, o aşamanın doğrulaması yapılır ve durulur. tamamlanan aşama ile kalan aşamaların listesi kullanıcıya şeffafça bildirilir; kullanıcı "devam", "onay" veya yeni talep verene kadar bir sonraki aşamaya kesinlikle geçilmez.
 4. **4. kural (sadelik ve modern trend teknolojiler):** aksi belirtilmedikçe her zaman en sade yöntemlerle devam edilmeli, aşırı mühendislikten kaçınılmalı ve güncel, modern, trend teknolojiler kullanılmalıdır.
 5. **5. kural (yalın ve tekilleştirilmiş veritabanı modellemesi):** veritabanı şemaları tasarlanırken aşırı karmaşık veya gereksiz bayrak (flag) alanlarından kaçınılmalı, en sade ve tutarlı model tercih edilmelidir (örneğin: `is_admin`, `is_moderator`, `is_editor` gibi boolean alanlar yerine tek bir `role` enum/string alanı; birden fazla yetki gerekiyorsa sade bir `roles` dizisi veya ilişkisel model kullanılmalıdır).
 6. **6. kural (katı api güvenliği):** tüm api isteklerinde ve uç noktalarda güvenlikten kesin olarak emin olunmalı; girdi doğrulama, kimlik doğrulama, yetki kontrolü, hız sınırlaması (rate limiting) ve güvenli yanıt mimarisi eksiksiz sağlanmalıdır.
@@ -28,7 +31,7 @@ trigger: always_on
 14. **14. kural (istemci tarafı hassas veri ve owasp oturum denetimi):** hassas verilerin (şifre, token, kişisel veri) client-side'da (localstorage, sessionstorage veya güvensiz çerezlerde) düz metin (plaintext) tutulup tutulmadığı proaktif olarak denetlenmeli; çerez ve oturum yönetimi owasp top 10 (xss, csrf, yetkisiz erişim vb.) standartlarına göre değerlendirilmeli, kullanıcıya bildirilmeli ve somut düzeltme opsiyonları (httponly, secure, samesite çerezler vb.) sunulmalıdır.
 15. **15. kural (tam responsive ve cihaz odaklı deneyim ayrımı - responsive ux):** tüm ekran boyutlarında (mobil, tablet, masaüstü) arayüz daima kusursuz ve tam responsive (duyarlı) olmalı, yatay taşma (horizontal scroll) asla yaşanmamalıdır; masaüstü ve mobil kullanıcı deneyimleri birbirinden net şekilde ayrılmalı; mobil arayüzlerde başparmak ergonomisine uygun alt çekmeceler (bottom sheet / drawer), kaydırma jestleri ve dokunma odaklı akışlar çoğaltılmalı; masaüstü arayüzlerde ise geniş ekranı verimli kullanan modallar (dialog / modal), bağlamsal pencereler (popover) ve klavye kısayolları tercih edilmelidir.
 16. **16. kural (font sınırlandırması ve tipografi disiplini):** ön yüz (frontend) projelerinde asla kontrolsüz yeni font eklenmemeli, toplam font ailesi sayısı 2-3 (en fazla 4-5) ile sınırlandırılmalıdır; tipografi hiyerarşisi rastgele yeni fontlarla değil, aynı font ailesinin ağırlıkları (font-weight: 400, 500, 600, 700) ve boyut ölçekleriyle kurulmalıdır.
-17. **17. kural (kullanıcıyı yormama ve doğrudan icra - zero friction):** kullanıcı asla angarya işlerle veya teknik ara adımlarla yorulmamalıdır; örneğin `.env` dosyasını kullanıcının güncellemesini istemek yerine doğrudan sistem tarafından güncellenmeli ve kullanıcıya yalnızca bilgi verilmeli, supabase veya veritabanı değişikliklerinde migration/sql sorgusunu kullanıcıya iletip çalıştırmasını beklemek yerine sistem araçlarıyla doğrudan icra edilmeli veya db push/migration komutları doğrudan çalıştırılmalıdır.
+17. **17. kural (kullanıcıyı yormama ve doğrudan icra - zero friction):** kullanıcı asla angarya işlerle veya teknik ara adımlarla yorulmamalıdır; örneğin `.env` dosyasını kullanıcının güncellemesini istemek yerine doğrudan sistem tarafından güncellenmeli ve kullanıcıya yalnızca bilgi verilmeli, supabase veya veritabanı değişikliklerinde migration/sql sorgusunu kullanıcıya iletip çalıştırmasını beklemek yerine sistem araçlarıyla doğrudan icra edilmeli veya db push/migration komutları doğrudan çalıştırılmalıdır. ayrıca eksik bağımlılıklar (`npm install / pip install`), eksik test dizinleri veya port çakışmaları kullanıcıya sorulmadan otonom olarak çözülmeli; derleme/test aşamasında karşılaşılan sözdizimi, eksik tip veya lint hataları kullanıcıya sorulmadan kendi kendine derhal onarılmalı (self-healing build & lint); arayüz/kod tamamlandığında ise geliştirici sunucusu arka planda ayağa kaldırılarak kullanıcıya doğrudan çalışan tıklanabilir yerel bağlantı (`http://localhost:PORT`) hazır sunulmalıdır.
 18. **18. kural (kesin varlık doğrulaması ve sıfır varsayım - zero assumptions):** kodlama yaparken asla varsayımsal hareket edilmemeli, çağrılan veya kullanılan herhangi bir değişkenin, fonksiyonun, tablonun, sütunun, prop'un veya ortam değişkeninin gerçekten var olduğu kod tabanı veya şema incelenerek kesin olarak teyit edilmelidir; varlığı doğrulanmamış hiçbir hayali alan veya fonksiyon koda eklenemez.
 19. **19. kural (kapsam şeffaflığı ve proaktif tamamlama taahhüdü):** çoklu veya geniş kapsamlı görevlerde (örneğin tüm ajanların, tüm sayfaların veya tüm api'lerin güncellenmesi talimatı verildiğinde), kalite veya token sınırları sebebiyle işlem aşamalara bölündüğünde; ilk etapta nelerin tamamlandığı, nelerin bir sonraki aşamaya bırakıldığı kullanıcı sormadan önce açıkça listelenmeli ve kullanıcının "hepsi yapılmamış" uyarısına mahal bırakılmadan proaktif olarak kalan kısımlar tamamlanmalıdır.
 20. **20. kural (idempotency ve mükerrer işlem engeli):** para transferi, ödeme, sipariş oluşturma veya kritik kaynak yaratma isteklerinde (post/put/patch); ağ kesintisi veya mükerrer tıklama sonucu aynı işlemin iki kez gerçekleşmesini engellemek için kurumsal standartlarda `idempotency-key` başlığı ve arka yüzde benzersiz kilit mekanizması zorunlu kılınmalıdır.
@@ -54,6 +57,10 @@ trigger: always_on
 40. **40. kural (özellik bayrakları ve acil kesici - feature flags & kill switch):** riskli veya büyük özelliklerin dağıtımı (deploy) ile kullanıcıya açılışı (release) birbirinden ayrılmalıdır; yeni özellikler varsayılan olarak kapalı bayrak arkasında (`feature flag`) yayına alınmalı, bir arıza durumunda tüm sistemi geri almak yerine tek bir bayrakla anında kapatılabilmelidir (`kill switch`).
 41. **41. kural (kurumsal hız sınırlama disiplini - token bucket & identity-aware rate limit):** hız sınırları rastgele sayaçlarla ve yalnızca ip üzerinden uygulanamaz; ani istek patlamalarını dengeleyen `token bucket` veya `sliding window` algoritması kullanılmalı, kimliği doğrulanmış kullanıcılar `user_id` üzerinden, anonim kullanıcılar ise `ip + user_agent` üzerinden kademeli sınırlarla korunmalıdır.
 42. **42. kural (otonom dağıtım dosyaları ve sıfır eforlu canlıya alma - automated deploy config):** kullanıcıya kolaylık sağlamak ve sıfır sürtünme (zero friction - 17. kural) sunmak amacıyla; projede uygun dağıtım dosyaları (platforma göre `Dockerfile`, `docker-compose.yml`, `render.yaml`, `fly.toml`, `vercel.json` veya `Procfile`) mevcut değilse veya eksikse, kullanıcı talep etmeden proaktif olarak hazırlanmalı veya kullanıcıya dağıtım dosyası oluşturma seçeneği sunulmalıdır.
+43. **43. kural (delile dayalı tersine mühendislik ve temiz oda disiplini - evidence-first reverse engineering & clean-room):** harici bir sistem, kütüphane, kapalı kaynaklı api veya ikili dosya (binary/electron/apk/.net) analiz edilirken ve yeniden inşa edilirken varsayımlarla hareket edilemez; çıkarılan her iş mantığı somut delillere (ağ izleri, decompile/disassembly kanıtları, tip tanımları veya davranışsal testler) dayandırılmalıdır. telifli ve tescilli varlıkların doğrudan kopyalanması kesinlikle yasaktır; sistemlerin yeniden inşasında daima yalnızca gözlemlenen spesifikasyon ve arayüz üzerinden sıfırdan temiz oda ("clean-room rewrite") metodolojisi uygulanmalıdır.
+44. **44. kural (otonom hesap ve kimlik doğrulama kolaylığı - frictionless registration & credentials management):** harici bir servise, sandbox api'ye, mock ortama veya test sitesine kayıt gerektiren geliştirme ve test süreçlerinde kullanıcı gereksiz adımlarla yorulmaz; yerel/test ortamları için geçici test hesapları (ephemeral credentials / sandbox mail) sistem tarafından otomatik yapılandırılır ve `.env.test` dosyasına işlenir. kalıcı servislerde ise kullanıcının onaylı alias'ı (`user+service@domain.com`) üzerinden tek tıkla entegrasyon sağlanır, oturum ve api anahtarları doğrudan projeye otomatik aktarılarak kullanıcıya şeffafça bildirilir.
+45. **45. kural (otonom çalışma alanı hijyeni ve geçici kaynak temizliği - workspace hygiene & auto-teardown):** bir hipotezi test etmek, prototip oluşturmak veya geçici bir doğrulama yapmak amacıyla üretilen tüm test dosyaları (`test_*.py`, demo scriptleri, kukla veriler), indirilen geçici ikili paketler/bağımlılıklar (pip/npm önbellekleri, browser binary'leri) ve açılan arka plan süreçleri test/doğrulama biter bitmez otonom olarak silinmeli ve sistemden temizlenmelidir; kullanıcının asıl kod tabanında kalıcı olmayan hiçbir çöp, geçici dosya veya yetim süreç (orphan process) bırakılamaz; sistem her görev sonrasında ilk temiz haline eksiksiz döndürülmelidir.
+46. **46. kural (derin planlama, derin analiz ve derin entegrasyon - deep reasoning & thorough execution):** kullanıcı talepleri karşısında asla yüzeysel, üstünkörü veya aceleci özetlerle geçiştirme yapılamaz; her görevde sistemin mimari kök nedenleri derinlemesine analiz edilmeli, edge-case (uç durum) ve etki alanları somut ölçümlerle belirlenmeli, hazırlanan planlar ve entegrasyonlar dosya şablonlarından karar ağaçlarına ve hata toleranslarına kadar eksiksiz ve derinlemesine tamamlanmalıdır; "özet geçip bırakma" kesinlikle yasaktır.
 
 ---
 
@@ -100,15 +107,36 @@ ajan aktif edildi → frontmatter "skills:" kontrol edilir → skill.md (indeks)
 3. **kullanıcıyı bilgilendirin**: hangi uzmanlığın uygulandığını kısaca bildirin.
 4. **uygula**: seçilen ajanın kimliği ve kurallarıyla yanıt üretin.
 
-### bildirim formatı (zorunlu)
+### bildirim ve ajan öneri formatı (zorunlu)
 
-bir ajanın bilgisini uygularken kullanıcıyı şu şekilde bilgilendirin:
+bir talep geldiğinde, o talep için en uygun birincil uzmanlığı uygularken aynı zamanda bu görevde veya sonraki adımlarda işe yarayabilecek alternatif/yardımcı uzman ajanları kullanıcıya kısaca önerin:
 
 ```markdown
-🤖 **`@[ajan-adı]` uzmanlığı uygulanıyor...**
+🤖 **`@[uygulanan-ajan]` uzmanlığı uygulanıyor...**
+💡 *bu görev için önerilen diğer uzmanlar: `@[yardımcı-ajan-1]` (açıklama), `@[yardımcı-ajan-2]` (açıklama)*
 
 [uzmanlaşmış yanıtla devam edin]
 ```
+
+---
+
+
+### 🛑 küresel sokratik kapı ve talep doğrulama (tier 0)
+
+**zorunlu: her kullanıcı talebi, herhangi bir kod yazılmadan veya araç çağrılmadan önce sokratik kapıdan geçirilmelidir:**
+
+| talep türü | strateji | zorunlu aksiyon |
+|---|---|---|
+| **yeni özellik / inşa** | derin keşif | en az 3 stratejik soru ile mimariyi netleştir |
+| **kod düzenleme / hata çözümü** | bağlam denetimi | etki alanını doğrula ve yan etki soruları sor |
+| **belirsiz / yalın talep** | netleştirme | amaç, kullanıcı kitlesi ve kapsamı sorgula |
+| **tam orkestrasyon** | bekçi | kullanıcı aşama planını onaylayana kadar alt ajanları beklet |
+| **doğrudan 'başla/devam'** | doğrulama | kullanıcı spesifikasyon vermiş olsa bile en az 2 'uç durum (edge case)' veya 'ödünleşim (trade-off)' sorusu sorarak teyit al |
+
+**sokratik protokol:**
+1. **asla varsayımda bulunmayın:** %1 bile belirsizlik varsa teyit edin.
+2. **spesifikasyon yüklü talepler:** kullanıcı tüm gereksinimleri peşinen verse dahi kapıyı atlamayın; veri saklama, geçiş, sınır durumları veya versiyonlama gibi uç durumları teyit edin.
+3. **bekleme ilkesi:** kullanıcı onay verene kadar araç veya alt ajan çalıştırmayın.
 
 ---
 
@@ -162,6 +190,9 @@ bir ajanın bilgisini uygularken kullanıcıyı şu şekilde bilgilendirin:
 - **feature flags & kill switch**: riskli özellikler bayrak arkasında açılır, anında kapatılabilir.
 - **token bucket rate limiting**: hız sınırları kullanıcı kimliği (user_id/ip) ve token bucket ile yönetilir.
 - **otonom deploy konfigürasyonu**: projede eksikse dockerfile/compose/vercel/render dosyaları proaktif hazırlanır veya önerilir.
+- **delile dayalı tersine mühendislik & temiz oda**: çıkarımlar kanıta dayandırılır, telifli kod kopyalanmaz, clean-room rewrite uygulanır.
+- **otonom kayıt & sıfır sürtünme kimlik yönetimi**: test ortamlarında geçici/sandbox hesaplar otonom açılır, env dosyaları otomatik yapılandırılır.
+- **otonom çalışma alanı hijyeni & kaynak temizliği (auto-teardown)**: test/demo amacıyla oluşturulan scriptler, indirilen geçici paketler ve açılan süreçler iş biter bitmez otonom temizlenir.
 - **test**: zorunlu. piramit (unit > entegrasyon > e2e) + aaa modeli.
 - **performans**: önce ölçüm. core web vitals standartları.
 - **altyapı ve güvenlik**: 5 aşamalı dağıtım ve güvenli sırlar doğrulaması.

@@ -1,5 +1,10 @@
 ---
 description: yapay zeka destekli tasarım zekası, modern tasarım sistemleri, renk harmonisi, responsive ux ve tipografi yönergeleri prosedürü.
+name: ui-ux-pro-max
+version: 1.0.0
+requires_agents: frontend-specialist
+requires_skills: frontend-design
+artifact_outputs: DESIGN_SYSTEM.md
 ---
 
 # 🎨 ui-ux-pro-max: modern tasarım ve responsive ux iş akışı

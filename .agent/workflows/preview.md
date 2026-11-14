@@ -2,6 +2,10 @@
 description: arayüz bileşenlerini, responsive düzenleri ve temaları yerel ortamda önizleyin ve test edin.
 priority: p1-workflow
 version: 2.0.0
+name: preview
+requires_agents: frontend-specialist
+requires_skills: frontend-design
+artifact_outputs: preview-url
 ---
 
 # arayüz önizleme ve görsel doğrulama iş akışı (/preview)

@@ -2,6 +2,10 @@
 description: projeyi güvenli, sıfır kesintili ve doğrulanmış biçimde canlı ortama dağıtın.
 priority: p1-workflow
 version: 2.0.0
+name: deploy
+requires_agents: devops-engineer
+requires_skills: deployment-procedures
+artifact_outputs: deploy-status
 ---
 
 # kurumsal canlıya alma ve dağıtım iş akışı (/deploy)

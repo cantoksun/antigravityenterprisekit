@@ -1,6 +1,9 @@
 ---
 name: systematic-debugging
 description: kök neden analizi ve kanıta dayalı doğrulama içeren 4 aşamalı sistematik hata ayıklama metodolojisi.
+version: 1.0.0
+when_to_use: "kök neden analizi ve kanıta dayalı doğrulama içeren 4 aşamalı sistematik hata ayıklama metodolojisi."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # sistematik hata ayıklama ilkeleri

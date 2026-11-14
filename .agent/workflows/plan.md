@@ -1,5 +1,10 @@
 ---
 description: proje planlama, mimari analiz ve görev kırılımı prosedürü. kod yazılmaz; yalnızca modüler plan dosyası oluşturulur.
+name: plan
+version: 1.0.0
+requires_agents: project-planner
+requires_skills: plan-writing
+artifact_outputs: task-plan
 ---
 
 # 📋 /plan - proje planlama ve görev kırılımı iş akışı

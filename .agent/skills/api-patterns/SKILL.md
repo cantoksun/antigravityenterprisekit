@@ -3,6 +3,8 @@ name: api-patterns
 description: kurumsal api tasarım ilkeleri. rest, graphql ve trpc karşılaştırması, yanıt formatları, versiyonlama ve sayfalandırma.
 priority: p1-structural
 version: 2.0.0
+when_to_use: "kurumsal api tasarım ilkeleri. rest, graphql ve trpc karşılaştırması, yanıt formatları, versiyonlama ve sayfalandırma."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal ve güvenli api tasarım standartları
@@ -13,7 +15,7 @@ bu beceri, kurumsal düzeyde ölçeklenebilir, tutarlı ve katı güvenlik stand
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 6 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır.

@@ -1,5 +1,10 @@
 ---
 description: projeler ve özellikler için yapılandırılmış beyin fırtınası, sokratik analiz ve seçenek keşfi prosedürü.
+name: brainstorm
+version: 1.0.0
+requires_agents: project-planner
+requires_skills: brainstorming
+artifact_outputs: discovery-notes
 ---
 
 # 🧠 /brainstorm - yapılandırılmış fikir ve mimari seçenek keşfi

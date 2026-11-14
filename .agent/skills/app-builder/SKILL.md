@@ -1,6 +1,9 @@
 ---
 name: app-builder
 description: doğal dil taleplerinden uçtan uca tam yığın (full-stack) uygulamalar inşa eden ana koordinatör beceri. proje türünü belirler, teknoloji yığınını seçer ve ajanları yönlendirir.
+version: 1.0.0
+when_to_use: "doğal dil taleplerinden uçtan uca tam yığın (full-stack) uygulamalar inşa eden ana koordinatör beceri. proje türünü belirler, teknoloji yığınını seçer ve ajanları yönlendirir."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # tam yığın uygulama inşa ilkeleri

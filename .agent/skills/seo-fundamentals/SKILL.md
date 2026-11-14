@@ -3,6 +3,8 @@ name: seo-fundamentals
 description: teknik seo temelleri, e-e-a-t standartları, core web vitals ve arama motoru indeksleme ilkeleri.
 priority: p2-specialized
 version: 2.0.0
+when_to_use: "teknik seo temelleri, e-e-a-t standartları, core web vitals ve arama motoru indeksleme ilkeleri."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # teknik arama motoru optimizasyonu (seo) kurumsal standartları
@@ -13,7 +15,7 @@ bu beceri; web uygulamalarının arama motorları tarafından eksiksiz indekslen
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 15 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır.

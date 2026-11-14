@@ -3,6 +3,8 @@ name: code-review-checklist
 description: kod kalitesi, güvenlik, performans ve kurumsal en iyi uygulamaları kapsayan kapsamlı kod inceleme kılavuzu.
 priority: p0-quality
 version: 2.0.0
+when_to_use: "kod kalitesi, güvenlik, performans ve kurumsal en iyi uygulamaları kapsayan kapsamlı kod inceleme kılavuzu."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal kod inceleme ve bellek sızıntısı denetim standartları
@@ -13,7 +15,7 @@ bu beceri, kod değişikliklerinde kalite, mimari uyum, güvenlik ve özellikle 
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 10 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır.

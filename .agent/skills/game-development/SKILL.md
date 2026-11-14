@@ -3,6 +3,8 @@ name: game-development
 description: oyun mantığı, döngü yönetimi, fizik etkileşimleri ve platforma özel optimizasyon becerisi.
 priority: p2-specialized
 version: 2.0.0
+when_to_use: "oyun mantığı, döngü yönetimi, fizik etkileşimleri ve platforma özel optimizasyon becerisi."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal oyun geliştirme ve grafik döngüsü standartları
@@ -13,7 +15,7 @@ bu beceri; oyun motorları (phaser, pixijs, three.js, unity, godot), oyun döng�
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 16 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir oyun mekaniği modülü tamamlanır.
@@ -60,3 +62,16 @@ bu beceri; oyun motorları (phaser, pixijs, three.js, unity, godot), oyun döng�
 
 ### 4. sonlu durum makinesi (finite state machine - fsm)
 - oyun durumları (yükleniyor, ana menü, oyun içi, duraklatıldı, oyun bitti) ve karakter durumları (koşma, zıplama, saldırı) spagetti `if-else` blokları yerine fsm ile yönetilmelidir.
+
+---
+
+## 🏛️ retro / decompile oyun yeniden inşası ve varlık politikası (byoa - 43. kural)
+
+eski, retro veya kapalı kaynaklı oyunların (dx-ball, ski or die, touhou vb.) yeniden inşasında (reconstruction / rewrite) yasal ve mimari ayrım:
+
+1. **temiz oda motor mimarisi (clean-room engine):**
+   - oyun mantığı, fizik kuralları ve matematiksel hesaplamalar tersine mühendislik çıktısından yalnızca spesifikasyon (spec) çıkarılarak modern bir dilde (rust, c++, typescript, godot) sıfırdan yazılır.
+2. **kullanıcının kendi varlığını getirmesi kuralı (bring-your-own-assets - byoa):**
+   - telif hakkına tabi grafikler (sprites, textures), sesler (bgm, sfx), harita ve bölüm dosyaları asla depoya eklenemez veya dağıtılamaz.
+   - oyun başlatıcısı veya yükleyici aracı, kullanıcının yasal olarak sahip olduğu orijinal oyundan veya kurulum dizininden varlıkları okumalıdır.
+   - varlıklar bulunamadığında yerel basit geometrik yer tutucular (procedural placeholders) ile oyunun çökmeden açılması sağlanmalıdır.

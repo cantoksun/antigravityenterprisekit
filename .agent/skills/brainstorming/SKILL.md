@@ -1,6 +1,9 @@
 ---
 name: brainstorming
 description: sokratik analiz ve karar mekanizmaları. karmaşık mimari seçenekleri netleştirmek için kullanılır.
+version: 1.0.0
+when_to_use: "sokratik analiz ve karar mekanizmaları. karmaşık mimari seçenekleri netleştirmek için kullanılır."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # beyin fırtınası ve mimari netleştirme ilkeleri

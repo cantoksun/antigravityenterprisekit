@@ -3,6 +3,8 @@ name: mcp-builder
 description: mcp (model context protocol) sunucu geliştirme ilkeleri. araç tasarımı, kaynak kalıpları ve kurumsal entegrasyonlar.
 priority: p2-specialized
 version: 2.0.0
+when_to_use: "mcp (model context protocol) sunucu geliştirme ilkeleri. araç tasarımı, kaynak kalıpları ve kurumsal entegrasyonlar."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # model bağlam protokolü (mcp) sunucu ve araç geliştirme standartları
@@ -13,7 +15,7 @@ bu beceri; yapay zeka modellerinin veritabanlarına, kurumsal api'lere, dosya si
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 16 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir mcp modülü tamamlanır.

@@ -58,10 +58,10 @@
 ## Execution Order
 
 | Phase | Agent(s) | Parallel? | Prerequisite | CHECKPOINT |
-|-------|----------|-----------|--------------|------------|
-| 0 | Socratic Gate | ❌ | - | ✅ Ask 3 questions |
-| 1 | Project Planner | ❌ | Questions answered | ✅ **PLAN.md created** |
-| 1.5 | **PLAN VERIFICATION** | ❌ | PLAN.md exists | ✅ **File exists in root** |
+|---|---|---|---|---|
+| 0 | Discovery & Context Check | ❌ | - | ✅ Verify environment & context (Rule 2) |
+| 1 | Project Planner | ❌ | Context checked | ✅ **{task-slug}.md created** |
+| 1.5 | **PLAN VERIFICATION** | ❌ | Plan exists | ✅ **File exists in root** |
 | 2 | Database Architect | ❌ | Plan ready | Schema defined |
 | 3 | Backend Specialist | ❌ | Schema ready | API routes created |
 | 4 | Frontend Specialist | ✅ | API ready (partial) | UI components ready |

@@ -2,6 +2,10 @@
 description: mevcut bir özelliği, bileşeni veya kod modülünü kurumsal standartlara göre iyileştirin ve refactor edin.
 priority: p1-workflow
 version: 2.0.0
+name: enhance
+requires_agents: code-archaeologist
+requires_skills: clean-code
+artifact_outputs: refactor-plan
 ---
 
 # kod iyileştirme ve refactor iş akışı (/enhance)

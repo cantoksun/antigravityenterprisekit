@@ -1,0 +1,8 @@
+# pycache
+__pycache__/
+*.pyc
+*.pyo
+
+# junctions / compatibility bridges (Windows specific)
+.agents
+.agent/agent

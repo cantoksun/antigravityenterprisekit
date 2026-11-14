@@ -3,6 +3,8 @@ name: testing-patterns
 description: kurumsal test kalıpları ve ilkeleri. birim, entegrasyon ve sahte (mock) nesne stratejileri.
 priority: p1-quality
 version: 2.0.0
+when_to_use: "kurumsal test kalıpları ve ilkeleri. birim, entegrasyon ve sahte (mock) nesne stratejileri."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal test kalıpları ve stratejileri (testing patterns)
@@ -13,7 +15,7 @@ bu beceri; sistem güvenilirliğini, gerileme (regression) risklerini önlemeyi,
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 14 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır.

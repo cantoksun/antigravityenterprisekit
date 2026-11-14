@@ -3,6 +3,8 @@ name: red-team-tactics
 description: mitre att&ck ve owasp api güvenlik çerçevelerine dayalı ofansif denetim, idor/bola tespiti ve yetki analizi uzmanı.
 priority: p0-security
 version: 2.0.0
+when_to_use: "mitre att&ck ve owasp api güvenlik çerçevelerine dayalı ofansif denetim, idor/bola tespiti ve yetki analizi uzmanı."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # ofansif güvenlik ve idor / bola zafiyet tespit standartları
@@ -13,7 +15,7 @@ bu beceri, sistemlerde yetkisiz kullanıcıların başkalarına ait verilere vey
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 8 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır.

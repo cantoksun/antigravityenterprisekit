@@ -3,6 +3,8 @@ name: web-design-guidelines
 description: modern web ve mobil arayüz yönergeleri, tam responsive standartlar, yatay taşma engeli, cihaz odaklı ux ayrımı ve erişilebilirlik.
 priority: p1-visual
 version: 2.2.0
+when_to_use: "modern web ve mobil arayüz yönergeleri, tam responsive standartlar, yatay taşma engeli, cihaz odaklı ux ayrımı ve erişilebilirlik."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal arayüz ve kullanıcı deneyimi yönergeleri (tam responsive ux)
@@ -13,7 +15,7 @@ bu beceri; tüm ekran boyutlarında (mobil, tablet, masaüstü) arayüzün kusur
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 18 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır (1. kural).
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz (2. kural).
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır (3. kural).

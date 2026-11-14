@@ -3,6 +3,8 @@ name: performance-profiling
 description: sistem performans analizi, profil çıkarma, darboğaz tespiti ve kaynak ölçüm ilkeleri.
 priority: p0-performance
 version: 2.0.0
+when_to_use: "sistem performans analizi, profil çıkarma, darboğaz tespiti ve kaynak ölçüm ilkeleri."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal bellek ve performans optimizasyonu standartları
@@ -13,7 +15,7 @@ bu beceri, sistemlerde bellek sızıntılarını engellemek, kaynak kullanımın
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 9 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir modül tamamlanır.

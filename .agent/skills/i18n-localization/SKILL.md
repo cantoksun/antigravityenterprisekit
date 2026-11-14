@@ -3,6 +3,8 @@ name: i18n-localization
 description: uluslararasılaştırma ve yerelleştirme ilkeleri. sabit kodlanmış metinleri tespit etme, çeviri dosyaları ve çoklu dil desteği.
 priority: p2-specialized
 version: 2.0.0
+when_to_use: "uluslararasılaştırma ve yerelleştirme ilkeleri. sabit kodlanmış metinleri tespit etme, çeviri dosyaları ve çoklu dil desteği."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal uluslararasılaştırma (i18n) ve yerelleştirme (l10n) standartları
@@ -13,7 +15,7 @@ bu beceri; kurumsal yazılımlarda çoklu dil mimarisi, sabit metinlerin temizle
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 16 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır (1. kural).
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir yerelleştirme modülü tamamlanır.

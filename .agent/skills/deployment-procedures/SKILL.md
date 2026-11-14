@@ -3,6 +3,8 @@ name: deployment-procedures
 description: güvenli canlıya alma süreçleri, sıfır kesinti stratejileri ve geri alma (rollback) protokolleri.
 priority: p1-operations
 version: 2.0.0
+when_to_use: "güvenli canlıya alma süreçleri, sıfır kesinti stratejileri ve geri alma (rollback) protokolleri."
+allowed-tools: [Read, Grep, Glob, Bash, Write, Edit]
 ---
 
 # kurumsal canlıya alma ve dağıtım standartları
@@ -13,7 +15,7 @@ bu beceri; yazılım sistemlerinin üretim ortamına güvenli, sıfır kesintili
 
 ## 🚨 kural öncelik hiyerarşisi
 
-1. **p0 (mutlak öncelik - temel 15 kural):**
+1. **p0 (mutlak öncelik - temel 46 kural):**
    - tüm çıktılar, açıklamalar ve dokümanlar küçük harfle yazılır ve türkçe karakterler (`ç, ğ, ı, ö, ş, ü`) eksiksiz kullanılır.
    - sorgusuz modüler icra esastır; kullanıcıya gereksiz sorular sorulmaz.
    - adım adım aşamalı yürütülür; her seferinde tek bir dağıtım aşaması tamamlanır.
