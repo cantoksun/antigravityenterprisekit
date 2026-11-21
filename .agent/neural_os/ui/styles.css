@@ -267,6 +267,12 @@ body {
   flex-direction: column;
   gap: 6px;
   z-index: 20;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), right 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.side-drawer.open ~ .graph-viewport .radar-container,
+body:has(.side-drawer.open) .radar-container {
+  right: 460px;
 }
 
 .radar-header {
@@ -609,7 +615,11 @@ body.fullscreen-mode .graph-viewport {
   z-index: 20;
   width: 230px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  transition: var(--transition);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), right 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+body:has(.side-drawer.open) .physics-panel {
+  right: 460px;
 }
 
 .physics-panel.collapsed .physics-body {
