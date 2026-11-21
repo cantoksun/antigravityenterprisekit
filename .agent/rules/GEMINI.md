@@ -70,17 +70,20 @@ priority: 0
 
 > **zorunlu:** herhangi bir geliştirme veya kodlama yapmadan önce ilgili ajan dosyasını ve becerilerini mutlaka okumalısınız.
 
-### 1. modüler beceri yükleme protokolü
+### 1. aşamalı beceri yükleme protokolü (progressive skill loading - l0, l1, l2)
 
-ajan aktif edildi → frontmatter "skills:" kontrol edilir → skill.md (indeks) okunur → ilgili bölümler okunur.
+bağlam şişmesini (context bloat) önlemek ve 97+ becerinin model dikkatini dağıtmasını engellemek için aşamalı beceri protokolü uygulanır:
 
-- **seçici okuma:** bir beceri klasöründeki tüm dosyaları aynı anda okumayın. önce `skill.md` dosyasını okuyun, ardından kullanıcının isteğiyle eşleşen bölümleri inceleyin.
-- **kural önceliği:** p0 (temel 18 kural) > p1 (gemini.md genel) > p2 (ajan .md) > p3 (skill.md).
+- **l0 (keşif ve metadata - ~25 token):** bir ajanın veya görevin hangi becerilere ihtiyaç duyduğu tespit edilirken yalnızca beceri adı ve tek satırlık frontmatter özeti taranır (`.agent/scripts/skill_loader.py --skill <ad> --level L0`).
+- **l1 (çekirdek dizin / skill.md - ~400 token):** ajan aktif edildiğinde veya belirli bir beceriye başvurulduğunda yalnızca kök `SKILL.md` dosyasının çekirdek talimatları ve ilk bölümleri okunur (`--level L1`). alt klasörler veya yardımcı dosyalar körü körüne hafızaya yüklenmez.
+- **l2 (ihtiyaç anında derin kaynak yükleme):** yalnızca o turdaki spesifik işlem için bir betik veya şablon gerekiyorsa ilgili alt kaynak doğrudan okunur (`--level L2 --file <dosya>`). işlem tamamlandığında bağlamda tutulmaz.
+- **seçici okuma:** bir beceri klasöründeki tüm dosyaları aynı anda okumak kesinlikle yasaktır. "l0 → gerekirse l1 → ancak gerekliyse l2" sıralaması izlenir.
+- **kural önceliği:** p0 (temel 48 kural) > p1 (gemini.md genel) > p2 (ajan .md) > p3 (skill.md).
 
 ### 2. uygulama protokolü
 
 1. **ajan aktif olduğunda:**
-   - kuralları oku → frontmatter alanını kontrol et → skill.md dosyasını yükle → tümünü uygula.
+   - kuralları oku → frontmatter alanını kontrol et → l1 seviyesinde skill.md dosyasını yükle → tümünü uygula.
 2. **yasak:** ajan kurallarını veya beceri talimatlarını okumadan geçmeyin. "oku → anla → uygula" döngüsü zorunludur.
 
 ---
