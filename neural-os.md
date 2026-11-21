@@ -1,14 +1,14 @@
 # 🏛️ kurumsal otonom ikinci beyin ve nöral işletim sistemi (neural-os.md)
 
-> bu plan, harici herhangi bir obsidian veya üçüncü parti yazılıma ihtiyaç duymaksızın, antigravity ai-os kitinin tamamen kendi içinde çalışan, web tabanlı interaktif 2d/3d zihin grafiğine, yerel vektör ve çift yönlü semantik arama motoruna sahip kurumsal seviye otonom bir bilgi işletim sistemi inşa etmeyi hedefler.
+> bu plan, harici herhangi bir üçüncü parti yazılıma ihtiyaç duymaksızın, antigravity ai-os kitinin tamamen kendi içinde çalışan, web tabanlı interaktif 2d/3d zihin grafiğine, yerel vektör ve çift yönlü semantik arama motoruna sahip kurumsal seviye otonom bir bilgi işletim sistemi inşa etmeyi hedefler.
 
 ---
 
 ## 1. 🎯 vizyon ve felsefe: harici bağımlılıktan sıfır sürtünmeli yerel güce
 
-klasik obsidian eklentileri veya harici masaüstü uygulamaları kullanıcının ortam değiştirmesini, manuel indeks kurmasını ve dosya gezinmesini gerektirir. 
+klasik harici masaüstü araçları veya not tutma programları kullanıcının ortam değiştirmesini, manuel indeks kurmasını ve dosya gezinmesini gerektirir. 
 **antigravity enterprise neural-os** ile:
-1. **harici yazılım bağımlılığı sıfırlanır:** obsidian kurulumuna gerek yoktur. sistem doğrudan tek bir komutla (`python .agent/scripts/neural_os.py --serve`) yerel, şık, karanlık temalı ve modern bir web arayüzü sunar (`http://localhost:PORT`).
+1. **harici yazılım bağımlılığı sıfırlanır:** üçüncü parti kuruluma gerek yoktur. sistem doğrudan tek bir komutla (`python .agent/scripts/neural_os.py serve`) yerel, şık, karanlık temalı ve modern bir web arayüzü sunar (`http://localhost:PORT`).
 2. **canlı interaktif güç ve zihin haritası:** force-directed 2d/3d webgl canvas üzerinde tüm kavramlar, mimari kararlar (adr), epizotlar ve kod bağımlılıkları canlı düğüm fizik motoruyla canlandırılır; düğümlere tıklandığında iç doküman, bağlantılı düğümler ve geri linkler (backlinks) anında açılır.
 3. **otonom semantik ve bm25 hibrit arama motoru:** harici api gerektirmeyen saf yerel ağırlıklı tf-idf / bm25 ve n-gram semantik benzerlik motoru ile tüm ajan kararları milisaniyeler içinde taranır.
 4. **kolektif hafıza havuzu (shared memory pool):** 20 uzman ajanın her biri mimari bir karar aldığında, hata çözdüğünde veya refactor yaptığında bu işletim sistemine otomatik düğüm ekler; grafik kendi kendini besler ve genişletir.
@@ -69,7 +69,7 @@ klasik obsidian eklentileri veya harici masaüstü uygulamaları kullanıcının
 - otonom port seçimi ve çakışma önleyici yapı.
 
 ### 🔹 modül 4: enterprise web grafik ve zihin paneli (`ui/index.html`, `ui/app.js`, `ui/styles.css`)
-- obsidian'ı aratmayan modern karanlık tema, cam morfolojisi ve modern tipografi (kural 16).
+- modern karanlık tema, cam morfolojisi ve modern tipografi (kural 16).
 - yerel yüksek performanslı force-directed canvas zihin grafiği, tıklanabilir düğümler, geri bağlantı paneli, markdown önizleme ve arama çubuğu.
 
 ### 🔹 modül 5: tek dosya çevrimdışı dışa aktarıcı (`exporter.py`) ve cli orkestrasyonu (`neural_os.py`)

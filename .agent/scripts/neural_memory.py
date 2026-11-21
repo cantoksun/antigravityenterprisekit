@@ -85,7 +85,7 @@ class NeuralVault:
         
         # 1. Parse all markdown files
         for md_path in self.root.rglob("*.md"):
-            if ".obsidian" in md_path.parts:
+            if md_path.name.startswith("."):
                 continue
             rel_path = md_path.relative_to(self.root).as_posix()
             stem = md_path.stem

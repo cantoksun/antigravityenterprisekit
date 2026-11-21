@@ -34,7 +34,7 @@ flowchart TD
         orch --> db["database-architect"]
     end
     
-    subgraph neural_vault ["🧠 antigravity neural vault (obsidian uyumlu)"]
+    subgraph neural_vault ["🧠 antigravity neural-os (yerel bilgi ağı)"]
         front <--> vault_concepts["concepts / bilgi düğümleri"]
         back <--> vault_decisions["decisions / adr kayıtları"]
         sec <--> vault_playbooks["playbooks / güvenlik & tasarım"]

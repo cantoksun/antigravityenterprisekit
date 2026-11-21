@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>antigravity enterprise neural-os</title>
+  <style>
+:root {
+  --bg-primary: #090d16;
+  --bg-secondary: #0f172a;
+  --bg-panel: rgba(15, 23, 42, 0.78);
+  --bg-card: rgba(30, 41, 59, 0.65);
+  --border-color: rgba(148, 163, 184, 0.14);
+  --border-active: rgba(99, 102, 241, 0.45);
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  
+  --accent-purple: #8b5cf6;
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-orange: #f97316;
+  --accent-rose: #ef4444;
+
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.top-header {
+  height: 56px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 50;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  font-size: 20px;
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.brand-badge {
+  background: rgba(99, 102, 241, 0.16);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  color: #a5b4fc;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 380px;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 8px 14px 8px 36px;
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  font-size: 13px;
+  outline: none;
+  transition: var(--transition);
+}
+
+.search-input:focus {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-icon {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.btn-icon:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Layout */
+.app-container {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Graph Canvas Area */
+.graph-viewport {
+  flex: 1;
+  position: relative;
+  background: radial-gradient(circle at center, #111827 0%, #090d16 100%);
+  cursor: grab;
+}
+
+.graph-viewport:active {
+  cursor: grabbing;
+}
+
+#graphCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Floating Graph Controls */
+.graph-hud {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: var(--bg-panel);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 20;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.controls-cluster {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 6px;
+  z-index: 20;
+}
+
+/* Side Inspection Panel */
+.side-drawer {
+  width: 440px;
+  background: var(--bg-panel);
+  backdrop-filter: blur(16px);
+  border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 30;
+}
+
+.side-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.drawer-title-group h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+.drawer-badge {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.close-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.metric-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.metric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.metric-val {
+  font-size: 15px;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.metric-lbl {
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.content-section h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.markdown-body {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  white-space: pre-wrap;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  font-family: monospace;
+}
+
+.links-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.link-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: #93c5fd;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.link-pill:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: #60a5fa;
+  color: #fff;
+}
+
+/* Search Dropdown Modal */
+.search-results-overlay {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 520px;
+  max-height: 400px;
+  background: var(--bg-panel);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  overflow-y: auto;
+  display: none;
+  z-index: 60;
+  padding: 10px;
+}
+
+.search-results-overlay.open {
+  display: block;
+}
+
+.search-item {
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.search-item:hover {
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.search-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-item-score {
+  font-size: 11px;
+  color: #38bdf8;
+}
+
+.search-item-snippet {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* Responsive UX (Rule 15) */
+@media (max-width: 768px) {
+  .search-container {
+    width: 200px;
+  }
+  .side-drawer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    top: auto;
+    height: 75vh;
+    border-top: 1px solid var(--border-color);
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+  }
+  .side-drawer.open {
+    transform: translateY(0);
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- Top Navigation Header -->
+  <header class="top-header">
+    <div class="brand-section">
+      <span class="brand-logo">🧠 antigravity neural-os</span>
+      <span class="brand-badge">enterprise v2.0</span>
+    </div>
+
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="hibrit semantik arama (bm25 + pagerank)..." autocomplete="off">
+    </div>
+
+    <div class="header-actions">
+      <button id="btnRecenter" class="btn-icon" title="grafiği merkeze hizala">
+        <span>🎯</span> ortala
+      </button>
+      <button id="btnReload" class="btn-icon" title="grafiği yeniden yükle">
+        <span>🔄</span> yenile
+      </button>
+    </div>
+  </header>
+
+  <!-- Search Results Dropdown -->
+  <div id="searchOverlay" class="search-results-overlay"></div>
+
+  <!-- Main Viewport -->
+  <main class="app-container">
+    <div class="graph-viewport" id="viewport">
+      <canvas id="graphCanvas"></canvas>
+
+      <!-- HUD & Legend -->
+      <div class="graph-hud">
+        <div class="legend-item"><span class="legend-dot" style="background: #8b5cf6;"></span> ana indeks (MOC)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #3b82f6;"></span> kavramlar (concepts)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #f97316;"></span> mimari kararlar (ADR)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #10b981;"></span> operasyon rehberleri (playbooks)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #ef4444;"></span> epizodik hafıza (episodes)</div>
+      </div>
+    </div>
+
+    <!-- Right Side Inspection Drawer -->
+    <aside id="sideDrawer" class="side-drawer">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <h2 id="drawerTitle">düğüm başlığı</h2>
+          <span id="drawerBadge" class="drawer-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa;">concept</span>
+        </div>
+        <button id="btnCloseDrawer" class="close-btn" title="kapat">✕</button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="metric-bar">
+          <div class="metric-card">
+            <div id="metricPR" class="metric-val">27.4%</div>
+            <div class="metric-lbl">pagerank</div>
+          </div>
+          <div class="metric-card">
+            <div id="metricIn" class="metric-val">6</div>
+            <div class="metric-lbl">gelen bağ</div>
+          </div>
+          <div class="metric-card">
+            <div id="metricOut" class="metric-val">3</div>
+            <div class="metric-lbl">giden bağ</div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3>özet</h3>
+          <p id="drawerSummary" style="font-size: 13px; color: var(--text-muted); line-height: 1.5;"></p>
+        </div>
+
+        <div class="content-section">
+          <h3>çift yönlü bağlantılar (backlinks)</h3>
+          <div id="drawerBacklinks" class="links-list"></div>
+        </div>
+
+        <div class="content-section">
+          <h3>giden bağlantılar (outlinks)</h3>
+          <div id="drawerOutlinks" class="links-list"></div>
+        </div>
+
+        <div class="content-section">
+          <h3>ham doküman içeriği</h3>
+          <div id="drawerContent" class="markdown-body"></div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+
+  // Embedded Offline Knowledge Base
+  window.__EMBEDDED_GRAPH_DATA__ = {"total_nodes": 8, "total_edges": 23, "nodes": [{"id": "index", "title": "antigravity nöral bilgi ağı ve otonom ikinci beyin", "type": "MOC", "tags": ["moc", "root", "neural-vault"], "path": "INDEX.md", "summary": "bu vault, harici hiçbir üçüncü parti uygulamaya ihtiyaç duymaksızın, antigravity ai-os kitine özgü yerel web zihin grafiği (`http://127.0.0.1:8990`), çift yönlü bağlantılı (`[[wikilink]]`) ve 20 yapay zeka ajanının ortak zekasıyla yaşayan o...", "in_degree": 7, "out_degree": 5, "centrality": 1.7143, "pagerank": 27.135, "color": "#64748b", "val": 54}, {"id": "architecture-overview", "title": "kurumsal sistem mimarisi ve bileşen haritası", "type": "concept", "tags": ["architecture", "c4-model", "enterprise"], "path": "concepts/architecture-overview.md", "summary": "bu düğüm, antigravity ekosisteminin çekirdek mimari bileşenlerini, ajan sorumluluklarını ve veri akış hiyerarşisini tanımlar.", "in_degree": 5, "out_degree": 3, "centrality": 1.1429, "pagerank": 18.774, "color": "#3b82f6", "val": 38}, {"id": "clean-code-principles", "title": "yalın kodlama ve katı kurumsal standartlar", "type": "concept", "tags": ["clean-code", "performance", "security"], "path": "concepts/clean-code-principles.md", "summary": "antigravity çatısı altında üretilen tüm kodların uymak zorunda olduğu mutlak kurallardır.", "in_degree": 5, "out_degree": 3, "centrality": 1.1429, "pagerank": 17.767, "color": "#3b82f6", "val": 36}, {"id": "adr-001-autonomous-neural-vault", "title": "adr 001: antigravity kitine özgü bağımsız nöral bilgi ağının (neural vault) benimsenmesi", "type": "decisions", "tags": ["adr", "architecture", "memory"], "path": "decisions/adr-001-autonomous-neural-vault.md", "summary": "harici üçüncü parti masaüstü uygulamaları kullanıcının ortam değiştirmesini gerektirir ve kite bağımlılık getirir. çoklu ajan mimarimizde ajanların bağımsız olarak bilgi kaydettiği, `[[wikilink]]` ile çift yönlü bağ kurduğu ve kitin kendi i...", "in_degree": 3, "out_degree": 2, "centrality": 0.7143, "pagerank": 14.565, "color": "#f97316", "val": 27}, {"id": "episode-2026-11-21-kolektif-hafiza-kancasi", "title": "kolektif-hafiza-kancasi", "type": "episode", "tags": ["episode", "memory"], "path": "episodes/episode-2026-11-21-kolektif-hafiza-kancasi.md", "summary": "- **tarih:** 2026-11-21", "in_degree": 0, "out_degree": 3, "centrality": 0.4286, "pagerank": 1.875, "color": "#ef4444", "val": 6}, {"id": "episode-2026-11-21-otonom-hafiza-tamamlandi", "title": "otonom-hafiza-tamamlandi", "type": "episode", "tags": ["episode", "memory", "auto-recorded"], "path": "episodes/episode-2026-11-21-otonom-hafiza-tamamlandi.md", "summary": "- **tarih:** 2026-11-21", "in_degree": 0, "out_degree": 3, "centrality": 0.4286, "pagerank": 1.875, "color": "#ef4444", "val": 6}, {"id": "episode-2026-11-21-vault-bootstrap", "title": "oturum kaydı: nöral bilgi ağının kurulumu ve omurga entegrasyonu", "type": "episode", "tags": ["episode", "bootstrap", "log"], "path": "episodes/episode-2026-11-21-vault-bootstrap.md", "summary": "- **tarih:** 2026-11-21", "in_degree": 1, "out_degree": 2, "centrality": 0.4286, "pagerank": 6.488, "color": "#ef4444", "val": 11}, {"id": "playbook-clean-architecture", "title": "temiz mimari ve servis katmanı uygulama rehberi", "type": "playbook", "tags": ["playbook", "patterns", "backend"], "path": "playbooks/playbook-clean-architecture.md", "summary": "bu playbook, yeni bir servis veya backend bileşeni inşa edilirken izlenecek standartları tanımlar.", "in_degree": 2, "out_degree": 2, "centrality": 0.5714, "pagerank": 11.522, "color": "#10b981", "val": 21}], "links": [{"source": "index", "target": "architecture-overview", "type": "outlink"}, {"source": "index", "target": "episode-2026-11-21-vault-bootstrap", "type": "outlink"}, {"source": "index", "target": "playbook-clean-architecture", "type": "outlink"}, {"source": "index", "target": "adr-001-autonomous-neural-vault", "type": "outlink"}, {"source": "index", "target": "clean-code-principles", "type": "outlink"}, {"source": "architecture-overview", "target": "clean-code-principles", "type": "outlink"}, {"source": "architecture-overview", "target": "adr-001-autonomous-neural-vault", "type": "outlink"}, {"source": "architecture-overview", "target": "index", "type": "outlink"}, {"source": "clean-code-principles", "target": "playbook-clean-architecture", "type": "outlink"}, {"source": "clean-code-principles", "target": "architecture-overview", "type": "outlink"}, {"source": "clean-code-principles", "target": "index", "type": "outlink"}, {"source": "adr-001-autonomous-neural-vault", "target": "architecture-overview", "type": "outlink"}, {"source": "adr-001-autonomous-neural-vault", "target": "index", "type": "outlink"}, {"source": "episode-2026-11-21-kolektif-hafiza-kancasi", "target": "clean-code-principles", "type": "outlink"}, {"source": "episode-2026-11-21-kolektif-hafiza-kancasi", "target": "architecture-overview", "type": "outlink"}, {"source": "episode-2026-11-21-kolektif-hafiza-kancasi", "target": "index", "type": "outlink"}, {"source": "episode-2026-11-21-otonom-hafiza-tamamlandi", "target": "clean-code-principles", "type": "outlink"}, {"source": "episode-2026-11-21-otonom-hafiza-tamamlandi", "target": "architecture-overview", "type": "outlink"}, {"source": "episode-2026-11-21-otonom-hafiza-tamamlandi", "target": "index", "type": "outlink"}, {"source": "episode-2026-11-21-vault-bootstrap", "target": "adr-001-autonomous-neural-vault", "type": "outlink"}, {"source": "episode-2026-11-21-vault-bootstrap", "target": "index", "type": "outlink"}, {"source": "playbook-clean-architecture", "target": "clean-code-principles", "type": "outlink"}, {"source": "playbook-clean-architecture", "target": "index", "type": "outlink"}]};
+  window.__EMBEDDED_NODE_DETAILS__ = {"index": {"id": "index", "title": "antigravity nöral bilgi ağı ve otonom ikinci beyin", "type": "MOC", "path": "INDEX.md", "tags": ["moc", "root", "neural-vault"], "outlinks": ["adr-001-autonomous-neural-vault", "architecture-overview", "clean-code-principles", "episode-2026-11-21-vault-bootstrap", "playbook-clean-architecture"], "backlinks": ["adr-001-autonomous-neural-vault", "architecture-overview", "clean-code-principles", "episode-2026-11-21-kolektif-hafiza-kancasi", "episode-2026-11-21-otonom-hafiza-tamamlandi", "episode-2026-11-21-vault-bootstrap", "playbook-clean-architecture"], "summary": "bu vault, harici hiçbir üçüncü parti uygulamaya ihtiyaç duymaksızın, antigravity ai-os kitine özgü yerel web zihin grafiği (`http://127.0.0.1:8990`), çift yönlü bağlantılı (`[[wikilink]]`) ve 20 yapay zeka ajanının ortak zekasıyla yaşayan o...", "content": "---\nid: index\ntitle: \"antigravity nöral bilgi ağı ve otonom ikinci beyin\"\ntype: MOC\ntags:\n  - moc\n  - root\n  - neural-vault\ncreated: 2026-11-21\nupdated: 2026-11-21\nlinks:\n  - \"[[architecture-overview]]\"\n  - \"[[adr-001-autonomous-neural-vault]]\"\n  - \"[[playbook-clean-architecture]]\"\n---\n\n# 🧠 antigravity nöral bilgi ağı (neural vault)\n\n> bu vault, harici hiçbir üçüncü parti uygulamaya ihtiyaç duymaksızın, antigravity ai-os kitine özgü yerel web zihin grafiği (`http://127.0.0.1:8990`), çift yönlü bağlantılı (`[[wikilink]]`) ve 20 yapay zeka ajanının ortak zekasıyla yaşayan otonom bir bilgi işletim sistemidir.\n\n---\n\n## 🗺️ harita ve içerik düğümleri (maps of content - MOC)\n\n### 1. 🧬 kavramlar ve mimari kurallar (`concepts/`)\n- [[architecture-overview]] — kurumsal sistem mimarisi, katmanlar ve veri akış diyagramı.\n- [[clean-code-principles]] — yalın kodlama, n+1 engelleme ve katı api güvenliği standartları.\n\n### 2. ⚖️ mimari karar kayıtları (`decisions/`)\n- [[adr-001-autonomous-neural-vault]] — kite özgü bağımsız nöral işletim sisteminin benimsenmesi.\n\n### 3. 📖 uygulama rehberleri ve kalıplar (`playbooks/`)\n- [[playbook-clean-architecture]] — kurumsal temiz mimari, servis katmanı ve repository kalıpları.\n\n### 4. 📜 epizodik oturum kayıtları (`episodes/`)\n- [[episode-2026-11-21-vault-bootstrap]] — nöral bilgi ağının başlangıç ve omurga kurulumu.\n\n---\n\n## 🔗 görselleştirme ve grafik bağlantıları (graph view)\nbu zihin haritası tarayıcıda doğrudan antigravity web arayüzü ile görüntülenir:\n- adres: `http://127.0.0.1:8990` veya `.agent/neural_os/ui/graph-preview.html`\n- renk grupları (`concepts`, `decisions`, `playbooks`, `episodes`) otomatik boyanır.\n- tüm ajanların oluşturduğu bağlantılar canlı fizik motorlu zihin haritası olarak izlenebilir.\n", "in_degree": 7, "out_degree": 5, "pagerank": 27.135}, "architecture-overview": {"id": "architecture-overview", "title": "kurumsal sistem mimarisi ve bileşen haritası", "type": "concept", "path": "concepts/architecture-overview.md", "tags": ["architecture", "c4-model", "enterprise"], "outlinks": ["adr-001-autonomous-neural-vault", "clean-code-principles", "index"], "backlinks": ["adr-001-autonomous-neural-vault", "clean-code-principles", "episode-2026-11-21-kolektif-hafiza-kancasi", "episode-2026-11-21-otonom-hafiza-tamamlandi", "index"], "summary": "bu düğüm, antigravity ekosisteminin çekirdek mimari bileşenlerini, ajan sorumluluklarını ve veri akış hiyerarşisini tanımlar.", "content": "---\nid: architecture-overview\ntitle: \"kurumsal sistem mimarisi ve bileşen haritası\"\ntype: concept\ntags:\n  - architecture\n  - c4-model\n  - enterprise\ncreated: 2026-11-21\nupdated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[clean-code-principles]]\"\n  - \"[[adr-001-autonomous-neural-vault]]\"\n---\n\n# 🏛️ kurumsal sistem mimarisi (architecture overview)\n\nbu düğüm, antigravity ekosisteminin çekirdek mimari bileşenlerini, ajan sorumluluklarını ve veri akış hiyerarşisini tanımlar.\n\n---\n\n## 🧩 mimari bileşenler ve etkileşim şeması\n\n```mermaid\nflowchart TD\n    user[\"kullanıcı talebi / komut\"] --> router[\"intelligent routing\"]\n    router --> orch[\"orchestrator (ana koordinatör)\"]\n    \n    subgraph agents [\"uzman yapay zeka ajanları\"]\n        orch --> front[\"frontend-specialist\"]\n        orch --> back[\"backend-specialist\"]\n        orch --> sec[\"security-auditor\"]\n        orch --> db[\"database-architect\"]\n    end\n    \n    subgraph neural_vault [\"🧠 antigravity neural-os (yerel bilgi ağı)\"]\n        front <--> vault_concepts[\"concepts / bilgi düğümleri\"]\n        back <--> vault_decisions[\"decisions / adr kayıtları\"]\n        sec <--> vault_playbooks[\"playbooks / güvenlik & tasarım\"]\n        db <--> vault_episodes[\"episodes / oturum hafızası\"]\n    end\n    \n    agents --> delivery[\"sıfır kesintili dağıtım & doğrulama\"]\n```\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n- kodlama ilkeleri: [[clean-code-principles]]\n- mimari karar: [[adr-001-autonomous-neural-vault]]\n", "in_degree": 5, "out_degree": 3, "pagerank": 18.774}, "clean-code-principles": {"id": "clean-code-principles", "title": "yalın kodlama ve katı kurumsal standartlar", "type": "concept", "path": "concepts/clean-code-principles.md", "tags": ["clean-code", "performance", "security"], "outlinks": ["architecture-overview", "index", "playbook-clean-architecture"], "backlinks": ["architecture-overview", "episode-2026-11-21-kolektif-hafiza-kancasi", "episode-2026-11-21-otonom-hafiza-tamamlandi", "index", "playbook-clean-architecture"], "summary": "antigravity çatısı altında üretilen tüm kodların uymak zorunda olduğu mutlak kurallardır.", "content": "---\nid: clean-code-principles\ntitle: \"yalın kodlama ve katı kurumsal standartlar\"\ntype: concept\ntags:\n  - clean-code\n  - performance\n  - security\ncreated: 2026-11-21\nupdated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[architecture-overview]]\"\n  - \"[[playbook-clean-architecture]]\"\n---\n\n# 🧹 yalın kodlama ve kurumsal standartlar (clean code principles)\n\nantigravity çatısı altında üretilen tüm kodların uymak zorunda olduğu mutlak kurallardır.\n\n---\n\n## ⚡ temel ilkeler\n1. **aşırı mühendislik yasağı (anti-overengineering):** ihtiyacın ötesinde soyutlama veya hayali yapılar eklenemez.\n2. **katı api güvenliği:** girdi doğrulama, rate limit ve idor/bola kontrolleri zorunludur.\n3. **bellek hijyeni:** kapatılmamış soketler ve event listener bellek sızıntıları engellenir.\n4. **n+1 sorgu engeli:** eager loading veya batch fetching uygulanır.\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n- sistem mimarisi: [[architecture-overview]]\n- uygulama rehberi: [[playbook-clean-architecture]]\n", "in_degree": 5, "out_degree": 3, "pagerank": 17.767}, "adr-001-autonomous-neural-vault": {"id": "adr-001-autonomous-neural-vault", "title": "adr 001: antigravity kitine özgü bağımsız nöral bilgi ağının (neural vault) benimsenmesi", "type": "decisions", "path": "decisions/adr-001-autonomous-neural-vault.md", "tags": ["adr", "architecture", "memory"], "outlinks": ["architecture-overview", "index"], "backlinks": ["architecture-overview", "episode-2026-11-21-vault-bootstrap", "index"], "summary": "harici üçüncü parti masaüstü uygulamaları kullanıcının ortam değiştirmesini gerektirir ve kite bağımlılık getirir. çoklu ajan mimarimizde ajanların bağımsız olarak bilgi kaydettiği, `[[wikilink]]` ile çift yönlü bağ kurduğu ve kitin kendi i...", "content": "---\nid: adr-001-autonomous-neural-vault\ntitle: \"adr 001: antigravity kitine özgü bağımsız nöral bilgi ağının (neural vault) benimsenmesi\"\nstatus: accepted\ndate: 2026-11-21\ntags:\n  - adr\n  - architecture\n  - memory\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[architecture-overview]]\"\n---\n\n# ⚖️ adr 001: kite özgü otonom nöral bilgi ağının benimsenmesi\n\n## 1. bağlam (context)\nharici üçüncü parti masaüstü uygulamaları kullanıcının ortam değiştirmesini gerektirir ve kite bağımlılık getirir. çoklu ajan mimarimizde ajanların bağımsız olarak bilgi kaydettiği, `[[wikilink]]` ile çift yönlü bağ kurduğu ve kitin kendi içindeki web sunucusu üzerinden görselleştirilebilen bağımsız bir ikinci beyin gerekmektedir.\n\n## 2. karar (decision)\n`.agent/vault/` dizini altında harici hiçbir masaüstü aracına ihtiyaç duymayan, tamamen kitin kendi web canvas motoruyla çalışan yerel bir vault yapısının kurulmasına karar verilmiştir.\n- çift yönlü bağlantı: `[[dosya-adi]]` standardı.\n- klasör yapısı: `concepts/`, `decisions/`, `playbooks/`, `episodes/`.\n- grafik arayüzü: kitin yerleşik `http://127.0.0.1:8990` web paneli üzerinden kuvvet odaklı fizik motoru.\n\n## 3. sonuçlar (consequences)\n- **olumlu:** kullanıcı harici hiçbir uygulama kurmadan doğrudan tarayıcıdan interaktif zihin haritasını izleyebilir.\n- **olumlu:** token tasarruflu, yalnızca ilgili düğümleri çağıran yerel nöral bellek altyapısı kazanıldı.\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n- sistem mimarisi: [[architecture-overview]]\n", "in_degree": 3, "out_degree": 2, "pagerank": 14.565}, "episode-2026-11-21-kolektif-hafiza-kancasi": {"id": "episode-2026-11-21-kolektif-hafiza-kancasi", "title": "kolektif-hafiza-kancasi", "type": "episode", "path": "episodes/episode-2026-11-21-kolektif-hafiza-kancasi.md", "tags": ["episode", "memory"], "outlinks": ["architecture-overview", "clean-code-principles", "index"], "backlinks": [], "summary": "- **tarih:** 2026-11-21", "content": "---\nid: episode-2026-11-21-kolektif-hafiza-kancasi\ntitle: \"kolektif-hafiza-kancasi\"\ntype: episode\ntags:\n  - episode\n  - memory\ncreated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[architecture-overview]]\"\n  - \"[[clean-code-principles]]\"\n---\n\n# 📜 kolektif-hafiza-kancasi\n\n- **tarih:** 2026-11-21\n- **özet:** ajanlar arasi nobet degisimi ve otomatik oturum hafizasi kancasi devreye alindi\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n", "in_degree": 0, "out_degree": 3, "pagerank": 1.875}, "episode-2026-11-21-otonom-hafiza-tamamlandi": {"id": "episode-2026-11-21-otonom-hafiza-tamamlandi", "title": "otonom-hafiza-tamamlandi", "type": "episode", "path": "episodes/episode-2026-11-21-otonom-hafiza-tamamlandi.md", "tags": ["episode", "memory", "auto-recorded"], "outlinks": ["architecture-overview", "clean-code-principles", "index"], "backlinks": [], "summary": "- **tarih:** 2026-11-21", "content": "---\nid: episode-2026-11-21-otonom-hafiza-tamamlandi\ntitle: \"otonom-hafiza-tamamlandi\"\ntype: episode\nagent: \"orchestrator\"\ntags:\n  - episode\n  - memory\n  - auto-recorded\ncreated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[clean-code-principles]]\"\n  - \"[[architecture-overview]]\"\n---\n\n# 📜 otonom-hafiza-tamamlandi\n\n- **tarih:** 2026-11-21\n- **icra eden ajan:** @[orchestrator]\n- **özet:** kullanici eforu sifirlandi, checklist ve otonom hafiza kancalari birlestirildi\n\n---\n\n## 📌 ilgili bağlantılar\n- [[INDEX]]\n- [[clean-code-principles]]\n- [[architecture-overview]]\n", "in_degree": 0, "out_degree": 3, "pagerank": 1.875}, "episode-2026-11-21-vault-bootstrap": {"id": "episode-2026-11-21-vault-bootstrap", "title": "oturum kaydı: nöral bilgi ağının kurulumu ve omurga entegrasyonu", "type": "episode", "path": "episodes/episode-2026-11-21-vault-bootstrap.md", "tags": ["episode", "bootstrap", "log"], "outlinks": ["adr-001-autonomous-neural-vault", "index"], "backlinks": ["index"], "summary": "- **tarih:** 2026-11-21", "content": "---\nid: episode-2026-11-21-vault-bootstrap\ntitle: \"oturum kaydı: nöral bilgi ağının kurulumu ve omurga entegrasyonu\"\ntype: episode\ntags:\n  - episode\n  - bootstrap\n  - log\ncreated: 2026-11-21\nupdated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[adr-001-autonomous-neural-vault]]\"\n---\n\n# 📜 oturum kaydı: vault bootstrap\n\n- **tarih:** 2026-11-21\n- **işlem:** antigravity kitine özgü yerel nöral bilgi ağı mimarisinin (`.agent/vault/`) sıfırdan kurulması.\n- **kapsam:** kavram düğümleri, adr kararları ve oturum kayıtlarının çift yönlü ilişkilendirilmesi.\n- **durum:** 1. modül başarıyla tamamlandı.\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n- mimari karar kaydı: [[adr-001-autonomous-neural-vault]]\n", "in_degree": 1, "out_degree": 2, "pagerank": 6.488}, "playbook-clean-architecture": {"id": "playbook-clean-architecture", "title": "temiz mimari ve servis katmanı uygulama rehberi", "type": "playbook", "path": "playbooks/playbook-clean-architecture.md", "tags": ["playbook", "patterns", "backend"], "outlinks": ["clean-code-principles", "index"], "backlinks": ["clean-code-principles", "index"], "summary": "bu playbook, yeni bir servis veya backend bileşeni inşa edilirken izlenecek standartları tanımlar.", "content": "---\nid: playbook-clean-architecture\ntitle: \"temiz mimari ve servis katmanı uygulama rehberi\"\ntype: playbook\ntags:\n  - playbook\n  - patterns\n  - backend\ncreated: 2026-11-21\nupdated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[clean-code-principles]]\"\n---\n\n# 📖 temiz mimari uygulama rehberi (playbook)\n\nbu playbook, yeni bir servis veya backend bileşeni inşa edilirken izlenecek standartları tanımlar.\n\n---\n\n## 🏗️ katman düzeni\n```text\nsrc/\n├── domain/       # saf iş mantığı ve tipler (harici bağımlılık yok)\n├── services/     # kullanım senaryoları ve orkestrasyon\n├── repositories/ # veritabanı ve dış kaynak erişimi\n└── api/          # uç noktalar, girdi doğrulama (zod) ve güvenlik\n```\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n- temiz kod kuralları: [[clean-code-principles]]\n", "in_degree": 2, "out_degree": 2, "pagerank": 11.522}};
+
+  // Override fetch for offline mode
+  const originalFetch = window.fetch;
+  window.fetch = async function(url) {
+    if (url === '/api/graph') {
+      return { json: async () => window.__EMBEDDED_GRAPH_DATA__ };
+    }
+    if (url.startsWith('/api/node/')) {
+      const nid = decodeURIComponent(url.replace('/api/node/', ''));
+      const det = window.__EMBEDDED_NODE_DETAILS__[nid] || {};
+      return { json: async () => det };
+    }
+    if (url.startsWith('/api/search')) {
+      const query = new URL(url, 'http://localhost').searchParams.get('q') || '';
+      const qLower = query.toLowerCase();
+      const results = [];
+      for (const [nid, det] of Object.entries(window.__EMBEDDED_NODE_DETAILS__)) {
+        if (det.title.toLowerCase().includes(qLower) || det.content.toLowerCase().includes(qLower) || (det.tags || []).some(t => t.includes(qLower))) {
+          results.push({
+            node_id: det.id,
+            title: det.title,
+            type: det.type,
+            score: 1.0,
+            snippet: det.summary,
+            tags: det.tags,
+            path: det.path
+          });
+        }
+      }
+      return { json: async () => results.slice(0, 10) };
+    }
+    return originalFetch.apply(this, arguments);
+  };
+
+/**
+ * Antigravity Enterprise Neural-OS: Interactive Force-Directed Canvas Graph.
+ * Pure Vanilla JavaScript & HTML5 Canvas - Zero external script dependencies.
+ */
+(() => {
+  // State
+  let nodes = [];
+  let links = [];
+  let activeNode = null;
+  let hoveredNode = null;
+
+  // Viewport / Camera Transform
+  let camera = { x: 0, y: 0, zoom: 1.0 };
+  let isDragging = false;
+  let dragStart = { x: 0, y: 0 };
+  let draggedNode = null;
+
+  // Canvas elements
+  const canvas = document.getElementById("graphCanvas");
+  const ctx = canvas.getContext("2d");
+  const viewport = document.getElementById("viewport");
+
+  // UI Drawer elements
+  const sideDrawer = document.getElementById("sideDrawer");
+  const btnCloseDrawer = document.getElementById("btnCloseDrawer");
+  const drawerTitle = document.getElementById("drawerTitle");
+  const drawerBadge = document.getElementById("drawerBadge");
+  const drawerSummary = document.getElementById("drawerSummary");
+  const drawerBacklinks = document.getElementById("drawerBacklinks");
+  const drawerOutlinks = document.getElementById("drawerOutlinks");
+  const drawerContent = document.getElementById("drawerContent");
+  const metricPR = document.getElementById("metricPR");
+  const metricIn = document.getElementById("metricIn");
+  const metricOut = document.getElementById("metricOut");
+
+  // Search elements
+  const searchInput = document.getElementById("searchInput");
+  const searchOverlay = document.getElementById("searchOverlay");
+  const btnRecenter = document.getElementById("btnRecenter");
+  const btnReload = document.getElementById("btnReload");
+
+  // Physics Simulation Constants
+  const REPULSION = 2800;
+  const SPRING_LENGTH = 140;
+  const SPRING_STRENGTH = 0.045;
+  const DAMPING = 0.88;
+  const CENTER_GRAVITY = 0.015;
+
+  function resizeCanvas() {
+    canvas.width = viewport.clientWidth * window.devicePixelRatio;
+    canvas.height = viewport.clientHeight * window.devicePixelRatio;
+    canvas.style.width = `${viewport.clientWidth}px`;
+    canvas.style.height = `${viewport.clientHeight}px`;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+
+  // Initialize Data
+  async function loadGraphData() {
+    try {
+      const res = await fetch("/api/graph");
+      const data = await res.json();
+      
+      const nodeMap = new Map();
+      const width = viewport.clientWidth;
+      const height = viewport.clientHeight;
+
+      // Layout nodes in a circle initially
+      const count = data.nodes.length;
+      nodes = data.nodes.map((n, i) => {
+        const angle = (i / count) * 2 * Math.PI;
+        const radius = Math.min(width, height) * 0.28;
+        const nodeObj = {
+          ...n,
+          x: width / 2 + radius * Math.cos(angle) + (Math.random() - 0.5) * 40,
+          y: height / 2 + radius * Math.sin(angle) + (Math.random() - 0.5) * 40,
+          vx: 0,
+          vy: 0,
+          radius: Math.max(9, Math.min(26, n.val || 12))
+        };
+        nodeMap.set(n.id, nodeObj);
+        return nodeObj;
+      });
+
+      links = data.links.map(l => ({
+        source: nodeMap.get(l.source) || l.source,
+        target: nodeMap.get(l.target) || l.target,
+        type: l.type
+      })).filter(l => typeof l.source === "object" && typeof l.target === "object");
+
+      recenter();
+    } catch (err) {
+      console.error("Grafik verisi yuklenemedi:", err);
+    }
+  }
+
+  // Force-directed Physics Step
+  function simulatePhysics() {
+    const width = viewport.clientWidth;
+    const height = viewport.clientHeight;
+    const cx = width / 2;
+    const cy = height / 2;
+
+    // 1. Repulsion between all node pairs
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const na = nodes[i];
+        const nb = nodes[j];
+        const dx = nb.x - na.x;
+        const dy = nb.y - na.y;
+        const distSq = dx * dx + dy * dy + 1;
+        const dist = Math.sqrt(distSq);
+
+        if (dist < 450) {
+          const force = REPULSION / distSq;
+          const fx = (dx / dist) * force;
+          const fy = (dy / dist) * force;
+          na.vx -= fx;
+          na.vy -= fy;
+          nb.vx += fx;
+          nb.vy += fy;
+        }
+      }
+    }
+
+    // 2. Spring force along links
+    for (const link of links) {
+      const dx = link.target.x - link.source.x;
+      const dy = link.target.y - link.source.y;
+      const dist = Math.sqrt(dx * dx + dy * dy) + 0.1;
+      const displacement = dist - SPRING_LENGTH;
+      const force = displacement * SPRING_STRENGTH;
+      const fx = (dx / dist) * force;
+      const fy = (dy / dist) * force;
+
+      link.source.vx += fx;
+      link.source.vy += fy;
+      link.target.vx -= fx;
+      link.target.vy -= fy;
+    }
+
+    // 3. Gravity towards center & velocity damping
+    for (const node of nodes) {
+      if (node === draggedNode) continue;
+
+      node.vx += (cx - node.x) * CENTER_GRAVITY;
+      node.vy += (cy - node.y) * CENTER_GRAVITY;
+
+      node.vx *= DAMPING;
+      node.vy *= DAMPING;
+
+      node.x += node.vx;
+      node.y += node.vy;
+    }
+  }
+
+  // Main Render Loop
+  function render() {
+    simulatePhysics();
+
+    const width = viewport.clientWidth;
+    const height = viewport.clientHeight;
+
+    ctx.clearRect(0, 0, width, height);
+    ctx.save();
+
+    // Apply Camera Transform
+    ctx.translate(camera.x, camera.y);
+    ctx.scale(camera.zoom, camera.zoom);
+
+    // 1. Draw Links
+    for (const link of links) {
+      const isConnectedToActive = activeNode && (link.source === activeNode || link.target === activeNode);
+      ctx.beginPath();
+      ctx.moveTo(link.source.x, link.source.y);
+      ctx.lineTo(link.target.x, link.target.y);
+      ctx.strokeStyle = isConnectedToActive ? "rgba(129, 140, 248, 0.75)" : "rgba(148, 163, 184, 0.18)";
+      ctx.lineWidth = isConnectedToActive ? 2.2 : 1.0;
+      ctx.stroke();
+    }
+
+    // 2. Draw Nodes
+    for (const node of nodes) {
+      const isSelected = node === activeNode;
+      const isHovered = node === hoveredNode;
+
+      // Glow halo
+      if (isSelected || isHovered) {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius + 8, 0, Math.PI * 2);
+        ctx.fillStyle = isSelected ? "rgba(99, 102, 241, 0.28)" : "rgba(255, 255, 255, 0.12)";
+        ctx.fill();
+      }
+
+      // Outer circle
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+      ctx.fillStyle = node.color || "#64748b";
+      ctx.fill();
+      ctx.lineWidth = isSelected ? 2.5 : 1.2;
+      ctx.strokeStyle = isSelected ? "#fff" : "rgba(255, 255, 255, 0.3)";
+      ctx.stroke();
+
+      // Node label
+      ctx.font = `${isSelected ? "bold " : ""}11px -apple-system, sans-serif`;
+      ctx.fillStyle = isSelected ? "#fff" : "#cbd5e1";
+      ctx.textAlign = "center";
+      ctx.fillText(node.title.length > 20 ? node.title.slice(0, 18) + ".." : node.title, node.x, node.y + node.radius + 14);
+    }
+
+    ctx.restore();
+    requestAnimationFrame(render);
+  }
+
+  // Coordinate Conversion
+  function toWorldCoords(screenX, screenY) {
+    return {
+      x: (screenX - camera.x) / camera.zoom,
+      y: (screenY - camera.y) / camera.zoom
+    };
+  }
+
+  function findNodeAt(worldX, worldY) {
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const n = nodes[i];
+      const dx = worldX - n.x;
+      const dy = worldY - n.y;
+      if (dx * dx + dy * dy <= (n.radius + 4) * (n.radius + 4)) {
+        return n;
+      }
+    }
+    return null;
+  }
+
+  // Open Detailed Drawer for a Node
+  async function selectNode(node) {
+    activeNode = node;
+    try {
+      const res = await fetch(`/api/node/${encodeURIComponent(node.id)}`);
+      const details = await res.json();
+
+      drawerTitle.textContent = details.title || details.id;
+      drawerBadge.textContent = details.type || "concept";
+      drawerBadge.style.background = `${node.color}28`;
+      drawerBadge.style.color = node.color;
+
+      metricPR.textContent = `${details.pagerank}%`;
+      metricIn.textContent = details.in_degree;
+      metricOut.textContent = details.out_degree;
+
+      drawerSummary.textContent = details.summary || "özet mevcut değil.";
+      drawerContent.textContent = details.content || "";
+
+      // Backlinks
+      drawerBacklinks.replaceChildren();
+      if (details.backlinks && details.backlinks.length > 0) {
+        details.backlinks.forEach(bid => {
+          const pill = document.createElement("a");
+          pill.className = "link-pill";
+          pill.textContent = `← [[${bid}]]`;
+          pill.onclick = (e) => {
+            e.preventDefault();
+            const targetNode = nodes.find(n => n.id === bid);
+            if (targetNode) selectNode(targetNode);
+          };
+          drawerBacklinks.appendChild(pill);
+        });
+      } else {
+        const emptyMsg = document.createElement("span");
+        emptyMsg.style.cssText = "font-size:11px;color:var(--text-dim)";
+        emptyMsg.textContent = "gelen bağlantı yok";
+        drawerBacklinks.appendChild(emptyMsg);
+      }
+
+      // Outlinks
+      drawerOutlinks.replaceChildren();
+      if (details.outlinks && details.outlinks.length > 0) {
+        details.outlinks.forEach(oid => {
+          const pill = document.createElement("a");
+          pill.className = "link-pill";
+          pill.textContent = `→ [[${oid}]]`;
+          pill.onclick = (e) => {
+            e.preventDefault();
+            const targetNode = nodes.find(n => n.id === oid);
+            if (targetNode) selectNode(targetNode);
+          };
+          drawerOutlinks.appendChild(pill);
+        });
+      } else {
+        const emptyMsg = document.createElement("span");
+        emptyMsg.style.cssText = "font-size:11px;color:var(--text-dim)";
+        emptyMsg.textContent = "giden bağlantı yok";
+        drawerOutlinks.appendChild(emptyMsg);
+      }
+
+      sideDrawer.classList.add("open");
+    } catch (err) {
+      console.error("Düğüm detayları alınamadı:", err);
+    }
+  }
+
+  function recenter() {
+    camera = { x: 0, y: 0, zoom: 1.0 };
+  }
+
+  // Pointer & Drag Handlers
+  canvas.addEventListener("mousedown", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const world = toWorldCoords(e.clientX - rect.left, e.clientY - rect.top);
+    const hitNode = findNodeAt(world.x, world.y);
+
+    if (hitNode) {
+      draggedNode = hitNode;
+    } else {
+      isDragging = true;
+      dragStart = { x: e.clientX - camera.x, y: e.clientY - camera.y };
+    }
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const world = toWorldCoords(e.clientX - rect.left, e.clientY - rect.top);
+
+    hoveredNode = findNodeAt(world.x, world.y);
+    canvas.style.cursor = hoveredNode ? "pointer" : (isDragging ? "grabbing" : "grab");
+
+    if (draggedNode) {
+      draggedNode.x = world.x;
+      draggedNode.y = world.y;
+      draggedNode.vx = 0;
+      draggedNode.vy = 0;
+    } else if (isDragging) {
+      camera.x = e.clientX - dragStart.x;
+      camera.y = e.clientY - dragStart.y;
+    }
+  });
+
+  window.addEventListener("mouseup", (e) => {
+    if (!isDragging && draggedNode) {
+      selectNode(draggedNode);
+    }
+    isDragging = false;
+    draggedNode = null;
+  });
+
+  // Zooming
+  canvas.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
+    camera.zoom = Math.max(0.3, Math.min(3.5, camera.zoom * zoomFactor));
+  }, { passive: false });
+
+  // Drawer Close
+  btnCloseDrawer.addEventListener("click", () => {
+    sideDrawer.classList.remove("open");
+    activeNode = null;
+  });
+
+  btnRecenter.addEventListener("click", recenter);
+  btnReload.addEventListener("click", loadGraphData);
+
+  // Search Input Handler (Debounced)
+  let searchTimeout = null;
+  searchInput.addEventListener("input", (e) => {
+    const query = e.target.value.trim();
+    clearTimeout(searchTimeout);
+    if (!query) {
+      searchOverlay.classList.remove("open");
+      searchOverlay.replaceChildren();
+      return;
+    }
+
+    searchTimeout = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        const results = await res.json();
+        
+        searchOverlay.replaceChildren();
+        if (results.length === 0) {
+          const noRes = document.createElement("div");
+          noRes.style.cssText = "padding:12px;font-size:12px;color:var(--text-dim)";
+          noRes.textContent = "sonuç bulunamadı.";
+          searchOverlay.appendChild(noRes);
+        } else {
+          results.forEach(r => {
+            const item = document.createElement("div");
+            item.className = "search-item";
+            
+            const titleRow = document.createElement("div");
+            titleRow.className = "search-item-title";
+            
+            const titleSpan = document.createElement("span");
+            titleSpan.textContent = `⚡ [[${r.node_id}]] ${r.title}`;
+            
+            const scoreSpan = document.createElement("span");
+            scoreSpan.className = "search-item-score";
+            scoreSpan.textContent = `skor: ${r.score}`;
+            
+            titleRow.appendChild(titleSpan);
+            titleRow.appendChild(scoreSpan);
+            
+            const snippetDiv = document.createElement("div");
+            snippetDiv.className = "search-item-snippet";
+            snippetDiv.textContent = r.snippet || "";
+            
+            item.appendChild(titleRow);
+            item.appendChild(snippetDiv);
+
+            item.onclick = () => {
+              searchOverlay.classList.remove("open");
+              searchInput.value = "";
+              const target = nodes.find(n => n.id === r.node_id);
+              if (target) {
+                selectNode(target);
+                // Pan camera to target node
+                camera.x = viewport.clientWidth / 2 - target.x * camera.zoom;
+                camera.y = viewport.clientHeight / 2 - target.y * camera.zoom;
+              }
+            };
+            searchOverlay.appendChild(item);
+          });
+        }
+        searchOverlay.classList.add("open");
+      } catch (err) {
+        console.error("Arama hatası:", err);
+      }
+    }, 180);
+  });
+
+  // Close search overlay on click outside
+  document.addEventListener("click", (e) => {
+    if (!searchOverlay.contains(e.target) && e.target !== searchInput) {
+      searchOverlay.classList.remove("open");
+    }
+  });
+
+  // Bootstrap
+  resizeCanvas();
+  loadGraphData();
+  render();
+})();
+
+</script>
+</body>
+</html>

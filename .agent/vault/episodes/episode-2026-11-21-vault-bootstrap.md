@@ -16,8 +16,8 @@ links:
 # 📜 oturum kaydı: vault bootstrap
 
 - **tarih:** 2026-11-21
-- **işlem:** obsidian yerel vault mimarisinin (`.agent/vault/`) sıfırdan kurulması.
-- **kapsam:** `.obsidian/` konfigürasyonu, graph view renk kuralları, kavram düğümleri ve adr kararlarının ilişkilendirilmesi.
+- **işlem:** antigravity kitine özgü yerel nöral bilgi ağı mimarisinin (`.agent/vault/`) sıfırdan kurulması.
+- **kapsam:** kavram düğümleri, adr kararları ve oturum kayıtlarının çift yönlü ilişkilendirilmesi.
 - **durum:** 1. modül başarıyla tamamlandı.
 
 ---

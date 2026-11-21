@@ -1,24 +1,24 @@
 ---
 name: memory-system
-description: obsidian uyumlu otonom nöral bellek ve bilgi ağı yönetimi. kararları, kuralları ve oturum hafızasını çift yönlü wikilink grafiğinde tutar.
+description: antigravity kitine özgü yerel nöral bellek ve bilgi ağı yönetimi. kararları, kuralları ve oturum hafızasını çift yönlü wikilink grafiğinde tutar.
 when_to_use: "kullanıcı 'bunu unutma', 'hafızaya kaydet', 'hatırla' dediğinde, kritik bir mimari karar (adr) alındığında veya oturum tamamlandığında kullanılır."
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 version: 2.0.0
 effort: low
 ---
 
-# 🧠 nöral bellek sistemi (neural memory system v2.0)
+# 🧠 nöral bellek sistemi (antigravity neural-os v2.0)
 
-> oturumlar arasında mimari kararları, konseptleri ve tecrübeleri obsidian uyumlu bir nöral bilgi ağında (`.agent/vault/`) çift yönlü bağlantılarla (`[[wikilink]]`) kalıcı tutar.
+> oturumlar arasında mimari kararları, konseptleri ve tecrübeleri antigravity kitine özgü bağımsız bir nöral bilgi ağında (`.agent/vault/`) çift yönlü bağlantılarla (`[[wikilink]]`) kalıcı tutar.
 
 ---
 
 ## 🎯 genel bakış ve omurga
 
-bu sistem, klasik pasif metin notlarının ötesine geçerek:
+bu sistem, harici herhangi bir üçüncü parti masaüstü uygulamasına bağımlı kalmadan:
 1. **çift yönlü bağlantı ağı (bidirectional graph):** tüm bilgiler `[[kavram]]` veya `[[karar]]` şeklinde birbirine düğümlenir.
-2. **obsidian uyumluluğu:** kullanıcı `.agent/vault/` dizinini obsidian'da açtığında renk kodlu interaktif bir bilgi grafiği ile karşılaşır.
-3. **otonom python motoru:** `.agent/scripts/neural_memory.py` üzerinden otomatik sorgulama, adr üretimi, epizot kaydı ve grafik bütünlüğü denetimi (`--audit`) sağlar.
+2. **kite özgü yerel web görselleştirici:** doğrudan `http://127.0.0.1:8990` üzerinden karanlık temalı, fizik motorlu interaktif bir bilgi grafiği sunar.
+3. **otonom python motoru:** `.agent/scripts/neural_memory.py` ve `neural_os.py` üzerinden otomatik sorgulama, adr üretimi, epizot kaydı ve grafik bütünlüğü denetimi (`--audit`) sağlar.
 
 ---
 
@@ -28,8 +28,7 @@ bu sistem, klasik pasif metin notlarının ötesine geçerek:
 - `concepts/`: genel mimari ilkeler, güvenlik standartları ve desenler.
 - `decisions/`: numaralandırılmış mimari karar kayıtları (`adr-*.md`).
 - `playbooks/`: adım adım uygulama ve operasyon rehberleri.
-- `episodes/`: oturum özetleri ve epizodik tecrübe kayıtları (`episode-*.md`).
-- `.obsidian/`: otomatik grafik renklendirme (`graph.json`) ve arayüz ayarları (`app.json`).
+- `episodes/`: otonom ajan epizotları ve oturum hafızası (`episode-*.md`).
 
 ---
 

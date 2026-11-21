@@ -1,6 +1,6 @@
 ---
 id: adr-001-autonomous-neural-vault
-title: "adr 001: obsidian uyumlu otonom nöral bilgi ağının (neural vault) benimsenmesi"
+title: "adr 001: antigravity kitine özgü bağımsız nöral bilgi ağının (neural vault) benimsenmesi"
 status: accepted
 date: 2026-11-21
 tags:
@@ -12,19 +12,19 @@ links:
   - "[[architecture-overview]]"
 ---
 
-# ⚖️ adr 001: otonom nöral bilgi ağının benimsenmesi
+# ⚖️ adr 001: kite özgü otonom nöral bilgi ağının benimsenmesi
 
 ## 1. bağlam (context)
-klasik claude ve obsidian entegrasyonları, yapay zekanın sadece notları okuduğu veya kullanıcının manuel link verdiği pasif bir modelle sınırlıdır. çoklu ajan mimarimizde ajanların bağımsız olarak bilgi kaydettiği, `[[wikilink]]` ile çift yönlü bağ kurduğu ve kullanıcının doğrudan obsidian ile görselleştirebileceği yaşayan bir hafıza gerekmektedir.
+harici üçüncü parti masaüstü uygulamaları kullanıcının ortam değiştirmesini gerektirir ve kite bağımlılık getirir. çoklu ajan mimarimizde ajanların bağımsız olarak bilgi kaydettiği, `[[wikilink]]` ile çift yönlü bağ kurduğu ve kitin kendi içindeki web sunucusu üzerinden görselleştirilebilen bağımsız bir ikinci beyin gerekmektedir.
 
 ## 2. karar (decision)
-`.agent/vault/` dizini altında obsidian uyumlu tam bir yerel vault yapısının kurulmasına karar verilmiştir.
+`.agent/vault/` dizini altında harici hiçbir masaüstü aracına ihtiyaç duymayan, tamamen kitin kendi web canvas motoruyla çalışan yerel bir vault yapısının kurulmasına karar verilmiştir.
 - çift yönlü bağlantı: `[[dosya-adi]]` standardı.
 - klasör yapısı: `concepts/`, `decisions/`, `playbooks/`, `episodes/`.
-- grafik renkleri ve görünüm: `.obsidian/graph.json` üzerinden otomatik renk kodlu.
+- grafik arayüzü: kitin yerleşik `http://127.0.0.1:8990` web paneli üzerinden kuvvet odaklı fizik motoru.
 
 ## 3. sonuçlar (consequences)
-- **olumlu:** kullanıcı projeyi obsidian'da tek tıkla açıp interaktif graph view ile ajanların ürettiği tüm mimariyi zihin haritası olarak izleyebilir.
+- **olumlu:** kullanıcı harici hiçbir uygulama kurmadan doğrudan tarayıcıdan interaktif zihin haritasını izleyebilir.
 - **olumlu:** token tasarruflu, yalnızca ilgili düğümleri çağıran yerel nöral bellek altyapısı kazanıldı.
 
 ---
