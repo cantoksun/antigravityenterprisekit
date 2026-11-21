@@ -64,6 +64,7 @@
     "scripts/quality_gates.py": "3146262862e1835a50120f41a8cbbb21c70e2986dfa0992524960e93a3644939",
     "scripts/rule_dispatcher.py": "7728683f46313948af3530d6d17d2b237fe077ccd82394addc261368506276d6",
     "scripts/session_manager.py": "dcacd94cc1117f81440c158fb6073cce69ab1e7bc7ecd54684bdef7c1b405d64",
+    "scripts/skill_aggregator.py": "87d2937326a5634c48e6bfb8f4fb1005546b468f7852a9d957aa935bc49f21eb",
     "scripts/skill_loader.py": "28953f27e844d6c71083ffdc1784f65ce4cf757e24c84f4bcfd5caa9c31ec03e",
     "scripts/tests/test_agents_contract.py": "4cc919d142883c1ef7f4886b60a3d094b6daffcf8a6f51353a35ba37d9f77930",
     "scripts/tests/test_context_optimization.py": "3dff8a41aa48e6d3d0f9b11eee4b13cf6900559379f01ec83aaa0ad227300205",
