@@ -9,6 +9,11 @@
   let activeNode = null;
   let hoveredNode = null;
 
+  // Starfield & Grid Particles
+  const STAR_COUNT = 60;
+  let stars = [];
+  let pulseOffset = 0; // Animating energy packets along links
+
   // Viewport / Camera Transform
   let camera = { x: 0, y: 0, zoom: 1.0 };
   let isDragging = false;
@@ -52,6 +57,22 @@
     canvas.style.width = `${viewport.clientWidth}px`;
     canvas.style.height = `${viewport.clientHeight}px`;
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    initStars();
+  }
+
+  function initStars() {
+    stars = [];
+    const w = viewport.clientWidth;
+    const h = viewport.clientHeight;
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        radius: Math.random() * 1.4 + 0.4,
+        alpha: Math.random() * 0.5 + 0.2,
+        speed: Math.random() * 0.15 + 0.05
+      });
+    }
   }
 
   window.addEventListener("resize", resizeCanvas);
@@ -155,6 +176,44 @@
     }
   }
 
+  // Draw Cyber Grid & Starfield
+  function drawCyberBackground(width, height) {
+    // 1. Perspective Cyber Grid
+    const gridSize = 48 * camera.zoom;
+    const offsetX = (camera.x % gridSize);
+    const offsetY = (camera.y % gridSize);
+
+    ctx.save();
+    ctx.strokeStyle = "rgba(99, 102, 241, 0.05)";
+    ctx.lineWidth = 1;
+
+    // Vertical lines
+    for (let x = offsetX; x < width; x += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, height);
+      ctx.stroke();
+    }
+    // Horizontal lines
+    for (let y = offsetY; y < height; y += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(width, y);
+      ctx.stroke();
+    }
+
+    // 2. Stars
+    for (const s of stars) {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(165, 180, 252, ${s.alpha})`;
+      ctx.fill();
+      s.y -= s.speed;
+      if (s.y < 0) s.y = height;
+    }
+    ctx.restore();
+  }
+
   // Main Render Loop
   function render() {
     simulatePhysics();
@@ -163,21 +222,41 @@
     const height = viewport.clientHeight;
 
     ctx.clearRect(0, 0, width, height);
+
+    // Render cyber grid & starfield in screen space
+    drawCyberBackground(width, height);
+
     ctx.save();
 
     // Apply Camera Transform
     ctx.translate(camera.x, camera.y);
     ctx.scale(camera.zoom, camera.zoom);
 
-    // 1. Draw Links
+    // 1. Draw Links & Animated Energy Pulses
+    pulseOffset = (pulseOffset + 0.007) % 1.0;
+
     for (const link of links) {
       const isConnectedToActive = activeNode && (link.source === activeNode || link.target === activeNode);
       ctx.beginPath();
       ctx.moveTo(link.source.x, link.source.y);
       ctx.lineTo(link.target.x, link.target.y);
-      ctx.strokeStyle = isConnectedToActive ? "rgba(129, 140, 248, 0.75)" : "rgba(148, 163, 184, 0.18)";
-      ctx.lineWidth = isConnectedToActive ? 2.2 : 1.0;
+      ctx.strokeStyle = isConnectedToActive ? "rgba(129, 140, 248, 0.85)" : "rgba(148, 163, 184, 0.16)";
+      ctx.lineWidth = isConnectedToActive ? 2.5 : 1.2;
       ctx.stroke();
+
+      // Energy packet animation (flowing photon)
+      const dx = link.target.x - link.source.x;
+      const dy = link.target.y - link.source.y;
+      const px = link.source.x + dx * pulseOffset;
+      const py = link.source.y + dy * pulseOffset;
+
+      ctx.beginPath();
+      ctx.arc(px, py, isConnectedToActive ? 3.0 : 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = isConnectedToActive ? "#38bdf8" : "rgba(129, 140, 248, 0.65)";
+      ctx.shadowColor = "#38bdf8";
+      ctx.shadowBlur = 6;
+      ctx.fill();
+      ctx.shadowBlur = 0; // reset
     }
 
     // 2. Draw Nodes
