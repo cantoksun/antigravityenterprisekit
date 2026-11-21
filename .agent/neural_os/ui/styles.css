@@ -111,7 +111,16 @@ body {
   position: absolute;
   left: 14px;
   color: var(--text-dim);
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.brand-icon {
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
 }
 
 .header-actions {
@@ -129,14 +138,52 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   transition: var(--transition);
+}
+
+.btn-icon .ui-icon {
+  color: #a3a3a3;
+  transition: color 0.15s ease;
 }
 
 .btn-icon:hover {
   background: #222222;
   color: var(--text-main);
   border-color: rgba(255, 255, 255, 0.30);
+}
+
+.btn-icon:hover .ui-icon {
+  color: #ffffff;
+}
+
+.radar-header {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.radar-header svg {
+  color: var(--text-dim);
+}
+
+.physics-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: lowercase;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.physics-title .ui-icon {
+  color: var(--text-dim);
 }
 
 /* Layout */

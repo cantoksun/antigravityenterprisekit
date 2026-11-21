@@ -10,24 +10,32 @@
   <!-- Top Navigation Header -->
   <header class="top-header">
     <div class="brand-section">
-      <span class="brand-logo">🧠 antigravity neural-os</span>
+      <span class="brand-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M3 12h3m12 0h3M12 3v3m0 12v3m-6.36-15.36l2.12 2.12m8.48 8.48l2.12 2.12m-12.72 0l2.12-2.12m8.48-8.48l2.12-2.12"></path></svg>
+      </span>
+      <span class="brand-logo">antigravity neural-os</span>
       <span class="brand-badge">enterprise v2.0</span>
     </div>
 
     <div class="search-container">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </span>
       <input type="text" id="searchInput" class="search-input" placeholder="hibrit semantik arama (bm25 + pagerank)..." autocomplete="off">
     </div>
 
     <div class="header-actions">
       <button id="btnToggleFullscreen" class="btn-icon" title="tam ekran odaklanma modu">
-        <span>⛶</span> tam ekran
+        <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+        <span>tam ekran</span>
       </button>
       <button id="btnRecenter" class="btn-icon" title="grafiği merkeze hizala">
-        <span>🎯</span> ortala
+        <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+        <span>ortala</span>
       </button>
       <button id="btnReload" class="btn-icon" title="grafiği yeniden yükle">
-        <span>🔄</span> yenile
+        <svg class="ui-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+        <span>yenile</span>
       </button>
     </div>
   </header>
@@ -43,35 +51,39 @@
       <!-- Filter Bar (Digital Twin of Antigravity Kit) -->
       <div class="filter-bar">
         <button class="filter-btn active" data-type="all">tümü (124)</button>
-        <button class="filter-btn" data-type="agent"><span class="btn-dot" style="background:#818cf8;"></span> 🤖 ajanlar (20)</button>
-        <button class="filter-btn" data-type="skill"><span class="btn-dot" style="background:#22d3ee;"></span> ⚡ beceriler (97)</button>
-        <button class="filter-btn" data-type="concept"><span class="btn-dot" style="background:#38bdf8;"></span> 🧬 kavramlar</button>
-        <button class="filter-btn" data-type="decision"><span class="btn-dot" style="background:#fb923c;"></span> ⚖️ kararlar</button>
-        <button class="filter-btn" data-type="rule"><span class="btn-dot" style="background:#f43f5e;"></span> 📜 anayasa</button>
+        <button class="filter-btn" data-type="agent"><span class="btn-dot" style="background:#818cf8;"></span> ajanlar (20)</button>
+        <button class="filter-btn" data-type="skill"><span class="btn-dot" style="background:#22d3ee;"></span> beceriler (97)</button>
+        <button class="filter-btn" data-type="concept"><span class="btn-dot" style="background:#38bdf8;"></span> kavramlar</button>
+        <button class="filter-btn" data-type="decision"><span class="btn-dot" style="background:#fb923c;"></span> kararlar</button>
+        <button class="filter-btn" data-type="rule"><span class="btn-dot" style="background:#f43f5e;"></span> anayasa</button>
       </div>
 
       <!-- Radar Minimap -->
       <div class="radar-container" id="radarContainer">
         <div class="radar-header">
-          <span>📡 siber radar</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span>radar</span>
         </div>
         <canvas id="radarCanvas" width="130" height="90"></canvas>
       </div>
 
       <!-- HUD & Legend -->
       <div class="graph-hud">
-        <div class="legend-item"><span class="legend-dot" style="background: #818cf8;"></span> 🤖 uzman ajanlar (agents)</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #22d3ee;"></span> ⚡ kurumsal beceriler (skills)</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #10b981;"></span> 🧠 ana indeks (MOC)</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #38bdf8;"></span> 🧬 kavramlar & mimari</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #fb923c;"></span> ⚖️ kararlar (ADR)</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #f43f5e;"></span> 📜 kural & anayasa</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #818cf8;"></span> uzman ajanlar (agents)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #22d3ee;"></span> kurumsal beceriler (skills)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #10b981;"></span> ana indeks (MOC)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #38bdf8;"></span> kavramlar & mimari</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #fb923c;"></span> kararlar (ADR)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #f43f5e;"></span> kural & anayasa</div>
       </div>
 
       <!-- Physics Control HUD (Obsidian Grade) -->
       <div class="physics-panel" id="physicsPanel">
         <div class="physics-header" id="physicsHeader">
-          <span class="physics-title">⚙️ fizik parametreleri</span>
+          <span class="physics-title">
+            <svg class="ui-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            fizik parametreleri
+          </span>
           <button id="btnTogglePhysics" class="physics-toggle-btn" title="paneli daralt/genişlet">−</button>
         </div>
         <div class="physics-body" id="physicsBody">
