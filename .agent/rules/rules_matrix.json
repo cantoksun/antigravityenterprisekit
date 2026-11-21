@@ -1,0 +1,77 @@
+{
+  "$schema": "../schemas/rules-matrix.schema.json",
+  "version": "1.0.0",
+  "description": "Antigravity AI-OS: Tier-based Context-Optimized Rule Matrix",
+  "tiers": {
+    "tier_0_universal": {
+      "name": "Evrensel Çekirdek Anayasa",
+      "description": "Her turda ve her istekte istisnasız aktif olan temel ilkeler (~350 token)",
+      "rule_ids": [1, 2, 3, 4, 7, 17, 18, 19, 45, 46, 47]
+    },
+    "tier_1_backend": {
+      "name": "Arka Yüz, API ve Veritabanı Kuralları",
+      "description": "Sunucu, veri tabanı, api, mikroservis veya backend görevlerinde dinamik yüklenir",
+      "rule_ids": [5, 6, 8, 9, 10, 11, 12, 20, 21, 22, 24, 25, 26, 27, 28, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42]
+    },
+    "tier_1_frontend": {
+      "name": "Ön Yüz, Web ve Responsive UX Kuralları",
+      "description": "Arayüz, react/next.js, css, mobil web veya kullanıcı deneyimi görevlerinde dinamik yüklenir",
+      "rule_ids": [9, 10, 13, 14, 15, 16, 23, 29, 48]
+    },
+    "tier_1_security": {
+      "name": "Siber Güvenlik, Denetim ve Kimlik Kuralları",
+      "description": "Güvenlik taraması, sızma testi, tersine mühendislik veya yetkilendirme görevlerinde yüklenir",
+      "rule_ids": [6, 7, 8, 14, 29, 30, 35, 41, 43, 44]
+    }
+  },
+  "rules": {
+    "1": {"title": "dil ve karakter standardı", "scope": "universal", "summary": "türkçe, eksiksiz türkçe karakter, küçük harf"},
+    "2": {"title": "sorgusuz modüler planlama ve icra", "scope": "universal", "summary": "kullanıcıyı gereksiz sorularla boğmadan numaralandırılmış aşamalara bölme"},
+    "3": {"title": "adım adım aşamalı yürütme (tek tur/tek modül)", "scope": "universal", "summary": "her turda yalnızca sıradaki bağımsız modülü tamamlama ve durma"},
+    "4": {"title": "sadelik ve modern trend teknolojiler", "scope": "universal", "summary": "aşırı mühendislikten kaçınma ve güncel modern yığın seçimi"},
+    "5": {"title": "yalın ve tekilleştirilmiş veritabanı modellemesi", "scope": "backend", "summary": "bayrak kirliliğinden kaçınma, tek role/enum mimarisi"},
+    "6": {"title": "katı api güvenliği", "scope": "backend,security", "summary": "girdi doğrulama, rate limit, güvenli yanıt"},
+    "7": {"title": "hassas verilerin mutlak korunması", "scope": "universal,security", "summary": "api key, parola ve kişisel verilerin asla kodda bulunmaması"},
+    "8": {"title": "idor ve bola açıklarının önceden tespiti", "scope": "backend,security", "summary": "kaynak sahipliği (owner_id) sorgu seviyesinde doğrulama"},
+    "9": {"title": "öncelikli bellek ve performans optimizasyonu", "scope": "backend,frontend", "summary": "gereksiz cpu/ram tüketimini önleme, asenkron akış"},
+    "10": {"title": "bellek sızıntısı analizi ve kullanıcı bildirimi", "scope": "backend,frontend", "summary": "kapatılmamış dinleyici, timer ve havuz tespiti"},
+    "11": {"title": "endüstri standardı sayfalama", "scope": "backend", "summary": "limitsiz sorgu yasağı, cursor/limit-offset rehberliği"},
+    "12": {"title": "rls ihlali 42501 ve yetkisiz işlem yönetimi", "scope": "backend", "summary": "satır düzeyi güvenlik hatalarını önceden tespit"},
+    "13": {"title": "paginasyon ve lazy loading eksikliği analizi", "scope": "frontend", "summary": "sonsuz akış ve tablolarda dom şişmesini engelleme"},
+    "14": {"title": "istemci tarafı hassas veri ve owasp oturum denetimi", "scope": "frontend,security", "summary": "localstorage'da plaintext veri yasağı, httponly çerezler"},
+    "15": {"title": "tam responsive ve cihaz odaklı deneyim ayrımı", "scope": "frontend", "summary": "yatay taşma yasağı, mobilde bottom sheet/drawer, masaüstünde modal/popover"},
+    "16": {"title": "font sınırlandırması ve tipografi disiplini", "scope": "frontend", "summary": "en fazla 2-3 font ailesi, boyut ve ağırlık skalası"},
+    "17": {"title": "kullanıcıyı yormama ve doğrudan icra (zero friction)", "scope": "universal", "summary": "ortam değişkeni, eksik paket ve dev server'ı otonom çözme"},
+    "18": {"title": "kesin varlık doğrulaması ve sıfır varsayım (zero assumptions)", "scope": "universal", "summary": "varlığı kodda kanıtlanmamış hiçbir hayali alan/fonksiyon eklenemez"},
+    "19": {"title": "kapsam şeffaflığı ve proaktif tamamlama taahhüdü", "scope": "universal", "summary": "çoklu işlerde nelerin yapıldığını açıkça listeleme ve proaktif bitirme"},
+    "20": {"title": "idempotency ve mükerrer işlem engeli", "scope": "backend", "summary": "ödeme ve kritik kaynak üretiminde idempotency-key başlığı"},
+    "21": {"title": "soft delete ve veri kurtarma güvencesi", "scope": "backend", "summary": "kritik verilerde hard delete yasağı, deleted_at alanı"},
+    "22": {"title": "değişmez denetim günlüğü (immutable audit logging)", "scope": "backend", "summary": "kritik değişikliklerde audit_logs tablosu"},
+    "23": {"title": "klavye navigasyonu ve anlamsal erişilebilirlik sadeliği", "scope": "frontend", "summary": "tab/enter/esc desteği, gereksiz aria yığmama"},
+    "24": {"title": "n+1 sorgu yasağı ve toplu veri yükleme", "scope": "backend", "summary": "döngü içi alt sorgu engeli, eager loading / join"},
+    "25": {"title": "atomik işlemler ve db transaction güvencesi", "scope": "backend", "summary": "çoklu tablo güncellemelerinde db.transaction() all-or-nothing"},
+    "26": {"title": "tip korumalı ve başlangıçta doğrulanan env (fail-fast env)", "scope": "backend", "summary": "zod/şema ile açılışta env kontrolü ve anında durma"},
+    "27": {"title": "zarif kapanış ve kaynak temizliği (graceful shutdown)", "scope": "backend", "summary": "sigterm/sigint anında aktif istekleri tamamlama ve havuzları kapatma"},
+    "28": {"title": "katı zaman aşımı ve devre kesici (timeout & circuit breaker)", "scope": "backend", "summary": "dış api isteklerinde zorunlu 5000ms zaman aşımı"},
+    "29": {"title": "güvenlik başlıkları ve csp", "scope": "frontend,backend,security", "summary": "content-security-policy, hsts, nosniff, x-frame-options"},
+    "30": {"title": "sıkı cors politikası ve beyaz liste disiplini", "scope": "backend,security", "summary": "origin: * yasağı, dinamik cors whitelist"},
+    "31": {"title": "sağlık ve hazır olma denetimi (liveness & readiness probes)", "scope": "backend", "summary": "/health/live ve /health/ready uç noktaları"},
+    "32": {"title": "dayanıklı yeniden deneme ve üssel geri çekilme", "scope": "backend", "summary": "exponential backoff with jitter ile en fazla 3 deneme"},
+    "33": {"title": "çakışma ve yarış durumu kontrolü (optimistic concurrency control)", "scope": "backend", "summary": "version tabanlı iyimser kilit veya select for update"},
+    "34": {"title": "yapısal loglama ve istek izleme (json logs & correlation-id)", "scope": "backend", "summary": "json log formatı ve x-correlation-id başlığı"},
+    "35": {"title": "webhook hmac imza doğrulaması", "scope": "backend,security", "summary": "sha-256 hmac ile rawBody imza teyidi"},
+    "36": {"title": "arka plan kuyruklarında ölü mektup yönetimi (dlq)", "scope": "backend", "summary": "3 kez başarısız işleri dead-letter queue'ya alma"},
+    "37": {"title": "akıllı http önbellekleme ve etag", "scope": "backend", "summary": "etag ve 304 not modified desteği"},
+    "38": {"title": "kvkk/gdpr uyumlu pii anonimleştirme", "scope": "backend", "summary": "unutulma hakkı, pii alanlarını anon_id ile maskeleme"},
+    "39": {"title": "sıfır kesintili veritabanı göçü (expand & contract)", "scope": "backend", "summary": "şema değişikliklerinde 3 aşamalı genişlet ve daralt modeli"},
+    "40": {"title": "özellik bayrakları ve acil kesici (feature flags & kill switch)", "scope": "backend", "summary": "dağıtım ve açılışı ayırma, tek bayrakla anında kapatma"},
+    "41": {"title": "kurumsal hız sınırlama disiplini (token bucket rate limit)", "scope": "backend,security", "summary": "user_id ve ip bazlı token bucket sınırlaması"},
+    "42": {"title": "otonom dağıtım dosyaları (automated deploy config)", "scope": "backend", "summary": "dockerfile/compose/vercel dosyalarını proaktif oluşturma"},
+    "43": {"title": "delile dayalı tersine mühendislik ve temiz oda disiplini", "scope": "security", "summary": "clean-room rewrite, telifli kod kopyalamama, somut delil"},
+    "44": {"title": "otonom hesap ve kimlik doğrulama kolaylığı", "scope": "security", "summary": "sandbox ve test hesaplarını otomatik yapılandırma"},
+    "45": {"title": "otonom çalışma alanı hijyeni ve geçici kaynak temizliği (auto-teardown)", "scope": "universal", "summary": "geçici test dosyalarını ve yetim süreçleri iş bitince temizleme"},
+    "46": {"title": "derin planlama, derin analiz ve derin entegrasyon", "scope": "universal", "summary": "yüzeysel özetlerle geçiştirmeme, kök neden ve etki analizi"},
+    "47": {"title": "akıllı süreç hijyeni ve takılma koruması", "scope": "universal", "summary": "meşru süreçlere izin verme, sadece kilitlenen süreçleri arındırma"},
+    "48": {"title": "otonom zihin grafiği ve şema hatırlatma refleksi (neural graph awareness)", "scope": "frontend", "summary": "kritik adımlarda graph-preview.html hatırlatması"}
+  }
+}
