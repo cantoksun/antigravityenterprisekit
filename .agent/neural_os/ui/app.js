@@ -281,57 +281,77 @@
       "episodes": "📜"
     };
 
+    // Identify neighbors if hovering or active
+    const focusedNode = hoveredNode || activeNode;
+    const neighborIds = new Set();
+    if (focusedNode) {
+      neighborIds.add(focusedNode.id);
+      for (const link of links) {
+        if (link.source.id === focusedNode.id) neighborIds.add(link.target.id);
+        if (link.target.id === focusedNode.id) neighborIds.add(link.source.id);
+      }
+    }
+
     for (const node of nodes) {
       if (node.filtered) continue;
       const isSelected = node === activeNode;
       const isHovered = node === hoveredNode;
       const isHub = (node.pagerank || 0) > 18;
+      const isNeighbor = focusedNode ? neighborIds.has(node.id) : true;
+      const opacity = isNeighbor ? 1.0 : 0.25;
 
-      // Holographic Pulsing Outer Rings for Hub / High PageRank nodes (Monochrome)
+      ctx.globalAlpha = opacity;
+
+      // Holographic Pulsing Outer Rings for Hub / High PageRank nodes
       if (isHub || isSelected) {
         const pulseSize = Math.sin(now + node.radius) * 3;
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius + 8 + pulseSize, 0, Math.PI * 2);
-        ctx.strokeStyle = isSelected ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.22)";
-        ctx.lineWidth = 1.0;
+        ctx.strokeStyle = isSelected ? "#ffffff" : `${node.color}88`;
+        ctx.lineWidth = isSelected ? 1.8 : 1.0;
         ctx.setLineDash([3, 3]);
         ctx.stroke();
         ctx.setLineDash([]); // reset dash
       }
 
-      // Glow halo (White/Gray bloom)
+      // Glow halo
       if (isSelected || isHovered || isHub) {
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius + (isSelected ? 8 : 4), 0, Math.PI * 2);
-        ctx.fillStyle = isSelected ? "rgba(255, 255, 255, 0.16)" : "rgba(255, 255, 255, 0.06)";
-        ctx.shadowColor = "#ffffff";
-        ctx.shadowBlur = isSelected ? 12 : 6;
+        ctx.fillStyle = isSelected ? "rgba(255, 255, 255, 0.25)" : `${node.color}33`;
+        ctx.shadowColor = node.color || "#ffffff";
+        ctx.shadowBlur = isSelected ? 16 : 8;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
 
-      // Outer circle (Dark Gray node container)
+      // Outer circle (High-contrast colored container)
       ctx.beginPath();
       ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-      ctx.fillStyle = isSelected ? "#2d2d2d" : (node.color || "#1c1c1c");
+      ctx.fillStyle = node.color || "#38bdf8";
       ctx.fill();
-      ctx.lineWidth = isSelected ? 2.0 : (isHub ? 1.5 : 1.0);
-      ctx.strokeStyle = isSelected ? "#ffffff" : "rgba(255, 255, 255, 0.35)";
+      ctx.lineWidth = isSelected ? 2.5 : (isHub ? 2.0 : 1.2);
+      ctx.strokeStyle = isSelected ? "#ffffff" : "rgba(255, 255, 255, 0.85)";
       ctx.stroke();
 
-      // Node Icon (Type symbol)
+      // Node Icon (Type symbol with drop shadow for extreme contrast)
       const icon = typeIcons[node.type?.toLowerCase()] || "🔹";
       ctx.font = `${Math.max(10, node.radius * 0.9)}px sans-serif`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillText(icon, node.x, node.y);
 
-      // Node label
-      ctx.font = `${isSelected ? "600 " : ""}11px -apple-system, sans-serif`;
-      ctx.fillStyle = isSelected ? "#ffffff" : "#a3a3a3";
+      // Node label (Crisp, high-contrast white text)
+      ctx.font = `${isSelected ? "700 " : "500 "}11.5px -apple-system, BlinkMacSystemFont, sans-serif`;
+      ctx.fillStyle = isSelected ? "#ffffff" : "#f1f5f9";
       ctx.textBaseline = "alphabetic";
       ctx.textAlign = "center";
-      ctx.fillText(node.title.length > 20 ? node.title.slice(0, 18) + ".." : node.title, node.x, node.y + node.radius + 14);
+      // Shadow behind text for readability over links
+      ctx.shadowColor = "rgba(0,0,0,0.95)";
+      ctx.shadowBlur = 4;
+      ctx.fillText(node.title.length > 22 ? node.title.slice(0, 20) + ".." : node.title, node.x, node.y + node.radius + 15);
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1.0;
     }
 
     ctx.restore();
@@ -411,6 +431,62 @@
     return null;
   }
 
+  // Parse and render clean markdown without raw frontmatter
+  function renderCleanMarkdown(container, rawText) {
+    container.replaceChildren();
+    if (!rawText) return;
+
+    // Strip Frontmatter
+    let text = rawText;
+    if (text.startsWith("---")) {
+      const secondIndex = text.indexOf("---", 3);
+      if (secondIndex !== -1) {
+        text = text.substring(secondIndex + 3).trim();
+      }
+    }
+
+    const lines = text.split("\n");
+    let currentList = null;
+
+    lines.forEach(line => {
+      const trimmed = line.trim();
+      if (!trimmed) {
+        currentList = null;
+        return;
+      }
+
+      if (trimmed.startsWith("### ")) {
+        currentList = null;
+        const h3 = document.createElement("h3");
+        h3.textContent = trimmed.substring(4);
+        container.appendChild(h3);
+      } else if (trimmed.startsWith("## ")) {
+        currentList = null;
+        const h2 = document.createElement("h2");
+        h2.textContent = trimmed.substring(3);
+        container.appendChild(h2);
+      } else if (trimmed.startsWith("# ")) {
+        currentList = null;
+        const h1 = document.createElement("h1");
+        h1.textContent = trimmed.substring(2);
+        container.appendChild(h1);
+      } else if (trimmed.startsWith("- ")) {
+        if (!currentList) {
+          currentList = document.createElement("ul");
+          container.appendChild(currentList);
+        }
+        const li = document.createElement("li");
+        li.textContent = trimmed.substring(2);
+        currentList.appendChild(li);
+      } else {
+        currentList = null;
+        const p = document.createElement("p");
+        p.textContent = trimmed;
+        container.appendChild(p);
+      }
+    });
+  }
+
   // Open Detailed Drawer for a Node
   async function selectNode(node) {
     activeNode = node;
@@ -420,15 +496,21 @@
 
       drawerTitle.textContent = details.title || details.id;
       drawerBadge.textContent = details.type || "concept";
-      drawerBadge.style.background = `${node.color}28`;
-      drawerBadge.style.color = node.color;
+      
+      // High-contrast, crystal clear badge styling
+      const typeColor = node.color || "#38bdf8";
+      drawerBadge.style.background = `${typeColor}22`;
+      drawerBadge.style.color = typeColor;
+      drawerBadge.style.border = `1px solid ${typeColor}55`;
 
       metricPR.textContent = `${details.pagerank}%`;
       metricIn.textContent = details.in_degree;
       metricOut.textContent = details.out_degree;
 
       drawerSummary.textContent = details.summary || "özet mevcut değil.";
-      drawerContent.textContent = details.content || "";
+      
+      // Render clean, beautiful markdown instead of raw YAML/code
+      renderCleanMarkdown(drawerContent, details.content || "");
 
       // Backlinks
       drawerBacklinks.replaceChildren();
