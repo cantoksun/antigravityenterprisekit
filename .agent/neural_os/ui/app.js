@@ -814,6 +814,40 @@
     });
   }
 
+  // Fullscreen & Keyboard Shortcuts (Obsidian Grade)
+  const btnToggleFullscreen = document.getElementById("btnToggleFullscreen");
+  if (btnToggleFullscreen) {
+    btnToggleFullscreen.addEventListener("click", () => {
+      document.body.classList.toggle("fullscreen-mode");
+      resizeCanvas();
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    // ESC closes search, drawer or exits fullscreen
+    if (e.key === "Escape") {
+      if (document.body.classList.contains("fullscreen-mode")) {
+        document.body.classList.remove("fullscreen-mode");
+        resizeCanvas();
+        return;
+      }
+      if (searchOverlay.classList.contains("open")) {
+        searchOverlay.classList.remove("open");
+        return;
+      }
+      if (sideDrawer.classList.contains("open")) {
+        sideDrawer.classList.remove("open");
+        activeNode = null;
+        return;
+      }
+    }
+    // F key toggles clean full screen
+    if ((e.key === "f" || e.key === "F") && document.activeElement !== searchInput) {
+      document.body.classList.toggle("fullscreen-mode");
+      resizeCanvas();
+    }
+  });
+
   // Bootstrap
   resizeCanvas();
   loadGraphData();
