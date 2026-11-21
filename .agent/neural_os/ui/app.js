@@ -271,9 +271,7 @@
       if (labels[type]) {
         const dot = btn.querySelector(".btn-dot");
         if (dot) {
-          btn.innerHTML = "";
-          btn.appendChild(dot);
-          btn.appendChild(document.createTextNode(` ${labels[type]}`));
+          btn.replaceChildren(dot, document.createTextNode(` ${labels[type]}`));
         } else {
           btn.textContent = labels[type];
         }
