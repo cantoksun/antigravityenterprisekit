@@ -67,6 +67,7 @@
     "scripts/validate_kit.py": "536a467a8ab279c345eb47bc4440106e2be982edb6a0af2e85a0f831320e0d4f",
     "scripts/validation_runner.py": "382463ab326c1978e76b45b45943ff99c60b04392e23aa46570e46359bff8664",
     "scripts/verify_all.py": "1bbf1853b461253c60feedc569d2faa6c5b33d7b8d93b012506befc26d21d3d6",
+    "scripts/verify_kit.py": "a50264977cd7d9578b2a8dd241e068eaeef4c53071b65b040294f174ef243115",
     "skills/ai-engineer/SKILL.md": "dd53012c45dc7911975774a372af2680af65add3822c6bc5c08849f785b719bf",
     "skills/airflow-dag-patterns/SKILL.md": "d3edb178fa3a624f042a90e04c948f37921fc8e049e557b2b7b2a22cb0a37c78",
     "skills/airflow-dag-patterns/resources/implementation-playbook.md": "55053a11ce43dc7f6dd2efcaf3efcb665033deb3739ccf763357faac3cdc467b",
