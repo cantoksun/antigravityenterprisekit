@@ -57,6 +57,7 @@
     "scripts/memory_hook.py": "975ac61dd02ce963f6372802ae7caccb5bff0782462e308eac888489fd7e670f",
     "scripts/neural_memory.py": "747e695ea95636ecfd33da9dc80f74c535692bdbe489cc079d4cd3a4fea28f94",
     "scripts/neural_os.py": "8546a6d110441cfe160f5c91b32d2ca6a0b9fab659c3cad54dfeef732d6d9976",
+    "scripts/neural_os_rag.py": "5aded2e24e6e8e3e5cd6f87ce5b87614f340dc8f6e61c3bc8e1431b3bce0599c",
     "scripts/quality_gates.py": "6aeac546fc6eb4fe028ecbd3f8415be94ac1adf75d474e0ad1bd468880344d2f",
     "scripts/rule_dispatcher.py": "7728683f46313948af3530d6d17d2b237fe077ccd82394addc261368506276d6",
     "scripts/session_manager.py": "dcacd94cc1117f81440c158fb6073cce69ab1e7bc7ecd54684bdef7c1b405d64",
