@@ -9,6 +9,11 @@
   let activeNode = null;
   let hoveredNode = null;
 
+  // Starfield & Grid Particles
+  const STAR_COUNT = 60;
+  let stars = [];
+  let pulseOffset = 0; // Animating energy packets along links
+
   // Viewport / Camera Transform
   let camera = { x: 0, y: 0, zoom: 1.0 };
   let isDragging = false;
@@ -19,6 +24,13 @@
   const canvas = document.getElementById("graphCanvas");
   const ctx = canvas.getContext("2d");
   const viewport = document.getElementById("viewport");
+
+  // Radar Minimap elements
+  const radarCanvas = document.getElementById("radarCanvas");
+  const radarCtx = radarCanvas.getContext("2d");
+
+  // Filtering state
+  let currentFilter = "all";
 
   // UI Drawer elements
   const sideDrawer = document.getElementById("sideDrawer");
@@ -52,6 +64,22 @@
     canvas.style.width = `${viewport.clientWidth}px`;
     canvas.style.height = `${viewport.clientHeight}px`;
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    initStars();
+  }
+
+  function initStars() {
+    stars = [];
+    const w = viewport.clientWidth;
+    const h = viewport.clientHeight;
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        radius: Math.random() * 1.4 + 0.4,
+        alpha: Math.random() * 0.5 + 0.2,
+        speed: Math.random() * 0.15 + 0.05
+      });
+    }
   }
 
   window.addEventListener("resize", resizeCanvas);
@@ -155,6 +183,44 @@
     }
   }
 
+  // Draw Cyber Grid & Starfield
+  function drawCyberBackground(width, height) {
+    // 1. Perspective Cyber Grid
+    const gridSize = 48 * camera.zoom;
+    const offsetX = (camera.x % gridSize);
+    const offsetY = (camera.y % gridSize);
+
+    ctx.save();
+    ctx.strokeStyle = "rgba(99, 102, 241, 0.05)";
+    ctx.lineWidth = 1;
+
+    // Vertical lines
+    for (let x = offsetX; x < width; x += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, height);
+      ctx.stroke();
+    }
+    // Horizontal lines
+    for (let y = offsetY; y < height; y += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(width, y);
+      ctx.stroke();
+    }
+
+    // 2. Stars
+    for (const s of stars) {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(165, 180, 252, ${s.alpha})`;
+      ctx.fill();
+      s.y -= s.speed;
+      if (s.y < 0) s.y = height;
+    }
+    ctx.restore();
+  }
+
   // Main Render Loop
   function render() {
     simulatePhysics();
@@ -163,54 +229,166 @@
     const height = viewport.clientHeight;
 
     ctx.clearRect(0, 0, width, height);
+
+    // Render cyber grid & starfield in screen space
+    drawCyberBackground(width, height);
+
     ctx.save();
 
     // Apply Camera Transform
     ctx.translate(camera.x, camera.y);
     ctx.scale(camera.zoom, camera.zoom);
 
-    // 1. Draw Links
+    // 1. Draw Links & Animated Energy Pulses
+    pulseOffset = (pulseOffset + 0.007) % 1.0;
+
     for (const link of links) {
       const isConnectedToActive = activeNode && (link.source === activeNode || link.target === activeNode);
       ctx.beginPath();
       ctx.moveTo(link.source.x, link.source.y);
       ctx.lineTo(link.target.x, link.target.y);
-      ctx.strokeStyle = isConnectedToActive ? "rgba(129, 140, 248, 0.75)" : "rgba(148, 163, 184, 0.18)";
-      ctx.lineWidth = isConnectedToActive ? 2.2 : 1.0;
+      ctx.strokeStyle = isConnectedToActive ? "rgba(129, 140, 248, 0.85)" : "rgba(148, 163, 184, 0.16)";
+      ctx.lineWidth = isConnectedToActive ? 2.5 : 1.2;
       ctx.stroke();
+
+      // Energy packet animation (flowing photon)
+      const dx = link.target.x - link.source.x;
+      const dy = link.target.y - link.source.y;
+      const px = link.source.x + dx * pulseOffset;
+      const py = link.source.y + dy * pulseOffset;
+
+      ctx.beginPath();
+      ctx.arc(px, py, isConnectedToActive ? 3.0 : 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = isConnectedToActive ? "#38bdf8" : "rgba(129, 140, 248, 0.65)";
+      ctx.shadowColor = "#38bdf8";
+      ctx.shadowBlur = 6;
+      ctx.fill();
+      ctx.shadowBlur = 0; // reset
     }
 
     // 2. Draw Nodes
+    const now = Date.now() * 0.003;
+    const typeIcons = {
+      "moc": "🧠",
+      "root": "🧠",
+      "concept": "🧬",
+      "concepts": "🧬",
+      "decision": "⚖️",
+      "decisions": "⚖️",
+      "playbook": "📖",
+      "playbooks": "📖",
+      "episode": "📜",
+      "episodes": "📜"
+    };
+
     for (const node of nodes) {
+      if (node.filtered) continue;
       const isSelected = node === activeNode;
       const isHovered = node === hoveredNode;
+      const isHub = (node.pagerank || 0) > 18;
 
-      // Glow halo
-      if (isSelected || isHovered) {
+      // Holographic Pulsing Outer Rings for Hub / High PageRank nodes
+      if (isHub || isSelected) {
+        const pulseSize = Math.sin(now + node.radius) * 4;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius + 8, 0, Math.PI * 2);
-        ctx.fillStyle = isSelected ? "rgba(99, 102, 241, 0.28)" : "rgba(255, 255, 255, 0.12)";
-        ctx.fill();
+        ctx.arc(node.x, node.y, node.radius + 10 + pulseSize, 0, Math.PI * 2);
+        ctx.strokeStyle = isSelected ? "rgba(56, 189, 248, 0.7)" : `${node.color}55`;
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]); // reset dash
       }
 
-      // Outer circle
+      // Glow halo
+      if (isSelected || isHovered || isHub) {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius + (isSelected ? 10 : 6), 0, Math.PI * 2);
+        ctx.fillStyle = isSelected ? "rgba(56, 189, 248, 0.3)" : `${node.color}25`;
+        ctx.shadowColor = node.color || "#8b5cf6";
+        ctx.shadowBlur = isSelected ? 16 : 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      // Outer circle (Glass node container)
       ctx.beginPath();
       ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
       ctx.fillStyle = node.color || "#64748b";
       ctx.fill();
-      ctx.lineWidth = isSelected ? 2.5 : 1.2;
-      ctx.strokeStyle = isSelected ? "#fff" : "rgba(255, 255, 255, 0.3)";
+      ctx.lineWidth = isSelected ? 2.5 : (isHub ? 2.0 : 1.2);
+      ctx.strokeStyle = isSelected ? "#38bdf8" : "rgba(255, 255, 255, 0.6)";
       ctx.stroke();
 
+      // Node Icon (Type symbol)
+      const icon = typeIcons[node.type?.toLowerCase()] || "🔹";
+      ctx.font = `${Math.max(10, node.radius * 0.9)}px sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(icon, node.x, node.y);
+
       // Node label
-      ctx.font = `${isSelected ? "bold " : ""}11px -apple-system, sans-serif`;
+      ctx.font = `${isSelected ? "600 " : ""}11px -apple-system, sans-serif`;
       ctx.fillStyle = isSelected ? "#fff" : "#cbd5e1";
+      ctx.textBaseline = "alphabetic";
       ctx.textAlign = "center";
       ctx.fillText(node.title.length > 20 ? node.title.slice(0, 18) + ".." : node.title, node.x, node.y + node.radius + 14);
     }
 
     ctx.restore();
+
+    // Render Radar Minimap
+    drawRadarMinimap();
+
     requestAnimationFrame(render);
+  }
+
+  // Draw Cyber Radar Minimap
+  function drawRadarMinimap() {
+    const rw = radarCanvas.width;
+    const rh = radarCanvas.height;
+    radarCtx.clearRect(0, 0, rw, rh);
+
+    if (nodes.length === 0) return;
+
+    // Calculate bounding box of all nodes
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const n of nodes) {
+      if (n.x < minX) minX = n.x;
+      if (n.x > maxX) maxX = n.x;
+      if (n.y < minY) minY = n.y;
+      if (n.y > maxY) maxY = n.y;
+    }
+
+    const pad = 80;
+    minX -= pad; maxX += pad; minY -= pad; maxY += pad;
+    const boxW = Math.max(10, maxX - minX);
+    const boxH = Math.max(10, maxY - minY);
+    const scale = Math.min((rw - 12) / boxW, (rh - 12) / boxH);
+
+    const toRadarX = (wx) => 6 + (wx - minX) * scale;
+    const toRadarY = (wy) => 6 + (wy - minY) * scale;
+
+    // Draw minimap nodes
+    for (const n of nodes) {
+      const rx = toRadarX(n.x);
+      const ry = toRadarY(n.y);
+      radarCtx.beginPath();
+      radarCtx.arc(rx, ry, n === activeNode ? 3.5 : 2.0, 0, Math.PI * 2);
+      radarCtx.fillStyle = n === activeNode ? "#38bdf8" : (n.color || "#64748b");
+      radarCtx.fill();
+    }
+
+    // Draw camera viewport box on radar
+    const camWorldTopLeft = toWorldCoords(0, 0);
+    const camWorldBottomRight = toWorldCoords(viewport.clientWidth, viewport.clientHeight);
+    const rvx = toRadarX(camWorldTopLeft.x);
+    const rvy = toRadarY(camWorldTopLeft.y);
+    const rvw = (camWorldBottomRight.x - camWorldTopLeft.x) * scale;
+    const rvh = (camWorldBottomRight.y - camWorldTopLeft.y) * scale;
+
+    radarCtx.strokeStyle = "rgba(56, 189, 248, 0.65)";
+    radarCtx.lineWidth = 1;
+    radarCtx.strokeRect(rvx, rvy, rvw, rvh);
   }
 
   // Coordinate Conversion
@@ -426,6 +604,24 @@
         console.error("Arama hatası:", err);
       }
     }, 180);
+  });
+
+  // Filter Button Listeners
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilter = btn.getAttribute("data-type");
+
+      // Filter nodes visibility/opacity
+      nodes.forEach(n => {
+        if (currentFilter === "all") {
+          n.filtered = false;
+        } else {
+          n.filtered = !n.type.toLowerCase().includes(currentFilter);
+        }
+      });
+    });
   });
 
   // Close search overlay on click outside
