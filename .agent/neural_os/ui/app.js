@@ -51,12 +51,12 @@
   const btnRecenter = document.getElementById("btnRecenter");
   const btnReload = document.getElementById("btnReload");
 
-  // Physics Simulation Constants
-  const REPULSION = 2800;
-  const SPRING_LENGTH = 140;
+  // Physics Simulation Dynamic Variables (Obsidian Grade)
+  let repulsion = 2800;
+  let springLength = 140;
   const SPRING_STRENGTH = 0.045;
   const DAMPING = 0.88;
-  const CENTER_GRAVITY = 0.015;
+  let centerGravity = 0.015;
 
   function resizeCanvas() {
     canvas.width = viewport.clientWidth * window.devicePixelRatio;
@@ -140,8 +140,8 @@
         const distSq = dx * dx + dy * dy + 1;
         const dist = Math.sqrt(distSq);
 
-        if (dist < 320) {
-          const force = (REPULSION * 0.8) / distSq;
+        if (dist < (springLength * 2.3)) {
+          const force = (repulsion * 0.8) / distSq;
           const fx = (dx / dist) * force;
           const fy = (dy / dist) * force;
           if (!na.pinned) { na.vx -= fx; na.vy -= fy; }
@@ -155,7 +155,7 @@
       const dx = link.target.x - link.source.x;
       const dy = link.target.y - link.source.y;
       const dist = Math.sqrt(dx * dx + dy * dy) + 0.1;
-      const displacement = dist - SPRING_LENGTH;
+      const displacement = dist - springLength;
       const force = displacement * SPRING_STRENGTH;
       const fx = (dx / dist) * force;
       const fy = (dy / dist) * force;
@@ -168,8 +168,8 @@
     for (const node of nodes) {
       if (node === draggedNode || node.pinned) continue;
 
-      node.vx += (cx - node.x) * CENTER_GRAVITY;
-      node.vy += (cy - node.y) * CENTER_GRAVITY;
+      node.vx += (cx - node.x) * centerGravity;
+      node.vy += (cy - node.y) * centerGravity;
 
       node.vx *= 0.82; // Smoother settling
       node.vy *= 0.82;
@@ -739,6 +739,80 @@
       searchOverlay.classList.remove("open");
     }
   });
+
+  // Physics Control HUD Wiring (Obsidian Grade)
+  const physicsPanel = document.getElementById("physicsPanel");
+  const btnTogglePhysics = document.getElementById("btnTogglePhysics");
+  const physicsHeader = document.getElementById("physicsHeader");
+  const sliderRepulsion = document.getElementById("sliderRepulsion");
+  const sliderDistance = document.getElementById("sliderDistance");
+  const sliderGravity = document.getElementById("sliderGravity");
+  const valRepulsion = document.getElementById("valRepulsion");
+  const valDistance = document.getElementById("valDistance");
+  const valGravity = document.getElementById("valGravity");
+  const btnResetPhysics = document.getElementById("btnResetPhysics");
+
+  function wakeUpSimulation() {
+    nodes.forEach(n => {
+      if (!n.pinned) {
+        n.vx += (Math.random() - 0.5) * 0.8;
+        n.vy += (Math.random() - 0.5) * 0.8;
+      }
+    });
+  }
+
+  if (btnTogglePhysics && physicsPanel) {
+    const togglePanel = () => {
+      physicsPanel.classList.toggle("collapsed");
+      btnTogglePhysics.textContent = physicsPanel.classList.contains("collapsed") ? "+" : "−";
+    };
+    btnTogglePhysics.addEventListener("click", (e) => {
+      e.stopPropagation();
+      togglePanel();
+    });
+    physicsHeader.addEventListener("click", togglePanel);
+  }
+
+  if (sliderRepulsion && valRepulsion) {
+    sliderRepulsion.addEventListener("input", (e) => {
+      repulsion = parseFloat(e.target.value);
+      valRepulsion.textContent = repulsion;
+      wakeUpSimulation();
+    });
+  }
+
+  if (sliderDistance && valDistance) {
+    sliderDistance.addEventListener("input", (e) => {
+      springLength = parseFloat(e.target.value);
+      valDistance.textContent = springLength;
+      wakeUpSimulation();
+    });
+  }
+
+  if (sliderGravity && valGravity) {
+    sliderGravity.addEventListener("input", (e) => {
+      centerGravity = parseFloat(e.target.value);
+      valGravity.textContent = centerGravity.toFixed(3);
+      wakeUpSimulation();
+    });
+  }
+
+  if (btnResetPhysics) {
+    btnResetPhysics.addEventListener("click", () => {
+      repulsion = 2800;
+      springLength = 140;
+      centerGravity = 0.015;
+
+      if (sliderRepulsion) sliderRepulsion.value = 2800;
+      if (valRepulsion) valRepulsion.textContent = "2800";
+      if (sliderDistance) sliderDistance.value = 140;
+      if (valDistance) valDistance.textContent = "140";
+      if (sliderGravity) sliderGravity.value = 0.015;
+      if (valGravity) valGravity.textContent = "0.015";
+
+      wakeUpSimulation();
+    });
+  }
 
   // Bootstrap
   resizeCanvas();
