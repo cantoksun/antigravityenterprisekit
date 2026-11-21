@@ -25,6 +25,13 @@
   const ctx = canvas.getContext("2d");
   const viewport = document.getElementById("viewport");
 
+  // Radar Minimap elements
+  const radarCanvas = document.getElementById("radarCanvas");
+  const radarCtx = radarCanvas.getContext("2d");
+
+  // Filtering state
+  let currentFilter = "all";
+
   // UI Drawer elements
   const sideDrawer = document.getElementById("sideDrawer");
   const btnCloseDrawer = document.getElementById("btnCloseDrawer");
@@ -275,6 +282,7 @@
     };
 
     for (const node of nodes) {
+      if (node.filtered) continue;
       const isSelected = node === activeNode;
       const isHovered = node === hoveredNode;
       const isHub = (node.pagerank || 0) > 18;
@@ -327,7 +335,60 @@
     }
 
     ctx.restore();
+
+    // Render Radar Minimap
+    drawRadarMinimap();
+
     requestAnimationFrame(render);
+  }
+
+  // Draw Cyber Radar Minimap
+  function drawRadarMinimap() {
+    const rw = radarCanvas.width;
+    const rh = radarCanvas.height;
+    radarCtx.clearRect(0, 0, rw, rh);
+
+    if (nodes.length === 0) return;
+
+    // Calculate bounding box of all nodes
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const n of nodes) {
+      if (n.x < minX) minX = n.x;
+      if (n.x > maxX) maxX = n.x;
+      if (n.y < minY) minY = n.y;
+      if (n.y > maxY) maxY = n.y;
+    }
+
+    const pad = 80;
+    minX -= pad; maxX += pad; minY -= pad; maxY += pad;
+    const boxW = Math.max(10, maxX - minX);
+    const boxH = Math.max(10, maxY - minY);
+    const scale = Math.min((rw - 12) / boxW, (rh - 12) / boxH);
+
+    const toRadarX = (wx) => 6 + (wx - minX) * scale;
+    const toRadarY = (wy) => 6 + (wy - minY) * scale;
+
+    // Draw minimap nodes
+    for (const n of nodes) {
+      const rx = toRadarX(n.x);
+      const ry = toRadarY(n.y);
+      radarCtx.beginPath();
+      radarCtx.arc(rx, ry, n === activeNode ? 3.5 : 2.0, 0, Math.PI * 2);
+      radarCtx.fillStyle = n === activeNode ? "#38bdf8" : (n.color || "#64748b");
+      radarCtx.fill();
+    }
+
+    // Draw camera viewport box on radar
+    const camWorldTopLeft = toWorldCoords(0, 0);
+    const camWorldBottomRight = toWorldCoords(viewport.clientWidth, viewport.clientHeight);
+    const rvx = toRadarX(camWorldTopLeft.x);
+    const rvy = toRadarY(camWorldTopLeft.y);
+    const rvw = (camWorldBottomRight.x - camWorldTopLeft.x) * scale;
+    const rvh = (camWorldBottomRight.y - camWorldTopLeft.y) * scale;
+
+    radarCtx.strokeStyle = "rgba(56, 189, 248, 0.65)";
+    radarCtx.lineWidth = 1;
+    radarCtx.strokeRect(rvx, rvy, rvw, rvh);
   }
 
   // Coordinate Conversion
@@ -543,6 +604,24 @@
         console.error("Arama hatası:", err);
       }
     }, 180);
+  });
+
+  // Filter Button Listeners
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilter = btn.getAttribute("data-type");
+
+      // Filter nodes visibility/opacity
+      nodes.forEach(n => {
+        if (currentFilter === "all") {
+          n.filtered = false;
+        } else {
+          n.filtered = !n.type.toLowerCase().includes(currentFilter);
+        }
+      });
+    });
   });
 
   // Close search overlay on click outside

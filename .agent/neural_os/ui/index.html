@@ -37,6 +37,23 @@
     <div class="graph-viewport" id="viewport">
       <canvas id="graphCanvas"></canvas>
 
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-type="all">tümü (all)</button>
+        <button class="filter-btn" data-type="concept">🧬 kavramlar</button>
+        <button class="filter-btn" data-type="decision">⚖️ kararlar</button>
+        <button class="filter-btn" data-type="playbook">📖 rehberler</button>
+        <button class="filter-btn" data-type="episode">📜 epizotlar</button>
+      </div>
+
+      <!-- Radar Minimap -->
+      <div class="radar-container" id="radarContainer">
+        <div class="radar-header">
+          <span>📡 siber radar</span>
+        </div>
+        <canvas id="radarCanvas" width="130" height="90"></canvas>
+      </div>
+
       <!-- HUD & Legend -->
       <div class="graph-hud">
         <div class="legend-item"><span class="legend-dot" style="background: #8b5cf6;"></span> ana indeks (MOC)</div>
