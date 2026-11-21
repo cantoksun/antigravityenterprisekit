@@ -177,6 +177,11 @@ Examples:
     parser.add_argument("project", help="Project path to validate")
     parser.add_argument("--url", help="URL for performance checks (lighthouse, playwright)")
     parser.add_argument("--skip-performance", action="store_true", help="Skip performance checks even if URL provided")
+    parser.add_argument(
+        "--gate",
+        choices=["session-start", "pre-commit", "task-complete", "session-end"],
+        help="Run a specific quality gate (besync-labs aligned 4-gate verification)",
+    )
     
     args = parser.parse_args()
     
@@ -185,6 +190,18 @@ Examples:
     if not project_path.exists():
         print_error(f"Project path does not exist: {project_path}")
         sys.exit(1)
+
+    # If specific quality gate requested, delegate to QualityGatesEngine
+    if args.gate:
+        try:
+            from quality_gates import QualityGatesEngine, print_gate_report
+        except ImportError:
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            from quality_gates import QualityGatesEngine, print_gate_report
+        engine = QualityGatesEngine(project_path)
+        report = engine.execute_gate(args.gate)
+        ok = print_gate_report(report)
+        sys.exit(0 if ok else 1)
     
     print_header("🚀 ANTIGRAVITY KIT - MASTER CHECKLIST")
     print(f"Project: {project_path}")

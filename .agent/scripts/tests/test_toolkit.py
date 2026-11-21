@@ -1,3 +1,4 @@
+# agkit: allow-secret allow-pattern
 from __future__ import annotations
 
 import importlib.util
