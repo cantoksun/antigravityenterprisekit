@@ -249,7 +249,7 @@ def validate_generated_docs(root: Path, findings: list[Finding]) -> None:
         add(findings, "error", "graph.missing", Path("DEPENDENCY_GRAPH.md"), "Run scripts/dependency_graph.py")
         return
     expected = render_dependency_graph(root)
-    if path.read_text("utf-8") != expected:
+    if path.read_text("utf-8").replace("\r\n", "\n") != expected.replace("\r\n", "\n"):
         add(findings, "error", "graph.stale", Path("DEPENDENCY_GRAPH.md"), "Dependency graph is stale")
 
 

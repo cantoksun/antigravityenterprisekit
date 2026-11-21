@@ -217,11 +217,10 @@ def component_files(root: Path) -> list[Path]:
 
 
 def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(65536), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    content = path.read_bytes()
+    # Normalize CRLF to LF so component hashes are deterministic across Windows, Linux, and macOS
+    content = content.replace(b"\r\n", b"\n")
+    return hashlib.sha256(content).hexdigest()
 
 
 def build_lock(root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
