@@ -77,18 +77,27 @@ class StandaloneGraphExporter:
         embedded_db_js = f"""
   // Embedded Offline Knowledge Base
   window.__EMBEDDED_GRAPH_DATA__ = {graph_json};
+  window.__GRAPH_DATA__ = window.__EMBEDDED_GRAPH_DATA__;
   window.__EMBEDDED_NODE_DETAILS__ = {details_json};
 
   // Override fetch for offline mode
   const originalFetch = window.fetch;
   window.fetch = async function(url) {{
     if (url === '/api/graph') {{
-      return {{ json: async () => window.__EMBEDDED_GRAPH_DATA__ }};
+      return {{
+        ok: true,
+        status: 200,
+        json: async () => window.__EMBEDDED_GRAPH_DATA__
+      }};
     }}
     if (url.startsWith('/api/node/')) {{
       const nid = decodeURIComponent(url.replace('/api/node/', ''));
       const det = window.__EMBEDDED_NODE_DETAILS__[nid] || {{}};
-      return {{ json: async () => det }};
+      return {{
+        ok: true,
+        status: 200,
+        json: async () => det
+      }};
     }}
     if (url.startsWith('/api/search')) {{
       const query = new URL(url, 'http://localhost').searchParams.get('q') || '';
@@ -107,7 +116,11 @@ class StandaloneGraphExporter:
           }});
         }}
       }}
-      return {{ json: async () => results.slice(0, 10) }};
+      return {{
+        ok: true,
+        status: 200,
+        json: async () => results.slice(0, 10)
+      }};
     }}
     return originalFetch.apply(this, arguments);
   }};

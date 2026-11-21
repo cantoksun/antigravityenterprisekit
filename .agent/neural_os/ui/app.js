@@ -189,9 +189,13 @@
 
   // Initialize Data
   function buildGraph(data) {
+    if (!data || !data.nodes || data.nodes.length === 0) {
+      console.warn("buildGraph: Gecerli veri bulunamadi");
+      return;
+    }
     const nodeMap = new Map();
-    const width = viewport.clientWidth;
-    const height = viewport.clientHeight;
+    const width = viewport.clientWidth || window.innerWidth || 1200;
+    const height = viewport.clientHeight || window.innerHeight || 800;
     const count = data.nodes.length;
 
     nodes = data.nodes.map((n, i) => {
@@ -209,27 +213,33 @@
       return nodeObj;
     });
 
-    links = data.links.map(l => ({
+    links = (data.links || []).map(l => ({
       source: nodeMap.get(l.source) || l.source,
       target: nodeMap.get(l.target) || l.target,
       type: l.type
     })).filter(l => typeof l.source === "object" && typeof l.target === "object");
 
+    console.log(`[Neural-OS] Grafik yuklendi: ${nodes.length} dugum, ${links.length} baglanti.`);
     recenter();
   }
 
   async function loadGraphData() {
-    // Standalone mode: exporter injects window.__GRAPH_DATA__
-    if (window.__GRAPH_DATA__) {
-      buildGraph(window.__GRAPH_DATA__);
+    // 1. Oncelik: Gömülü offline veri (standalone tek dosya HTML)
+    const embedded = window.__EMBEDDED_GRAPH_DATA__ || window.__GRAPH_DATA__;
+    if (embedded && embedded.nodes && embedded.nodes.length > 0) {
+      buildGraph(embedded);
       return;
     }
-    // Server mode: fetch from API
+
+    // 2. Sunucu modu: fetch API
     try {
       const res = await fetch("/api/graph");
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      buildGraph(data);
+      if (data && data.nodes) {
+        buildGraph(data);
+      } else {
+        console.warn("API gecerli dugum verisi donmedi:", data);
+      }
     } catch (err) {
       console.error("Grafik verisi yuklenemedi:", err);
     }
