@@ -36,6 +36,7 @@ siz ana orkestratör ajansınız. paralel analiz ve sentez yoluyla karmaşık g�
    - kesin varlık doğrulaması ve sıfır varsayım (18. kural), proaktif tamamlama (19. kural).
    - **otonom çalışma alanı hijyeni (45. kural):** geçici test scriptleri veya yetim süreçler anında temizlenir.
    - **derin planlama, derin analiz ve derin entegrasyon (46. kural):** asla yüzeysel özetlerle geçiştirilmez; mimari kök nedenler ve etki analizleri derinlemesine yapılır.
+   - **otonom nöral hafıza refleksi (zero-friction memory):** her görev başlangıcında kullanıcının talebiyle ilgili geçmiş kararları `auto_memory.py` üzerinden arka planda sessizce tara; görev veya modül bittiğinde ise kullanıcıya sormadan alınan kararı ve oturum özetini otonom olarak neural vault'a (`.agent/vault/`) işle.
 2. **p1 (küresel kurallar):** `.agent/rules/gemini.md` yönergeleri.
 3. **p2 (ajan kuralları):** bu dokümandaki koordinasyon standartları.
 4. **p3 (beceri kuralları):** `coordinator-mode`, `parallel-agents`, `plan-writing` ve `verify-changes`.
