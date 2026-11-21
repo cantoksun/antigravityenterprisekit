@@ -1,0 +1,138 @@
+{
+  "nodes": [
+    {
+      "id": "node-moc",
+      "type": "file",
+      "file": "INDEX.md",
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 260,
+      "color": "6"
+    },
+    {
+      "id": "node-arch",
+      "type": "file",
+      "file": "concepts/architecture-overview.md",
+      "x": -450,
+      "y": -250,
+      "width": 380,
+      "height": 300,
+      "color": "5"
+    },
+    {
+      "id": "node-clean",
+      "type": "file",
+      "file": "concepts/clean-code-principles.md",
+      "x": -450,
+      "y": 150,
+      "width": 380,
+      "height": 300,
+      "color": "5"
+    },
+    {
+      "id": "node-adr001",
+      "type": "file",
+      "file": "decisions/adr-001-autonomous-neural-vault.md",
+      "x": 450,
+      "y": -250,
+      "width": 380,
+      "height": 300,
+      "color": "3"
+    },
+    {
+      "id": "node-playbook",
+      "type": "file",
+      "file": "playbooks/playbook-clean-architecture.md",
+      "x": 450,
+      "y": 150,
+      "width": 380,
+      "height": 300,
+      "color": "4"
+    },
+    {
+      "id": "node-episodes",
+      "type": "group",
+      "label": "Epizodik Hafıza ve Oturumlar",
+      "x": -150,
+      "y": 380,
+      "width": 620,
+      "height": 240,
+      "color": "1"
+    },
+    {
+      "id": "node-ep1",
+      "type": "file",
+      "file": "episodes/episode-2026-11-21-vault-bootstrap.md",
+      "x": -130,
+      "y": 430,
+      "width": 270,
+      "height": 160
+    },
+    {
+      "id": "node-ep2",
+      "type": "file",
+      "file": "episodes/episode-2026-11-21-kolektif-hafiza-kancasi.md",
+      "x": 170,
+      "y": 430,
+      "width": 270,
+      "height": 160
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-moc-arch",
+      "fromNode": "node-moc",
+      "fromSide": "left",
+      "toNode": "node-arch",
+      "toSide": "right",
+      "label": "mimari harita"
+    },
+    {
+      "id": "edge-moc-clean",
+      "fromNode": "node-moc",
+      "fromSide": "left",
+      "toNode": "node-clean",
+      "toSide": "right",
+      "label": "güvenlik ve standartlar"
+    },
+    {
+      "id": "edge-moc-adr",
+      "fromNode": "node-moc",
+      "fromSide": "right",
+      "toNode": "node-adr001",
+      "toSide": "left",
+      "label": "mimari kararlar"
+    },
+    {
+      "id": "edge-moc-playbook",
+      "fromNode": "node-moc",
+      "fromSide": "right",
+      "toNode": "node-playbook",
+      "toSide": "left",
+      "label": "operasyon rehberleri"
+    },
+    {
+      "id": "edge-arch-clean",
+      "fromNode": "node-arch",
+      "fromSide": "bottom",
+      "toNode": "node-clean",
+      "toSide": "top"
+    },
+    {
+      "id": "edge-adr-playbook",
+      "fromNode": "node-adr001",
+      "fromSide": "bottom",
+      "toNode": "node-playbook",
+      "toSide": "top"
+    },
+    {
+      "id": "edge-moc-episodes",
+      "fromNode": "node-moc",
+      "fromSide": "bottom",
+      "toNode": "node-episodes",
+      "toSide": "top",
+      "label": "oturum geçmişi"
+    }
+  ]
+}
