@@ -121,6 +121,18 @@ class QualityGatesEngine:
                 severity="warning",
             ))
 
+        # 1.5 Pre-flight Tech Stack & Dependency Conflict Auditor
+        stack_script = self.toolkit_root / "scripts" / "stack_validator.py"
+        if stack_script.is_file():
+            code, out, _ = self.run_command([sys.executable, str(stack_script), str(self.project_path), "--json"])
+            stack_pass = (code == 0)
+            checks.append(GateCheckResult(
+                name="Pre-Flight Stack Audit (stack_validator)",
+                passed=stack_pass,
+                message="Clean dependency ecosystem (no major version clashes)" if stack_pass else "Conflicting dependencies detected",
+                severity="warning",
+            ))
+
         passed = all(c.passed for c in checks if c.severity == "error")
         return GateReport(
             gate="session-start",
