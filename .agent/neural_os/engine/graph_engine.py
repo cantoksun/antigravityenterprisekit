@@ -198,18 +198,18 @@ class EnterpriseGraphEngine:
 
     def get_graph_export(self) -> Dict[str, Any]:
         """Produce clean JSON structure for web canvas/force-directed rendering."""
-        # Sadece Siyah ve Koyu Gri / Monokrom Disiplini
+        # Canlı, estetik ve yüksek kontrastlı renk kodları
         node_type_colors = {
-            "root": "#262626",       # Koyu Gri Düğüm (Beyaz/Açık Gri Vurgulu)
-            "MOC": "#262626",
-            "concept": "#1c1c1c",    # Koyu Gri
-            "concepts": "#1c1c1c",
-            "decision": "#222222",   # Koyu Gri
-            "decisions": "#222222",
-            "playbook": "#1a1a1a",   # Koyu Gri
-            "playbooks": "#1a1a1a",
-            "episode": "#141414",    # En Koyu Gri / Siyaha Yakın
-            "episodes": "#141414",
+            "root": "#a855f7",       # MOC / Ana İndeks - Canlı Mor
+            "MOC": "#a855f7",
+            "concept": "#38bdf8",    # Kavramlar - Parlak Camgöbeği/Mavi
+            "concepts": "#38bdf8",
+            "decision": "#fb923c",   # Mimari Kararlar - Parlak Turuncu
+            "decisions": "#fb923c",
+            "playbook": "#34d399",   # Operasyon Rehberleri - Parlak Zümrüt Yeşili
+            "playbooks": "#34d399",
+            "episode": "#f87171",    # Epizodik Hafıza - Parlak Mercan Kırmızısı
+            "episodes": "#f87171",
         }
 
         nodes_list = []
