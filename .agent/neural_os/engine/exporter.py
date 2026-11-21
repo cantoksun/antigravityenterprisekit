@@ -60,11 +60,15 @@ class StandaloneGraphExporter:
             f"<style>\n{css_content}\n</style>"
         )
 
+        # Safe JSON embedding to prevent </script> tags in markdown from closing the script tag early
+        graph_json = json.dumps(graph_data, ensure_ascii=False).replace("</script>", "<\\/script>").replace("</SCRIPT>", "<\\/SCRIPT>")
+        details_json = json.dumps(node_details_map, ensure_ascii=False).replace("</script>", "<\\/script>").replace("</SCRIPT>", "<\\/SCRIPT>")
+
         # Patch app.js to use embedded data when running as static file (no server)
         embedded_db_js = f"""
   // Embedded Offline Knowledge Base
-  window.__EMBEDDED_GRAPH_DATA__ = {json.dumps(graph_data, ensure_ascii=False)};
-  window.__EMBEDDED_NODE_DETAILS__ = {json.dumps(node_details_map, ensure_ascii=False)};
+  window.__EMBEDDED_GRAPH_DATA__ = {graph_json};
+  window.__EMBEDDED_NODE_DETAILS__ = {details_json};
 
   // Override fetch for offline mode
   const originalFetch = window.fetch;
