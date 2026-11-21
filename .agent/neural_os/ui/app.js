@@ -260,30 +260,68 @@
     }
 
     // 2. Draw Nodes
+    const now = Date.now() * 0.003;
+    const typeIcons = {
+      "moc": "🧠",
+      "root": "🧠",
+      "concept": "🧬",
+      "concepts": "🧬",
+      "decision": "⚖️",
+      "decisions": "⚖️",
+      "playbook": "📖",
+      "playbooks": "📖",
+      "episode": "📜",
+      "episodes": "📜"
+    };
+
     for (const node of nodes) {
       const isSelected = node === activeNode;
       const isHovered = node === hoveredNode;
+      const isHub = (node.pagerank || 0) > 18;
 
-      // Glow halo
-      if (isSelected || isHovered) {
+      // Holographic Pulsing Outer Rings for Hub / High PageRank nodes
+      if (isHub || isSelected) {
+        const pulseSize = Math.sin(now + node.radius) * 4;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius + 8, 0, Math.PI * 2);
-        ctx.fillStyle = isSelected ? "rgba(99, 102, 241, 0.28)" : "rgba(255, 255, 255, 0.12)";
-        ctx.fill();
+        ctx.arc(node.x, node.y, node.radius + 10 + pulseSize, 0, Math.PI * 2);
+        ctx.strokeStyle = isSelected ? "rgba(56, 189, 248, 0.7)" : `${node.color}55`;
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]); // reset dash
       }
 
-      // Outer circle
+      // Glow halo
+      if (isSelected || isHovered || isHub) {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius + (isSelected ? 10 : 6), 0, Math.PI * 2);
+        ctx.fillStyle = isSelected ? "rgba(56, 189, 248, 0.3)" : `${node.color}25`;
+        ctx.shadowColor = node.color || "#8b5cf6";
+        ctx.shadowBlur = isSelected ? 16 : 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      // Outer circle (Glass node container)
       ctx.beginPath();
       ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
       ctx.fillStyle = node.color || "#64748b";
       ctx.fill();
-      ctx.lineWidth = isSelected ? 2.5 : 1.2;
-      ctx.strokeStyle = isSelected ? "#fff" : "rgba(255, 255, 255, 0.3)";
+      ctx.lineWidth = isSelected ? 2.5 : (isHub ? 2.0 : 1.2);
+      ctx.strokeStyle = isSelected ? "#38bdf8" : "rgba(255, 255, 255, 0.6)";
       ctx.stroke();
 
+      // Node Icon (Type symbol)
+      const icon = typeIcons[node.type?.toLowerCase()] || "🔹";
+      ctx.font = `${Math.max(10, node.radius * 0.9)}px sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(icon, node.x, node.y);
+
       // Node label
-      ctx.font = `${isSelected ? "bold " : ""}11px -apple-system, sans-serif`;
+      ctx.font = `${isSelected ? "600 " : ""}11px -apple-system, sans-serif`;
       ctx.fillStyle = isSelected ? "#fff" : "#cbd5e1";
+      ctx.textBaseline = "alphabetic";
       ctx.textAlign = "center";
       ctx.fillText(node.title.length > 20 ? node.title.slice(0, 18) + ".." : node.title, node.x, node.y + node.radius + 14);
     }
