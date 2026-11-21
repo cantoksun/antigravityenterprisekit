@@ -16,6 +16,8 @@ if str(SCRIPTS) not in sys.path:
 from github_automator import get_git_info, build_pr_body, create_github_pr
 from media_extractor import extract_youtube_id, generate_mock_transcript, format_transcript_markdown
 from skill_aggregator import get_local_skills_inventory, normalize_skill_content
+from stack_validator import audit_stack_conflicts
+from skill_loader import load_l2_resource
 
 
 class EcosystemParityTests(unittest.TestCase):
@@ -55,6 +57,22 @@ class EcosystemParityTests(unittest.TestCase):
         self.assertEqual(len(data["suggestedPrompts"]), 3)
         self.assertIn("capabilities", data)
         self.assertEqual(data["capabilities"]["rules"], 48)
+        self.assertEqual(data["capabilities"]["skills"], 100)
+
+    def test_stack_validator_audits_cleanly(self):
+        report = audit_stack_conflicts(WORKSPACE_ROOT)
+        self.assertIn("status", report)
+        self.assertIn(report["status"], ("pass", "warning"))
+        self.assertIn("findings", report)
+
+    def test_sharp_edges_references_exist_in_core_skills(self):
+        db_edges = load_l2_resource("database-design", "references/sharp_edges.md", root=WORKSPACE_ROOT)
+        self.assertEqual(db_edges["level"], "L2")
+        self.assertIn("sharp edges", db_edges["content"].lower())
+
+        next_edges = load_l2_resource("nextjs-react-expert", "references/sharp_edges.md", root=WORKSPACE_ROOT)
+        self.assertEqual(next_edges["level"], "L2")
+        self.assertIn("waterfall", next_edges["content"].lower())
 
     def test_github_automator_dry_run_and_body_generation(self):
         body = build_pr_body(

@@ -69,7 +69,7 @@
     "scripts/stack_validator.py": "4ab79fbc132d2eb751b91dee92b668ed08784abe8f862b11327885adc8c2c915",
     "scripts/tests/test_agents_contract.py": "4cc919d142883c1ef7f4886b60a3d094b6daffcf8a6f51353a35ba37d9f77930",
     "scripts/tests/test_context_optimization.py": "3dff8a41aa48e6d3d0f9b11eee4b13cf6900559379f01ec83aaa0ad227300205",
-    "scripts/tests/test_ecosystem_parity.py": "9ecacc04058eb67100138520553f467f6ce19d286f06c52726063c748775b234",
+    "scripts/tests/test_ecosystem_parity.py": "ce852a469e9e9f8aecb90798ab970dc824261891b91a164fd08878b624c6d63d",
     "scripts/tests/test_neural_os_contract.py": "a797f17e91f46b59784345ffbce23819beeda180354e1fcd18d64709e706d1f7",
     "scripts/tests/test_rules_contract.py": "58e34ed836c64a8daccbf70a7881d9973d3ff28fbf146bfaac775830a7d7515e",
     "scripts/tests/test_skills_contract.py": "534cfed7859d9a5f50bf0d96b6bd99dc2f2a1882d445b9c2352f8af4fbe58290",
