@@ -277,15 +277,15 @@ class EnterpriseGraphEngine:
 
     def get_graph_export(self) -> Dict[str, Any]:
         """Produce clean JSON structure for web canvas/force-directed rendering."""
-        # Canlı, estetik ve yüksek kontrastlı renk kodları (Proje Dijital İkizi)
+        # Canlı, estetik ve yüksek kontrastlı renk kodları (Proje Dijital İkizi - No Purple)
         node_type_colors = {
-            "root": "#a855f7",       # MOC / Ana İndeks - Canlı Mor
-            "MOC": "#a855f7",
+            "root": "#10b981",       # MOC / Ana İndeks - Parlak Zümrüt Yeşili (Emerald)
+            "MOC": "#10b981",
             "concept": "#38bdf8",    # Kavramlar - Parlak Camgöbeği/Mavi
             "concepts": "#38bdf8",
             "decision": "#fb923c",   # Mimari Kararlar - Parlak Turuncu
             "decisions": "#fb923c",
-            "playbook": "#34d399",   # Operasyon Rehberleri - Parlak Zümrüt Yeşili
+            "playbook": "#34d399",   # Operasyon Rehberleri - Parlak Nane Yeşili
             "playbooks": "#34d399",
             "episode": "#f87171",    # Epizodik Hafıza - Parlak Mercan Kırmızısı
             "episodes": "#f87171",
