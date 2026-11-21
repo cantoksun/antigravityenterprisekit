@@ -33,7 +33,7 @@ links:
 - [[playbook-clean-architecture]] — kurumsal temiz mimari, servis katmanı ve repository kalıpları.
 
 ### 4. 📜 epizodik oturum kayıtları (`episodes/`)
-- [[episode-2026-11-21-vault-bootstrap]] — nöral bilgi ağının başlangıç ve omurga kurulumu.
+- [[episode-2026-11-21-vault-bootstrap]] — antigravity neural-os başlangıç ve çekirdek omurga kurulumu.
 
 ---
 

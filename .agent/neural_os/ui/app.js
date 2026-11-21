@@ -447,12 +447,26 @@
 
     const lines = text.split("\n");
     let currentList = null;
+    let inRelatedSection = false;
 
     lines.forEach(line => {
       const trimmed = line.trim();
       if (!trimmed) {
         currentList = null;
         return;
+      }
+
+      // Hide repetitive related links block at the end (already rendered as pills)
+      if (trimmed.includes("ilgili bağlantılar") || trimmed.includes("İlgili Bağlantılar")) {
+        inRelatedSection = true;
+        return;
+      }
+      if (inRelatedSection) {
+        if (trimmed.startsWith("#")) {
+          inRelatedSection = false;
+        } else {
+          return; // Skip duplicate link lines
+        }
       }
 
       if (trimmed.startsWith("### ")) {
@@ -507,9 +521,7 @@
       metricIn.textContent = details.in_degree;
       metricOut.textContent = details.out_degree;
 
-      drawerSummary.textContent = details.summary || "özet mevcut değil.";
-      
-      // Render clean, beautiful markdown instead of raw YAML/code
+      // Render clean, beautiful markdown
       renderCleanMarkdown(drawerContent, details.content || "");
 
       // Backlinks
