@@ -581,7 +581,32 @@
   }
 
   function recenter() {
-    camera = { x: 0, y: 0, zoom: 1.0 };
+    if (nodes.length === 0) {
+      camera = { x: 0, y: 0, zoom: 1.0 };
+      return;
+    }
+
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const n of nodes) {
+      if (n.x < minX) minX = n.x;
+      if (n.x > maxX) maxX = n.x;
+      if (n.y < minY) minY = n.y;
+      if (n.y > maxY) maxY = n.y;
+    }
+
+    const graphCenterX = (minX + maxX) / 2;
+    const graphCenterY = (minY + maxY) / 2;
+    const graphW = Math.max(200, maxX - minX + 160);
+    const graphH = Math.max(200, maxY - minY + 160);
+
+    const vpW = viewport.clientWidth;
+    const vpH = viewport.clientHeight;
+
+    const fitZoom = Math.min(1.2, Math.min(vpW / graphW, vpH / graphH));
+    camera.zoom = Math.max(0.4, fitZoom);
+
+    camera.x = vpW / 2 - graphCenterX * camera.zoom;
+    camera.y = vpH / 2 - graphCenterY * camera.zoom;
   }
 
   // Pointer & Drag Handlers
@@ -631,11 +656,20 @@
     draggedNode = null;
   });
 
-  // Zooming
+  // Zooming around cursor
   canvas.addEventListener("wheel", (e) => {
     e.preventDefault();
-    const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
-    camera.zoom = Math.max(0.3, Math.min(3.5, camera.zoom * zoomFactor));
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const zoomFactor = e.deltaY < 0 ? 1.12 : 0.88;
+    const newZoom = Math.max(0.2, Math.min(4.0, camera.zoom * zoomFactor));
+
+    // Keep world coordinate under mouse fixed while zooming
+    camera.x = mouseX - (mouseX - camera.x) * (newZoom / camera.zoom);
+    camera.y = mouseY - (mouseY - camera.y) * (newZoom / camera.zoom);
+    camera.zoom = newZoom;
   }, { passive: false });
 
   // Drawer Close
