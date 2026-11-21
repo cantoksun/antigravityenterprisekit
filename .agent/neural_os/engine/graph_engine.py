@@ -45,9 +45,10 @@ class EnterpriseGraphEngine:
     """Zero-dependency high performance graph analytics engine."""
 
     def __init__(self, vault_root: Optional[Path] = None):
+        agent_dir = Path(__file__).resolve().parents[2]
+        self.agent_dir = agent_dir
         if vault_root is None:
-            # Default to .agent/vault
-            self.root = (Path(__file__).resolve().parents[2] / "vault").resolve()
+            self.root = (agent_dir / "vault").resolve()
         else:
             self.root = vault_root.resolve()
 
@@ -105,11 +106,11 @@ class EnterpriseGraphEngine:
         if not self.root.is_dir():
             return
 
-        # 1. Parse all markdown files
+        # 1. Parse all vault markdown files
         for md_path in self.root.rglob("*.md"):
             if md_path.name.startswith("."):
                 continue
-            rel_path = md_path.relative_to(self.root).as_posix()
+            rel_path = md_path.relative_to(self.agent_dir).as_posix()
             stem = md_path.stem
             content = md_path.read_text("utf-8", errors="replace")
             fm, body = self._parse_frontmatter(content)
@@ -139,6 +140,84 @@ class EnterpriseGraphEngine:
                 summary=self._extract_summary(body),
                 created=str(fm.get("created", "")),
                 updated=str(fm.get("updated", "")),
+            )
+
+        # 2. Organically parse all 20 AI Agents (.agent/agents/*.md)
+        agents_dir = self.agent_dir / "agents"
+        if agents_dir.is_dir():
+            for agent_path in agents_dir.glob("*.md"):
+                stem = agent_path.stem
+                rel_path = agent_path.relative_to(self.agent_dir).as_posix()
+                content = agent_path.read_text("utf-8", errors="replace")
+                fm, body = self._parse_frontmatter(content)
+                
+                agent_id = f"agent-{stem}"
+                title = f"@{stem}"
+                skills_raw = fm.get("skills", "")
+                skill_list = [s.strip() for s in skills_raw.split(",") if s.strip()] if isinstance(skills_raw, str) else skills_raw
+                
+                # Links to skills and core rules
+                outlinks = {f"skill-{s}" for s in skill_list}
+                outlinks.add("rule-gemini")
+                outlinks.add("architecture-overview")
+
+                self.nodes[agent_id] = EnterpriseNode(
+                    id=agent_id,
+                    title=title,
+                    type="agent",
+                    relative_path=rel_path,
+                    tags=["agent", "ai-specialist"],
+                    outlinks=outlinks,
+                    raw_content=content,
+                    summary=fm.get("description", self._extract_summary(body)),
+                    created="2026-11-21",
+                    updated="2026-11-21",
+                )
+
+        # 3. Organically parse key AI Skills (.agent/skills/*/SKILL.md)
+        skills_dir = self.agent_dir / "skills"
+        if skills_dir.is_dir():
+            for skill_path in skills_dir.glob("*/SKILL.md"):
+                skill_name = skill_path.parent.name
+                rel_path = skill_path.relative_to(self.agent_dir).as_posix()
+                content = skill_path.read_text("utf-8", errors="replace")
+                fm, body = self._parse_frontmatter(content)
+
+                skill_id = f"skill-{skill_name}"
+                title = f"skill:{skill_name}"
+                outlinks = {"architecture-overview"}
+                if "clean-code" in skill_name:
+                    outlinks.add("clean-code-principles")
+
+                self.nodes[skill_id] = EnterpriseNode(
+                    id=skill_id,
+                    title=title,
+                    type="skill",
+                    relative_path=rel_path,
+                    tags=["skill", "capability"],
+                    outlinks=outlinks,
+                    raw_content=content,
+                    summary=fm.get("description", self._extract_summary(body)),
+                    created="2026-11-21",
+                    updated="2026-11-21",
+                )
+
+        # 4. Organically parse System Constitution (.agent/rules/GEMINI.md)
+        rules_path = self.agent_dir / "rules" / "GEMINI.md"
+        if rules_path.is_file():
+            content = rules_path.read_text("utf-8", errors="replace")
+            fm, body = self._parse_frontmatter(content)
+            self.nodes["rule-gemini"] = EnterpriseNode(
+                id="rule-gemini",
+                title="kural:GEMINI (48 temel kural)",
+                type="rule",
+                relative_path="rules/GEMINI.md",
+                tags=["rules", "constitution", "governance"],
+                outlinks={"architecture-overview", "clean-code-principles"},
+                raw_content=content,
+                summary="antigravity ai-os kiti 48 temel anayasa kuralı ve mutlak öncelik protokolü.",
+                created="2026-11-21",
+                updated="2026-11-21",
             )
 
         # 2. Build backlinks and resolve link targets
@@ -198,7 +277,7 @@ class EnterpriseGraphEngine:
 
     def get_graph_export(self) -> Dict[str, Any]:
         """Produce clean JSON structure for web canvas/force-directed rendering."""
-        # Canlı, estetik ve yüksek kontrastlı renk kodları
+        # Canlı, estetik ve yüksek kontrastlı renk kodları (Proje Dijital İkizi)
         node_type_colors = {
             "root": "#a855f7",       # MOC / Ana İndeks - Canlı Mor
             "MOC": "#a855f7",
@@ -210,6 +289,9 @@ class EnterpriseGraphEngine:
             "playbooks": "#34d399",
             "episode": "#f87171",    # Epizodik Hafıza - Parlak Mercan Kırmızısı
             "episodes": "#f87171",
+            "agent": "#818cf8",      # Uzman Ajanlar - Neon İndigo
+            "skill": "#22d3ee",      # Kurumsal Beceriler - Açık Turkuaz
+            "rule": "#f43f5e",       # Anayasa Kuralları - Derin Kırmızı
         }
 
         nodes_list = []

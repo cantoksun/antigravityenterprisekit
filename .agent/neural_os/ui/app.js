@@ -266,9 +266,12 @@
       ctx.shadowBlur = 0; // reset
     }
 
-    // 2. Draw Nodes (Strict Monochrome: Siyah ve Koyu Gri)
+    // 2. Draw Nodes (Living Digital Twin Icons)
     const now = Date.now() * 0.003;
     const typeIcons = {
+      "agent": "🤖",
+      "skill": "⚡",
+      "rule": "📜",
       "moc": "🧠",
       "root": "🧠",
       "concept": "🧬",
