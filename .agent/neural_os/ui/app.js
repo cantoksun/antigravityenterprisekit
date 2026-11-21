@@ -583,6 +583,9 @@
       }
 
       sideDrawer.classList.add("open");
+      if (physicsPanel) physicsPanel.classList.add("shifted");
+      const radarContainer = document.getElementById("radarContainer");
+      if (radarContainer) radarContainer.classList.add("shifted");
     } catch (err) {
       console.error("Düğüm detayları alınamadı:", err);
     }
@@ -683,6 +686,9 @@
   // Drawer Close
   btnCloseDrawer.addEventListener("click", () => {
     sideDrawer.classList.remove("open");
+    if (physicsPanel) physicsPanel.classList.remove("shifted");
+    const radarContainer = document.getElementById("radarContainer");
+    if (radarContainer) radarContainer.classList.remove("shifted");
     activeNode = null;
   });
 
@@ -912,6 +918,9 @@
       }
       if (sideDrawer.classList.contains("open")) {
         sideDrawer.classList.remove("open");
+        if (physicsPanel) physicsPanel.classList.remove("shifted");
+        const radarContainer = document.getElementById("radarContainer");
+        if (radarContainer) radarContainer.classList.remove("shifted");
         activeNode = null;
         return;
       }
