@@ -3,7 +3,7 @@
   "name": "antigravity-ai-os",
   "displayName": "Antigravity AI-OS (Solo + Enterprise++)",
   "version": "1.0.0",
-  "description": "Enterprise-grade autonomous AI operating system: 48 constitution rules, 20 specialized agents, 97 progressive skills, and a 125-node local Obsidian neural memory vault.",
+  "description": "Enterprise-grade autonomous AI operating system: 48 constitution rules, 20 specialized agents, 100 progressive skills, and a 125-node local Obsidian neural memory vault.",
   "author": "Can Toksun & Antigravity Enterprise Community",
   "homepage": "https://github.com/cantoksun/antigravityenterprisekit",
   "repository": "https://github.com/cantoksun/antigravityenterprisekit.git",
@@ -25,7 +25,7 @@
   ],
   "capabilities": {
     "agents": 20,
-    "skills": 97,
+    "skills": 100,
     "rules": 48,
     "qualityGates": 4,
     "neuralNodes": 125

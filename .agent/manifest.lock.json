@@ -1,7 +1,7 @@
 {
   "$schema": "schemas/manifest-lock.schema.json",
   "components": {
-    "ARCHITECTURE.md": "a0cb2e066c06710b6d33b84a0360560a3bcec9b4593ebb5e45db5fe5ff05a846",
+    "ARCHITECTURE.md": "12e29c805bf189561024987aa3a0bebdc0e66f0b84482f1cc30fb4d2ef0d3662",
     "VERSION": "94bc11e2a5617c66e6d2f849e14be6579c44c90d0f985d80ce4dc96dff46fa94",
     "agents/backend-specialist.md": "efdecd2b7cae8fb116a9831a0fe431d56086c04cab9e822eecdf04c21a343206",
     "agents/code-archaeologist.md": "fdbc0535d37e9f92f2b11b7e4b0fa6e51525edc5d1ec9d341822543e55f0c45b",
@@ -72,7 +72,7 @@
     "scripts/tests/test_ecosystem_parity.py": "9ecacc04058eb67100138520553f467f6ce19d286f06c52726063c748775b234",
     "scripts/tests/test_neural_os_contract.py": "a797f17e91f46b59784345ffbce23819beeda180354e1fcd18d64709e706d1f7",
     "scripts/tests/test_rules_contract.py": "58e34ed836c64a8daccbf70a7881d9973d3ff28fbf146bfaac775830a7d7515e",
-    "scripts/tests/test_skills_contract.py": "162082def7afe28108c71230e0a21b3d37625f87eac737e3653cc6bb3f8abf68",
+    "scripts/tests/test_skills_contract.py": "534cfed7859d9a5f50bf0d96b6bd99dc2f2a1882d445b9c2352f8af4fbe58290",
     "scripts/tests/test_toolkit.py": "742cf021387e70ad46188634e65c37d717160c3cc5f0510547ed7f8c5bd6c738",
     "scripts/tests/test_workflows_contract.py": "d173f8e1f59bc5664cab3a0ce4a0a19bdfd7995501ac943fddc5b43e37d6af86",
     "scripts/validate_kit.py": "536a467a8ab279c345eb47bc4440106e2be982edb6a0af2e85a0f831320e0d4f",
@@ -175,9 +175,12 @@
     "skills/deployment-procedures/SKILL.md": "3ae97e49e22ea01225a7ac8b4af24307339a89bdfd5f56900e07c7682b3f6381",
     "skills/design-spec/SKILL.md": "f807726593ed3067a02fd42efe205c1455f09ca29c3fffe7dfee24eeacce7f39",
     "skills/design-spec/collection.md": "3a3f86e594a4cc229a11b387634282af6de0c85cbaea85202da1e41d43ad1979",
+    "skills/design-system-tokens/SKILL.md": "22c5d95570abea27acbf40c52bbd8f513c5c9d858b7d964b501127dc4a42a166",
     "skills/desktop-rust-patterns/SKILL.md": "e94ccba12e49ad359365e8a74cdcda34c12d4ffc7af3a9c90445da5a50a7cb87",
     "skills/doc.md": "617c52f21a69434077995bbfaaa34db558be519ab88792d33fc8423e4c9dc44b",
     "skills/documentation-templates/SKILL.md": "227b6e2cacdcab5733249d6f666d67495ab62918f5af967f61e95bbb0f0611b9",
+    "skills/edge-runtime-patterns/SKILL.md": "ddb924570ef0be082f9ffe97cde0d4c68fa9ce7f57cc620d80250939aeb4ae24",
+    "skills/event-driven-architecture/SKILL.md": "74309b8136b62b29ddbcc7aded195550c336688e00726af11097acad0d42b8ea",
     "skills/frontend-architecture/SKILL.md": "23e3e599280ee1ad0bc0e08f40070943de60862acfc23060ae9bf4b3211bece3",
     "skills/frontend-design/SKILL.md": "d75ff112cb62e38a95b3904f7f7ab7f163a0bc5195cf3678f0b71a78d673f93c",
     "skills/frontend-design/animation-guide.md": "50b6c57bd21dd545befc48038ed92dc5e1ada7d65489a6fc833f68857a461317",
@@ -317,6 +320,6 @@
     "workflows/verify.md": "0bdab5ebac6bef7e76cc64b2196116d6f0763da7a91ee671f60acd2bb9c35e67"
   },
   "kitVersion": "2026.8.31",
-  "manifestSha256": "2be710e34c3141b52c74823306317500d576263adbe8a2377d62845dc7a969c9",
+  "manifestSha256": "41b160b069c04aa5c44c1d1d3bd01e0a6bd8e6a4a977abd963799055bf99dd1f",
   "schemaVersion": "1.0.0"
 }

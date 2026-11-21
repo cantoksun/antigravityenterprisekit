@@ -21,7 +21,7 @@ class SkillsContractTests(unittest.TestCase):
         cls.python_scripts = sorted(cls.skills_dir.glob("*/scripts/*.py"))
 
     def test_total_skills_count_is_exact(self):
-        self.assertEqual(97, len(self.skill_files), "Expected exactly 97 enterprise skills")
+        self.assertEqual(100, len(self.skill_files), "Expected exactly 100 enterprise skills")
 
     def test_all_skills_have_valid_frontmatter(self):
         for path in self.skill_files:
