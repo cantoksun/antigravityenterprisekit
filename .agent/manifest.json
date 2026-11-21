@@ -10,7 +10,7 @@
           "api-mocking": "^1.0.0",
           "api-patterns": "^2.0.0",
           "async-python-patterns": "^1.0.0",
-          "auth-implementation-patterns": "^1.0.0",
+          "auth-implementation-patterns": "^2.0.0",
           "backend-security-coder": "^1.0.0",
           "bash-linux": "^2.0.0",
           "clean-code": "^1.0.0",
@@ -408,7 +408,7 @@
         "skills": {
           "api-patterns": "^2.0.0",
           "attack-tree-construction": "^1.0.0",
-          "auth-implementation-patterns": "^1.0.0",
+          "auth-implementation-patterns": "^2.0.0",
           "clean-code": "^1.0.0",
           "red-team-tactics": "^2.0.0",
           "security-requirement-extraction": "^1.0.0",
@@ -710,7 +710,7 @@
       ],
       "path": "skills/auth-implementation-patterns/SKILL.md",
       "scripts": [],
-      "version": "1.0.0"
+      "version": "2.0.0"
     },
     "backend-security-coder": {
       "allowedTools": [

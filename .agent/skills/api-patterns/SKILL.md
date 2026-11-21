@@ -90,3 +90,7 @@ her api isteğinde ve uç noktada şu güvenlik katmanları tavizsiz uygulanmal�
 - **fail-fast ve standart hata nesnesi:** hata anında sistem sessizce kilitlenmek yerine fail-fast prensibiyle açık hata fırlatmalıdır.
 - **yapısal izleme (34. kural):** yakalanan her hata benzersiz bir `x-correlation-id` ile merkezi json loglara işlenmeli ve istemciye standart bir `error.code` ile bildirilmelidir.
 - **devre kesici ve zaman aşımı (28. kural):** yanıt vermeyen dış apilerin sessizce sistemi tıkaması `5000ms timeout` ve devre kesici (circuit breaker) ile engellenir.
+
+### 4. kimlik ve kullanıcı adı yaşam döngüsü senkronizasyonu (single source of truth)
+- **kural tekilleştirme (ssot):** kullanıcı adı, slug veya e-posta gibi alanlara ait doğrulama kuralları asla tek bir api route'unda izole bırakılamaz; ortak bir şema modülünde (`lib/username.ts` veya `shared/validators/auth.ts`) tanımlanmalı ve kayıt, oauth ve profil düzenleme katmanlarının tümü aynı motoru kullanmalıdır.
+- **sosyal giriş ve oauth provisioning koruması:** google, apple veya oauth ile ilk kez kayıt olan kullanıcılara geçersiz kullanıcı adı atanmasını engellemek için otomatik temizleme (`sanitizeUsername`) ve veritabanı çakışmalarını önleyen benzersizlik çözücü (`getUniqueUsername`) zorunludur.
