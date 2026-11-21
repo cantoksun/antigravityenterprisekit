@@ -87,3 +87,7 @@ bu beceri; react 19, next.js (app router), sunucu bileşenleri (rsc), sıfır ş
 
 ### 5. resim ve medya optimizasyonu (13. kural)
 - standart `<img>` yerine her zaman `next/image` kullanılmalı; boyutlar (`width`, `height`), otomatik webp/avif dönüşümü ve tembel yükleme (`loading="lazy"`) sağlanmalıdır.
+
+### 6. yan etkilerde mükerrer mutasyon engeli ve ref kilidi (20. ve 33. kural)
+- url parametreleriyle (örneğin `?userId=...`) sayfa açıldığında tetiklenen konuşma veya oturum başlatma mutasyonlarında; liste yüklenirken veya referans yenilendiğinde `useEffect`'in mükerrer çalışmasını engellemek için tek seferlik `useRef` kilidi ve mevcut kayıt kontrolü (`find`) zorunludur.
+- backend uç noktasında ise `getOrCreate` (upsert) ve veritabanı `unique` kısıtlaması uygulanarak yarış durumları (race conditions) kökten önlenmelidir.

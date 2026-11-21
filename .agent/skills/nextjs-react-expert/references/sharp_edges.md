@@ -51,3 +51,28 @@ bu doküman; react 19 ve next.js app router mimarilerinde en sık yapılan perfo
   const [state, formAction, isPending] = useActionState(updateProfile, null);
   return <button disabled={isPending}>{isPending ? 'Kaydediliyor...' : 'Kaydet'}</button>;
   ```
+
+---
+
+### 5. url parametresiyle açılışta useEffect içi kontrolsüz mutasyon ve mükerrer kayıt tuzağı
+- **tuzak:** `?userId=usr_123` gibi bir url parametresiyle sayfaya girildiğinde, `useEffect` içinde kontrolsüz şekilde `startConversation(userId)` gibi bir mutasyon çağırmak. konuşma listesi henüz yüklenirken veya liste durumu güncellenip referansı değiştiğinde effect tekrar tetiklenir ve veritabanında aynı iki kullanıcı arasında mükerrer kopya kayıtlar oluşturur.
+- **çözüm (çift katmanlı koruma):**
+  1. **ön yüz (ref guard & loading check):** liste henüz yüklenirken mutasyon tetiklenmez, aynı parametre için tek seferlik `useRef` kilidi (`initiatedUserRef.current`) ve mevcut kayıt kontrolü uygulanır:
+     ```typescript
+     const initiatedUserRef = useRef<string | null>(null);
+
+     useEffect(() => {
+       if (!targetUserId || isLoadingConversations) return;
+       // mevcut konuşma varsa seç, yeniden oluşturma
+       const existing = conversations.find(c => c.participantId === targetUserId);
+       if (existing) {
+         setSelectedChatId(existing.id);
+         return;
+       }
+       // mükerrer tetiklemeyi ref kilidiyle engelle
+       if (initiatedUserRef.current === targetUserId) return;
+       initiatedUserRef.current = targetUserId;
+       startConversation(targetUserId);
+     }, [targetUserId, isLoadingConversations, conversations]);
+     ```
+  2. **arka yüz ve veritabanı (20. ve 33. anayasa kuralı):** backend uç noktası daima `getOrCreateConversation` (upsert / on conflict do nothing) mantığıyla çalışmalıdır. veritabanında `@@unique([user_a_id, user_b_id])` kısıtlaması bulunmalı, ön yüz kaç kez paralel istek atarsa atsın veritabanı asla ikinci bir kopya üretmemeli, mevcut kaydı dönmelidir.
