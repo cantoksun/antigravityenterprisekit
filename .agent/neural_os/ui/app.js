@@ -253,7 +253,7 @@
       drawerContent.textContent = details.content || "";
 
       // Backlinks
-      drawerBacklinks.innerHTML = "";
+      drawerBacklinks.replaceChildren();
       if (details.backlinks && details.backlinks.length > 0) {
         details.backlinks.forEach(bid => {
           const pill = document.createElement("a");
@@ -267,11 +267,14 @@
           drawerBacklinks.appendChild(pill);
         });
       } else {
-        drawerBacklinks.innerHTML = "<span style='font-size:11px;color:var(--text-dim)'>gelen bağlantı yok</span>";
+        const emptyMsg = document.createElement("span");
+        emptyMsg.style.cssText = "font-size:11px;color:var(--text-dim)";
+        emptyMsg.textContent = "gelen bağlantı yok";
+        drawerBacklinks.appendChild(emptyMsg);
       }
 
       // Outlinks
-      drawerOutlinks.innerHTML = "";
+      drawerOutlinks.replaceChildren();
       if (details.outlinks && details.outlinks.length > 0) {
         details.outlinks.forEach(oid => {
           const pill = document.createElement("a");
@@ -285,7 +288,10 @@
           drawerOutlinks.appendChild(pill);
         });
       } else {
-        drawerOutlinks.innerHTML = "<span style='font-size:11px;color:var(--text-dim)'>giden bağlantı yok</span>";
+        const emptyMsg = document.createElement("span");
+        emptyMsg.style.cssText = "font-size:11px;color:var(--text-dim)";
+        emptyMsg.textContent = "giden bağlantı yok";
+        drawerOutlinks.appendChild(emptyMsg);
       }
 
       sideDrawer.classList.add("open");
@@ -361,7 +367,7 @@
     clearTimeout(searchTimeout);
     if (!query) {
       searchOverlay.classList.remove("open");
-      searchOverlay.innerHTML = "";
+      searchOverlay.replaceChildren();
       return;
     }
 
@@ -370,20 +376,37 @@
         const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
         const results = await res.json();
         
-        searchOverlay.innerHTML = "";
+        searchOverlay.replaceChildren();
         if (results.length === 0) {
-          searchOverlay.innerHTML = "<div style='padding:12px;font-size:12px;color:var(--text-dim)'>sonuç bulunamadı.</div>";
+          const noRes = document.createElement("div");
+          noRes.style.cssText = "padding:12px;font-size:12px;color:var(--text-dim)";
+          noRes.textContent = "sonuç bulunamadı.";
+          searchOverlay.appendChild(noRes);
         } else {
           results.forEach(r => {
             const item = document.createElement("div");
             item.className = "search-item";
-            item.innerHTML = `
-              <div class="search-item-title">
-                <span>⚡ [[${r.node_id}]] ${r.title}</span>
-                <span class="search-item-score">skor: ${r.score}</span>
-              </div>
-              <div class="search-item-snippet">${r.snippet || ""}</div>
-            `;
+            
+            const titleRow = document.createElement("div");
+            titleRow.className = "search-item-title";
+            
+            const titleSpan = document.createElement("span");
+            titleSpan.textContent = `⚡ [[${r.node_id}]] ${r.title}`;
+            
+            const scoreSpan = document.createElement("span");
+            scoreSpan.className = "search-item-score";
+            scoreSpan.textContent = `skor: ${r.score}`;
+            
+            titleRow.appendChild(titleSpan);
+            titleRow.appendChild(scoreSpan);
+            
+            const snippetDiv = document.createElement("div");
+            snippetDiv.className = "search-item-snippet";
+            snippetDiv.textContent = r.snippet || "";
+            
+            item.appendChild(titleRow);
+            item.appendChild(snippetDiv);
+
             item.onclick = () => {
               searchOverlay.classList.remove("open");
               searchInput.value = "";
