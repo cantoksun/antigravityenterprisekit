@@ -160,6 +160,8 @@
     }
     ctx.restore();
   }
+
+  function resizeCanvas() {
     canvas.width = viewport.clientWidth * window.devicePixelRatio;
     canvas.height = viewport.clientHeight * window.devicePixelRatio;
     canvas.style.width = `${viewport.clientWidth}px`;
@@ -186,39 +188,48 @@
   window.addEventListener("resize", resizeCanvas);
 
   // Initialize Data
+  function buildGraph(data) {
+    const nodeMap = new Map();
+    const width = viewport.clientWidth;
+    const height = viewport.clientHeight;
+    const count = data.nodes.length;
+
+    nodes = data.nodes.map((n, i) => {
+      const angle = (i / count) * 2 * Math.PI;
+      const radius = Math.min(width, height) * 0.28;
+      const nodeObj = {
+        ...n,
+        x: width / 2 + radius * Math.cos(angle) + (Math.random() - 0.5) * 40,
+        y: height / 2 + radius * Math.sin(angle) + (Math.random() - 0.5) * 40,
+        vx: 0,
+        vy: 0,
+        radius: Math.max(9, Math.min(26, n.val || 12))
+      };
+      nodeMap.set(n.id, nodeObj);
+      return nodeObj;
+    });
+
+    links = data.links.map(l => ({
+      source: nodeMap.get(l.source) || l.source,
+      target: nodeMap.get(l.target) || l.target,
+      type: l.type
+    })).filter(l => typeof l.source === "object" && typeof l.target === "object");
+
+    recenter();
+  }
+
   async function loadGraphData() {
+    // Standalone mode: exporter injects window.__GRAPH_DATA__
+    if (window.__GRAPH_DATA__) {
+      buildGraph(window.__GRAPH_DATA__);
+      return;
+    }
+    // Server mode: fetch from API
     try {
       const res = await fetch("/api/graph");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      
-      const nodeMap = new Map();
-      const width = viewport.clientWidth;
-      const height = viewport.clientHeight;
-
-      // Layout nodes in a circle initially
-      const count = data.nodes.length;
-      nodes = data.nodes.map((n, i) => {
-        const angle = (i / count) * 2 * Math.PI;
-        const radius = Math.min(width, height) * 0.28;
-        const nodeObj = {
-          ...n,
-          x: width / 2 + radius * Math.cos(angle) + (Math.random() - 0.5) * 40,
-          y: height / 2 + radius * Math.sin(angle) + (Math.random() - 0.5) * 40,
-          vx: 0,
-          vy: 0,
-          radius: Math.max(9, Math.min(26, n.val || 12))
-        };
-        nodeMap.set(n.id, nodeObj);
-        return nodeObj;
-      });
-
-      links = data.links.map(l => ({
-        source: nodeMap.get(l.source) || l.source,
-        target: nodeMap.get(l.target) || l.target,
-        type: l.type
-      })).filter(l => typeof l.source === "object" && typeof l.target === "object");
-
-      recenter();
+      buildGraph(data);
     } catch (err) {
       console.error("Grafik verisi yuklenemedi:", err);
     }

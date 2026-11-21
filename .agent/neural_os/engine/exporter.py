@@ -60,9 +60,18 @@ class StandaloneGraphExporter:
             f"<style>\n{css_content}\n</style>"
         )
 
-        # Safe JSON embedding to prevent </script> tags in markdown from closing the script tag early
-        graph_json = json.dumps(graph_data, ensure_ascii=False).replace("</script>", "<\\/script>").replace("</SCRIPT>", "<\\/SCRIPT>")
-        details_json = json.dumps(node_details_map, ensure_ascii=False).replace("</script>", "<\\/script>").replace("</SCRIPT>", "<\\/SCRIPT>")
+        # Safe JSON embedding: escape both opening <script and closing </script> tags
+        # so HTML parsers never treat embedded JSON strings as new script blocks.
+        def _safe_json(obj):
+            raw = json.dumps(obj, ensure_ascii=False)
+            # Escape closing tag first (order matters)
+            raw = raw.replace("</script>", "<\\/script>").replace("</SCRIPT>", "<\\/SCRIPT>")
+            # Escape opening tag to prevent browser from starting a new script context
+            raw = raw.replace("<script", "<\\u0073cript").replace("<SCRIPT", "<\\u0053CRIPT")
+            return raw
+
+        graph_json = _safe_json(graph_data)
+        details_json = _safe_json(node_details_map)
 
         # Patch app.js to use embedded data when running as static file (no server)
         embedded_db_js = f"""
