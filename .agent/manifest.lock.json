@@ -55,6 +55,7 @@
     "scripts/context_budget.py": "01adfbaea074a6080ee8970efef776bf1373cdb288d90dd9cfd42de0d560f9ab",
     "scripts/dependency_graph.py": "2a92705a7830bbe6465c05def2fb8e1729c9ce167f02e05bc03985f76bfbfd9d",
     "scripts/generate_manifest.py": "3b4e271cbe82abfecd72419331c9bcc4e165f3f825bcea579e2c4a6ea76b6f50",
+    "scripts/github_automator.py": "8124c42b9852284599628237168efc4e240f360b663a2b01f5eaf9f7936cc6be",
     "scripts/memory_hook.py": "975ac61dd02ce963f6372802ae7caccb5bff0782462e308eac888489fd7e670f",
     "scripts/neural_memory.py": "747e695ea95636ecfd33da9dc80f74c535692bdbe489cc079d4cd3a4fea28f94",
     "scripts/neural_os.py": "8546a6d110441cfe160f5c91b32d2ca6a0b9fab659c3cad54dfeef732d6d9976",
