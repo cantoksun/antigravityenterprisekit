@@ -75,6 +75,13 @@ ajan herhangi bir kimlik kuralı yazdığında veya güncellediğinde şu 4 nokt
 - [ ] **profil düzenleme (settings/profile):** ayarlar ekranında aynı regex ve `isUnique` kontrolü çalışıyor mu?
 - [ ] **veritabanı kısıtlaması (db constraint):** tabloda `username UNIQUE` indeksi var mı?
 
+### 4. şeffaf bildirim disiplini (developer ve son kullanıcı ux şeffaflığı)
+- **geliştiriciye şeffaf raporlama (19. ve 46. kural):** ajan kimlik ve profil kurallarını güncellediğinde bunu sessizce yapamaz; hangi doğrulama kurallarının değiştiğini, oauth kayıt ve webhook katmanında `sanitizeUsername` ve `getUniqueUsername` fonksiyonlarının nasıl devreye alındığını kullanıcıya açıkça bildirmek zorundadır.
+- **son kullanıcıya şeffaf ux bildirimi (zero silent mutation):** 
+  sosyal girişle kaydolan bir kullanıcının adı otomatik temizlenip değiştirildiğinde veya çakışma sebebiyle `@can.toksun_1` şeklinde atandığında bu durum kullanıcıdan gizlenemez:
+  1. **hoş geldin veya onboarding adımı:** kullanıcıya atanan kullanıcı adı açıkça gösterilmeli ("kullanıcı adınız @can.toksun_1 olarak belirlendi; dilediğiniz zaman profil ayarlarından değiştirebilirsiniz") veya ilk girişte kullanıcı adı onaylama/özelleştirme adımı sunulmalıdır.
+  2. **anlaşılır doğrulama mesajları:** geçersiz kullanıcı adı denemelerinde jenerik hata mesajları yerine tam ihlal sebebi (örneğin "kullanıcı adı nokta ile başlayamaz ve ardışık iki nokta içeremez") kullanıcıya gösterilmelidir.
+
 ---
 
 ## 🛡️ token ve oturum ömür döngüsü
