@@ -1,0 +1,33 @@
+{
+  "$schema": "https://antigravity.google.com/schemas/plugin.json",
+  "name": "antigravity-ai-os",
+  "displayName": "Antigravity AI-OS (Solo + Enterprise++)",
+  "version": "1.0.0",
+  "description": "Enterprise-grade autonomous AI operating system: 48 constitution rules, 20 specialized agents, 97 progressive skills, and a 125-node local Obsidian neural memory vault.",
+  "author": "Can Toksun & Antigravity Enterprise Community",
+  "homepage": "https://github.com/cantoksun/antigravityenterprisekit",
+  "repository": "https://github.com/cantoksun/antigravityenterprisekit.git",
+  "license": "MIT",
+  "keywords": [
+    "antigravity",
+    "ai-os",
+    "autonomous-agents",
+    "neural-memory",
+    "obsidian",
+    "clean-code",
+    "enterprise-architecture",
+    "context-optimization"
+  ],
+  "suggestedPrompts": [
+    "Run master quality verification and contract test suite",
+    "Query the neural knowledge graph for architectural decisions",
+    "Audit context budget and optimize prompt token consumption"
+  ],
+  "capabilities": {
+    "agents": 20,
+    "skills": 97,
+    "rules": 48,
+    "qualityGates": 4,
+    "neuralNodes": 125
+  }
+}
