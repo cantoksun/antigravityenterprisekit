@@ -586,6 +586,8 @@
       if (physicsPanel) physicsPanel.classList.add("shifted");
       const radarContainer = document.getElementById("radarContainer");
       if (radarContainer) radarContainer.classList.add("shifted");
+      const zoomContainer = document.getElementById("zoomContainer");
+      if (zoomContainer) zoomContainer.classList.add("shifted");
     } catch (err) {
       console.error("Düğüm detayları alınamadı:", err);
     }
@@ -667,6 +669,41 @@
     draggedNode = null;
   });
 
+  // Zoom Controls HUD Wiring (Obsidian Grade)
+  const zoomSlider = document.getElementById("zoomSlider");
+  const btnZoomIn = document.getElementById("btnZoomIn");
+  const btnZoomOut = document.getElementById("btnZoomOut");
+
+  function setCameraZoom(targetZoom) {
+    const clamped = Math.max(0.3, Math.min(3.5, targetZoom));
+    const cx = viewport.clientWidth / 2;
+    const cy = viewport.clientHeight / 2;
+
+    camera.x = cx - (cx - camera.x) * (clamped / camera.zoom);
+    camera.y = cy - (cy - camera.y) * (clamped / camera.zoom);
+    camera.zoom = clamped;
+
+    if (zoomSlider) zoomSlider.value = clamped;
+  }
+
+  if (zoomSlider) {
+    zoomSlider.addEventListener("input", (e) => {
+      setCameraZoom(parseFloat(e.target.value));
+    });
+  }
+
+  if (btnZoomIn) {
+    btnZoomIn.addEventListener("click", () => {
+      setCameraZoom(camera.zoom * 1.25);
+    });
+  }
+
+  if (btnZoomOut) {
+    btnZoomOut.addEventListener("click", () => {
+      setCameraZoom(camera.zoom * 0.8);
+    });
+  }
+
   // Zooming around cursor
   canvas.addEventListener("wheel", (e) => {
     e.preventDefault();
@@ -681,6 +718,7 @@
     camera.x = mouseX - (mouseX - camera.x) * (newZoom / camera.zoom);
     camera.y = mouseY - (mouseY - camera.y) * (newZoom / camera.zoom);
     camera.zoom = newZoom;
+    if (zoomSlider) zoomSlider.value = newZoom;
   }, { passive: false });
 
   // Drawer Close
@@ -689,6 +727,8 @@
     if (physicsPanel) physicsPanel.classList.remove("shifted");
     const radarContainer = document.getElementById("radarContainer");
     if (radarContainer) radarContainer.classList.remove("shifted");
+    const zoomContainer = document.getElementById("zoomContainer");
+    if (zoomContainer) zoomContainer.classList.remove("shifted");
     activeNode = null;
   });
 
@@ -921,6 +961,8 @@
         if (physicsPanel) physicsPanel.classList.remove("shifted");
         const radarContainer = document.getElementById("radarContainer");
         if (radarContainer) radarContainer.classList.remove("shifted");
+        const zoomContainer = document.getElementById("zoomContainer");
+        if (zoomContainer) zoomContainer.classList.remove("shifted");
         activeNode = null;
         return;
       }

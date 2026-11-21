@@ -58,6 +58,19 @@
         <button class="filter-btn" data-type="rule"><span class="btn-dot" style="background:#f43f5e;"></span> anayasa</button>
       </div>
 
+      <!-- Zoom Slider HUD (Obsidian Grade) -->
+      <div class="zoom-slider-container" id="zoomContainer">
+        <button id="btnZoomIn" class="zoom-btn" title="yakınlaştır (+)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+        <div class="zoom-track">
+          <input type="range" id="zoomSlider" class="zoom-range" min="0.3" max="3.5" step="0.05" value="1.0" orient="vertical">
+        </div>
+        <button id="btnZoomOut" class="zoom-btn" title="uzaklaştır (−)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+      </div>
+
       <!-- Radar Minimap -->
       <div class="radar-container" id="radarContainer">
         <div class="radar-header">
