@@ -59,7 +59,107 @@
   const DAMPING = 0.84;
   let centerGravity = 0.016;
 
-  function resizeCanvas() {
+  // Vector Glyph Drawers for Canvas Nodes (Monochrome Obsidian Grade)
+  function drawNodeGlyph(ctx, type, x, y, r) {
+    ctx.save();
+    ctx.strokeStyle = "#ffffff";
+    ctx.fillStyle = "#ffffff";
+    ctx.lineWidth = Math.max(1.2, r * 0.12);
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    const s = r * 0.48; // Glyph scale
+
+    switch (type) {
+      case "agent": // Robot / Specialist visor
+        ctx.beginPath();
+        // Head frame
+        ctx.strokeRect(x - s * 0.8, y - s * 0.7, s * 1.6, s * 1.3);
+        // Visor line
+        ctx.beginPath();
+        ctx.moveTo(x - s * 0.5, y - s * 0.1);
+        ctx.lineTo(x + s * 0.5, y - s * 0.1);
+        ctx.stroke();
+        // Antenna
+        ctx.beginPath();
+        ctx.moveTo(x, y - s * 0.7);
+        ctx.lineTo(x, y - s * 1.1);
+        ctx.stroke();
+        break;
+
+      case "skill": // Lightning bolt / Capability
+        ctx.beginPath();
+        ctx.moveTo(x + s * 0.1, y - s * 1.0);
+        ctx.lineTo(x - s * 0.5, y + s * 0.0);
+        ctx.lineTo(x + s * 0.05, y + s * 0.0);
+        ctx.lineTo(x - s * 0.1, y + s * 1.0);
+        ctx.lineTo(x + s * 0.6, y - s * 0.05);
+        ctx.lineTo(x + s * 0.05, y - s * 0.05);
+        ctx.closePath();
+        ctx.fill();
+        break;
+
+      case "rule": // Shield / Constitution
+        ctx.beginPath();
+        ctx.moveTo(x, y - s * 0.9);
+        ctx.lineTo(x + s * 0.8, y - s * 0.5);
+        ctx.quadraticCurveTo(x + s * 0.7, y + s * 0.6, x, y + s * 1.0);
+        ctx.quadraticCurveTo(x - s * 0.7, y + s * 0.6, x - s * 0.8, y - s * 0.5);
+        ctx.closePath();
+        ctx.stroke();
+        // Inner check/mark
+        ctx.beginPath();
+        ctx.arc(x, y - s * 0.1, s * 0.22, 0, Math.PI * 2);
+        ctx.fill();
+        break;
+
+      case "moc":
+      case "root": // Neural Hub / Core
+        ctx.beginPath();
+        ctx.arc(x, y, s * 0.4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(x, y, s * 0.85, 0, Math.PI * 2);
+        ctx.stroke();
+        break;
+
+      case "decision":
+      case "decisions": // Scale / Balance (ADR)
+        ctx.beginPath();
+        ctx.moveTo(x, y - s * 0.9);
+        ctx.lineTo(x, y + s * 0.8);
+        ctx.moveTo(x - s * 0.8, y - s * 0.4);
+        ctx.lineTo(x + s * 0.8, y - s * 0.4);
+        ctx.stroke();
+        // Left & right pans
+        ctx.beginPath();
+        ctx.arc(x - s * 0.8, y + s * 0.1, s * 0.35, 0, Math.PI);
+        ctx.arc(x + s * 0.8, y + s * 0.1, s * 0.35, 0, Math.PI);
+        ctx.stroke();
+        break;
+
+      case "concept":
+      case "concepts": // Network atom / Concept
+        ctx.beginPath();
+        ctx.arc(x, y, s * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.ellipse(x, y, s * 0.9, s * 0.4, Math.PI / 4, 0, Math.PI * 2);
+        ctx.stroke();
+        break;
+
+      default: // Minimal diamond / Node dot
+        ctx.beginPath();
+        ctx.moveTo(x, y - s * 0.7);
+        ctx.lineTo(x + s * 0.7, y);
+        ctx.lineTo(x, y + s * 0.7);
+        ctx.lineTo(x - s * 0.7, y);
+        ctx.closePath();
+        ctx.fill();
+        break;
+    }
+    ctx.restore();
+  }
     canvas.width = viewport.clientWidth * window.devicePixelRatio;
     canvas.height = viewport.clientHeight * window.devicePixelRatio;
     canvas.style.width = `${viewport.clientWidth}px`;
@@ -274,23 +374,8 @@
       ctx.shadowBlur = 0; // reset
     }
 
-    // 2. Draw Nodes (Living Digital Twin Icons)
+    // 2. Draw Nodes (Living Digital Twin Vector Nodes)
     const now = Date.now() * 0.003;
-    const typeIcons = {
-      "agent": "🤖",
-      "skill": "⚡",
-      "rule": "📜",
-      "moc": "🧠",
-      "root": "🧠",
-      "concept": "🧬",
-      "concepts": "🧬",
-      "decision": "⚖️",
-      "decisions": "⚖️",
-      "playbook": "📖",
-      "playbooks": "📖",
-      "episode": "📜",
-      "episodes": "📜"
-    };
 
     // Identify neighbors if hovering or active
     const focusedNode = hoveredNode || activeNode;
@@ -345,12 +430,8 @@
       ctx.strokeStyle = isSelected ? "#ffffff" : "rgba(255, 255, 255, 0.85)";
       ctx.stroke();
 
-      // Node Icon (Type symbol with drop shadow for extreme contrast)
-      const icon = typeIcons[node.type?.toLowerCase()] || "🔹";
-      ctx.font = `${Math.max(10, node.radius * 0.9)}px sans-serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(icon, node.x, node.y);
+      // Node Glyph (High-contrast vector obsidian glyph instead of emoji)
+      drawNodeGlyph(ctx, node.type?.toLowerCase(), node.x, node.y, node.radius);
 
       // Node label (Obsidian-Grade Zoom-Dependent Culling)
       // If zoomed out, only show hub / high authority or focused nodes
