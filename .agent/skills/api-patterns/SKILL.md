@@ -70,3 +70,23 @@ her api isteğinde ve uç noktada şu güvenlik katmanları tavizsiz uygulanmal�
 1. **rest:** kamusal, genel tüketim veya mikroservis entegrasyonlarında standart.
 2. **trpc / server actions:** full-stack typescript projelerinde sıfır api kazası ve uçtan uca tip güvenliği için tercih edilir.
 3. **graphql:** karmaşık ilişkisel veri modellerinde istemciye tam kontrol verilmek istendiğinde kullanılır.
+
+---
+
+## 🔍 şema ve kolon uyumu, mapper kayıpları ve sessiz hata engeli
+
+### 1. şema ve kolon farklılıkları (schema drift & column mismatch)
+- **18. kural (sıfır varsayım):** api uç noktalarında veritabanı kolonları asla varsayılmaz. daima veritabanı şemasından otomatik türetilen tipler (`prisma.validator`, drizzle `inferred type`, kysely) kullanılır; elle yazılan ve şemayla senkronize olmayan hayali tipler yasaktır.
+- **39. kural (expand & contract):** canlı sistemlerde kolon adı değiştirme veya silme işlemleri doğrudan yapılamaz; geriye dönük uyumluluk için üç aşamalı genişlet ve daralt kalıbı uygulanır.
+- **statik şema denetimi:** projelerde `schema_validator.py` çalıştırılarak eksik ilişkiler ve tip sapmaları önceden taranır.
+
+### 2. mapper ve filtreleme kayıpları (data truncation & over-stripping)
+- **aşırı filtreleme (over-stripping) engeli:** zod gibi şema doğrulayıcılarda güvenlik için `strip` kullanılırken, domain modelinden dto'ya dönüşüm yapılan mapper katmanında zorunlu alanların sessizce düşmesini engellemek için `satisfies DTO` veya tip zorlaması uygulanır.
+- **saf dönüşüm fonksiyonları (pure mappers):** her mapper fonksiyonu açık ve öngörülebilir olmalıdır (`toDTO`, `fromPersistence`). sayfalama (`page`, `limit`), toplam kayıt (`totalCount`) ve filtre meta verileri dönüşüm esnasında asla kaybolamaz.
+- **kontrat testleri:** mapper katmanı eksik veya null değer senaryolarına karşı `testing-patterns` altında birim testleriyle doğrulanır.
+
+### 3. sessiz api hataları (silent failures & swallowed exceptions)
+- **boş catch yasağı (no empty catch):** `try { ... } catch (e) {}` veya hatayı yalnızca `console.log(e)` yapıp `return null` / `{ success: false }` dönerek hatayı yutmak kesinlikle yasaktır.
+- **fail-fast ve standart hata nesnesi:** hata anında sistem sessizce kilitlenmek yerine fail-fast prensibiyle açık hata fırlatmalıdır.
+- **yapısal izleme (34. kural):** yakalanan her hata benzersiz bir `x-correlation-id` ile merkezi json loglara işlenmeli ve istemciye standart bir `error.code` ile bildirilmelidir.
+- **devre kesici ve zaman aşımı (28. kural):** yanıt vermeyen dış apilerin sessizce sistemi tıkaması `5000ms timeout` ve devre kesici (circuit breaker) ile engellenir.
