@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>antigravity enterprise neural-os</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Top Navigation Header -->
+  <header class="top-header">
+    <div class="brand-section">
+      <span class="brand-logo">🧠 antigravity neural-os</span>
+      <span class="brand-badge">enterprise v2.0</span>
+    </div>
+
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="hibrit semantik arama (bm25 + pagerank)..." autocomplete="off">
+    </div>
+
+    <div class="header-actions">
+      <button id="btnRecenter" class="btn-icon" title="grafiği merkeze hizala">
+        <span>🎯</span> ortala
+      </button>
+      <button id="btnReload" class="btn-icon" title="grafiği yeniden yükle">
+        <span>🔄</span> yenile
+      </button>
+    </div>
+  </header>
+
+  <!-- Search Results Dropdown -->
+  <div id="searchOverlay" class="search-results-overlay"></div>
+
+  <!-- Main Viewport -->
+  <main class="app-container">
+    <div class="graph-viewport" id="viewport">
+      <canvas id="graphCanvas"></canvas>
+
+      <!-- HUD & Legend -->
+      <div class="graph-hud">
+        <div class="legend-item"><span class="legend-dot" style="background: #8b5cf6;"></span> ana indeks (MOC)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #3b82f6;"></span> kavramlar (concepts)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #f97316;"></span> mimari kararlar (ADR)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #10b981;"></span> operasyon rehberleri (playbooks)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #ef4444;"></span> epizodik hafıza (episodes)</div>
+      </div>
+    </div>
+
+    <!-- Right Side Inspection Drawer -->
+    <aside id="sideDrawer" class="side-drawer">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <h2 id="drawerTitle">düğüm başlığı</h2>
+          <span id="drawerBadge" class="drawer-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa;">concept</span>
+        </div>
+        <button id="btnCloseDrawer" class="close-btn" title="kapat">✕</button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="metric-bar">
+          <div class="metric-card">
+            <div id="metricPR" class="metric-val">27.4%</div>
+            <div class="metric-lbl">pagerank</div>
+          </div>
+          <div class="metric-card">
+            <div id="metricIn" class="metric-val">6</div>
+            <div class="metric-lbl">gelen bağ</div>
+          </div>
+          <div class="metric-card">
+            <div id="metricOut" class="metric-val">3</div>
+            <div class="metric-lbl">giden bağ</div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <h3>özet</h3>
+          <p id="drawerSummary" style="font-size: 13px; color: var(--text-muted); line-height: 1.5;"></p>
+        </div>
+
+        <div class="content-section">
+          <h3>çift yönlü bağlantılar (backlinks)</h3>
+          <div id="drawerBacklinks" class="links-list"></div>
+        </div>
+
+        <div class="content-section">
+          <h3>giden bağlantılar (outlinks)</h3>
+          <div id="drawerOutlinks" class="links-list"></div>
+        </div>
+
+        <div class="content-section">
+          <h3>ham doküman içeriği</h3>
+          <div id="drawerContent" class="markdown-body"></div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
