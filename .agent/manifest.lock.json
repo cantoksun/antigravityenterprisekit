@@ -68,6 +68,7 @@
     "scripts/skill_loader.py": "28953f27e844d6c71083ffdc1784f65ce4cf757e24c84f4bcfd5caa9c31ec03e",
     "scripts/tests/test_agents_contract.py": "4cc919d142883c1ef7f4886b60a3d094b6daffcf8a6f51353a35ba37d9f77930",
     "scripts/tests/test_context_optimization.py": "3dff8a41aa48e6d3d0f9b11eee4b13cf6900559379f01ec83aaa0ad227300205",
+    "scripts/tests/test_ecosystem_parity.py": "9ecacc04058eb67100138520553f467f6ce19d286f06c52726063c748775b234",
     "scripts/tests/test_neural_os_contract.py": "a797f17e91f46b59784345ffbce23819beeda180354e1fcd18d64709e706d1f7",
     "scripts/tests/test_rules_contract.py": "58e34ed836c64a8daccbf70a7881d9973d3ff28fbf146bfaac775830a7d7515e",
     "scripts/tests/test_skills_contract.py": "162082def7afe28108c71230e0a21b3d37625f87eac737e3653cc6bb3f8abf68",
