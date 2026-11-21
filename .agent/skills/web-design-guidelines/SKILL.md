@@ -34,6 +34,9 @@ bu beceri; tüm ekran boyutlarında (mobil, tablet, masaüstü) arayüzün kusur
 ### 1. sıfır yatay taşma kuralı (zero horizontal scroll)
 - mobil cihazlardan 4k monitörlere kadar hiçbir ekranda sayfa gövdesinde istemsiz yatay kaydırma çubuğu (`overflow-x`) oluşamaz.
 - sabit piksel genişlikleri (`width: 800px`) yerine daima esnek ve yüzdelik genişlikler (`w-full`, `max-w-4xl`, `min-w-0`), esnek ızgaralar (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`) ve taşmayı önleyen kutu modelleri kullanılır.
+- **sözcük kırılma standardı (`break-all` yasağı vs `break-words [overflow-wrap:anywhere]`):**
+  - `break-all` (`word-break: break-all`) kullanımı kesinlikle yasaktır; normal kelimeleri bile hece bütünlüğü gözetmeksizin satır sonunda harf ortasından böler ve tipografi okunabilirliğini bozar.
+  - bunun yerine daima `break-words [overflow-wrap:anywhere]` (veya modern tailwind ile `break-anywhere`) kullanılır. bu yapı normal metinlerde kelime bütünlüğünü korur; yalnızca ve yalnızca tek başına satıra sığmayan devasa url, token veya hash gibi kesintisiz dizgileri güvenle kırar ve flex/grid ebeveynlerinde `min-content` taşmasını engeller.
 
 ### 2. etkileşimli pencereler: modal vs alt çekmece (drawer)
 - **mobilde (ekran < 768px):**

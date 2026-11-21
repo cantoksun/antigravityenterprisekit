@@ -62,3 +62,4 @@ modern arayüz tasarımında görsel gürültüyü (visual clutter) azaltmak ve 
 ## 🔤 16. kural: tipografi disiplini ve font sınırlaması
 - projede toplam font ailesi sayısı **maksimum 2-3 (en fazla 4-5)** ile sınırlıdır; sürekli keyfi font eklenmez.
 - hiyerarşi aynı fontun ağırlıkları (`font-normal`, `font-semibold`, `font-bold`) ve boyut ölçekleriyle kurulur.
+- **sözcük kırılma kuralı (`break-all` yasağı):** metinleri rastgele harf ortasından kesen `break-all` yasaktır; kelime bütünlüğünü koruyan ve yalnızca satıra sığmayan url/token gibi uzun dizgileri kıran `break-words [overflow-wrap:anywhere]` standardı zorunludur.

@@ -82,3 +82,7 @@ bu beceri; tailwind css v4+, css-first yapılandırma, tasarım belirteçleri (t
 ### 4. duyarlı tasarım ve konteyner sorguları
 - ekran boyutuna göre `sm:`, `md:`, `lg:` önekleri mantıksal bir akışla küçük ekrandan büyük ekrana (mobile-first) doğru kurgulanmalıdır.
 - bağımsız kart bileşenlerinde ekran yerine bileşen genişliğine duyarlı olmak için konteyner sorguları (`@container`, `@md:grid-cols-2`) tercih edilmelidir.
+
+### 5. tipografik sözcük kırılma standartları (break-all yasağı)
+- `break-all` (`word-break: break-all`): normal kelimeleri bile hece gözetmeksizin satır sonuna geldiğinde harf ortasından keser; kesinlikle **kullanılmaz**.
+- `break-words [overflow-wrap:anywhere]`: normal kelimeleri alt satıra tam taşır; sadece satıra sığmayan url, hash veya token'ları kırar. flex/grid kutularında `min-content` kaynaklı taşmaları önlemek için daima `break-words [overflow-wrap:anywhere]` (veya tailwind v4'te `break-anywhere`) kullanılır.
