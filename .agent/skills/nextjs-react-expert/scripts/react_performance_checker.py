@@ -18,6 +18,17 @@ class PerformanceChecker:
         self.warnings = []
         self.passed = []
 
+    def _iter_files(self, extensions: List[str]) -> List[Path]:
+        skip_dirs = {"node_modules", ".next", "dist", "build", ".git"}
+        matched = []
+        for ext in extensions:
+            clean_ext = ext.lstrip(".")
+            for path in self.project_path.rglob(f"*.{clean_ext}"):
+                if any(p in skip_dirs for p in path.parts):
+                    continue
+                matched.append(path)
+        return matched
+
     def check_waterfalls(self):
         """Check for sequential await patterns (Section 1)"""
         print("\n[*] Checking for waterfalls (sequential awaits)...")
@@ -229,6 +240,7 @@ class PerformanceChecker:
         self.check_image_optimization()
 
         self.generate_report()
+        return len(self.issues) == 0
 
 
 def main():

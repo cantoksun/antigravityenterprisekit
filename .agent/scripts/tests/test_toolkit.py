@@ -203,7 +203,8 @@ eval(user_input)
                 self.assertTrue(workflow["artifactOutputs"])
 
     def test_orchestration_guidance_is_antigravity_first_and_bounded(self):
-        orchestrator = (TOOLKIT / "agent/orchestrator.md").read_text("utf-8")
+        orch_path = (TOOLKIT / "agents/orchestrator.md") if (TOOLKIT / "agents").is_dir() else (TOOLKIT / "agent/orchestrator.md")
+        orchestrator = orch_path.read_text("utf-8")
         parallel = (TOOLKIT / "skills/parallel-agents/SKILL.md").read_text("utf-8")
         combined = orchestrator + "\n" + parallel
 

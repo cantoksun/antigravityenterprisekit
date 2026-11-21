@@ -120,20 +120,22 @@ def build_manifest(root: Path) -> dict[str, Any]:
             "scripts": sorted(_relative(root, item) for item in path.parent.glob("scripts/*.py")),
         }
 
+    agents_dir = (root / "agents") if (root / "agents").is_dir() else (root / "agent")
     agents: dict[str, dict[str, Any]] = {}
-    for path in sorted((root / "agent").glob("*.md")):
-        data = load_frontmatter(path)
-        dependencies: dict[str, str] = {}
-        for skill_name in normalize_list(data.get("skills")):
-            skill_version = str(skills.get(skill_name, {}).get("version", "0.0.0"))
-            dependencies[skill_name] = compatible_range(skill_version) if is_semver(skill_version) else skill_version
-        agents[path.stem] = {
-            "path": _relative(root, path),
-            "version": str(data.get("version", "")),
-            "model": str(data.get("model", "inherit")),
-            "tools": normalize_list(data.get("tools")),
-            "requires": {"skills": dependencies},
-        }
+    if agents_dir.is_dir():
+        for path in sorted(agents_dir.glob("*.md")):
+            data = load_frontmatter(path)
+            dependencies: dict[str, str] = {}
+            for skill_name in normalize_list(data.get("skills")):
+                skill_version = str(skills.get(skill_name, {}).get("version", "0.0.0"))
+                dependencies[skill_name] = compatible_range(skill_version) if is_semver(skill_version) else skill_version
+            agents[path.stem] = {
+                "path": _relative(root, path),
+                "version": str(data.get("version", "")),
+                "model": str(data.get("model", "inherit")),
+                "tools": normalize_list(data.get("tools")),
+                "requires": {"skills": dependencies},
+            }
 
     workflows: dict[str, dict[str, Any]] = {}
     for path in sorted((root / "workflows").glob("*.md")):
@@ -203,7 +205,7 @@ def component_files(root: Path) -> list[Path]:
         path = root / name
         if path.is_file():
             files.append(path)
-    for directory in ("agent", "skills", "workflows", "rules", "memory", "hooks", "schemas", "scripts"):
+    for directory in ("agent", "agents", "skills", "workflows", "rules", "memory", "hooks", "schemas", "scripts"):
         base = root / directory
         if not base.is_dir():
             continue

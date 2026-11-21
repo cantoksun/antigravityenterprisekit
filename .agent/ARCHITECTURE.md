@@ -13,7 +13,7 @@ kurumsal yapay zeka ajan kiti modüler, rol tabanlı ve yüksek disiplinli bile�
 | **Total Agents** | 20 |
 | **Total Skills** | 97 |
 | **Total Workflows** | 14 |
-| **Total Skill Scripts** | 17 |
+| **Total Skill Scripts** | 19 |
 
 - **20 uzman ajan** - kurumsal rollere ve 45 katı kurala göre özelleştirilmiş yapay zeka profilleri
 - **97 beceri (skill)** - alana özel teknik bilgi, rehber ve denetim modülleri

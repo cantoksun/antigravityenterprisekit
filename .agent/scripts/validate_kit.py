@@ -135,8 +135,9 @@ def validate_frontmatter(
     skills: dict[str, dict[str, object]] = {}
     workflows: dict[str, dict[str, object]] = {}
     rules: dict[str, dict[str, object]] = {}
+    agents_dir = (root / "agents") if (root / "agents").is_dir() else (root / "agent")
     groups = (
-        ("agent", sorted((root / "agent").glob("*.md"))),
+        ("agent", sorted(agents_dir.glob("*.md"))),
         ("skill", sorted((root / "skills").glob("*/SKILL.md"))),
         ("workflow", sorted((root / "workflows").glob("*.md"))),
         ("rule", sorted((root / "rules").glob("*.md"))),
@@ -330,8 +331,9 @@ def validate_architecture_counts(root: Path, findings: list[Finding]) -> None:
         add(findings, "error", "architecture.missing", Path("ARCHITECTURE.md"), "ARCHITECTURE.md is missing")
         return
     text = path.read_text("utf-8", errors="replace")
+    agents_dir = (root / "agents") if (root / "agents").is_dir() else (root / "agent")
     actual = {
-        "agents": len(list((root / "agent").glob("*.md"))),
+        "agents": len(list(agents_dir.glob("*.md"))),
         "skills": len(list((root / "skills").glob("*/SKILL.md"))),
         "workflows": len(list((root / "workflows").glob("*.md"))),
         "skill_scripts": len(list((root / "skills").glob("*/scripts/*.py"))),

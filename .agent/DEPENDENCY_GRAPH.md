@@ -189,6 +189,7 @@ flowchart LR
   A_backend_specialist --> S_ai_engineer
   A_backend_specialist --> S_async_python_patterns
   A_backend_specialist --> S_api_mocking
+  A_backend_specialist --> S_memory_system
   A_code_archaeologist --> S_clean_code
   A_code_archaeologist --> S_architecture
   A_code_archaeologist --> S_code_review_checklist
@@ -249,6 +250,7 @@ flowchart LR
   A_orchestrator --> S_lint_and_validate
   A_orchestrator --> S_powershell_windows
   A_orchestrator --> S_bash_linux
+  A_orchestrator --> S_memory_system
   A_penetration_tester --> S_clean_code
   A_penetration_tester --> S_vulnerability_scanner
   A_penetration_tester --> S_red_team_tactics
@@ -280,6 +282,7 @@ flowchart LR
   A_project_planner --> S_c4_component
   A_project_planner --> S_c4_code
   A_project_planner --> S_architecture_decision_records
+  A_project_planner --> S_memory_system
   A_qa_automation_engineer --> S_webapp_testing
   A_qa_automation_engineer --> S_testing_patterns
   A_qa_automation_engineer --> S_web_design_guidelines

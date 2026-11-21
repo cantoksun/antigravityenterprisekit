@@ -3,7 +3,7 @@
   "agents": {
     "backend-specialist": {
       "model": "inherit",
-      "path": "agent/backend-specialist.md",
+      "path": "agents/backend-specialist.md",
       "requires": {
         "skills": {
           "ai-engineer": "^1.0.0",
@@ -18,6 +18,7 @@
           "golang-pro": "^1.0.0",
           "lint-and-validate": "^2.0.0",
           "mcp-builder": "^2.0.0",
+          "memory-system": "^2.0.0",
           "nodejs-best-practices": "^2.0.0",
           "powershell-windows": "^2.0.0",
           "python-patterns": "^2.0.0",
@@ -36,7 +37,7 @@
     },
     "code-archaeologist": {
       "model": "inherit",
-      "path": "agent/code-archaeologist.md",
+      "path": "agents/code-archaeologist.md",
       "requires": {
         "skills": {
           "anti-reversing-techniques": "^1.0.0",
@@ -60,7 +61,7 @@
     },
     "database-architect": {
       "model": "inherit",
-      "path": "agent/database-architect.md",
+      "path": "agents/database-architect.md",
       "requires": {
         "skills": {
           "api-patterns": "^2.0.0",
@@ -83,7 +84,7 @@
     },
     "debugger": {
       "model": "inherit",
-      "path": "agent/debugger.md",
+      "path": "agents/debugger.md",
       "requires": {
         "skills": {
           "clean-code": "^1.0.0",
@@ -103,7 +104,7 @@
     },
     "devops-engineer": {
       "model": "inherit",
-      "path": "agent/devops-engineer.md",
+      "path": "agents/devops-engineer.md",
       "requires": {
         "skills": {
           "bash-linux": "^2.0.0",
@@ -132,7 +133,7 @@
     },
     "documentation-writer": {
       "model": "inherit",
-      "path": "agent/documentation-writer.md",
+      "path": "agents/documentation-writer.md",
       "requires": {
         "skills": {
           "clean-code": "^1.0.0",
@@ -151,7 +152,7 @@
     },
     "explorer-agent": {
       "model": "inherit",
-      "path": "agent/explorer-agent.md",
+      "path": "agents/explorer-agent.md",
       "requires": {
         "skills": {
           "architecture": "^2.0.0",
@@ -170,7 +171,7 @@
     },
     "frontend-specialist": {
       "model": "inherit",
-      "path": "agent/frontend-specialist.md",
+      "path": "agents/frontend-specialist.md",
       "requires": {
         "skills": {
           "api-mocking": "^1.0.0",
@@ -196,7 +197,7 @@
     },
     "game-developer": {
       "model": "inherit",
-      "path": "agent/game-developer.md",
+      "path": "agents/game-developer.md",
       "requires": {
         "skills": {
           "clean-code": "^1.0.0",
@@ -216,7 +217,7 @@
     },
     "mobile-developer": {
       "model": "inherit",
-      "path": "agent/mobile-developer.md",
+      "path": "agents/mobile-developer.md",
       "requires": {
         "skills": {
           "clean-code": "^1.0.0",
@@ -237,7 +238,7 @@
     },
     "orchestrator": {
       "model": "inherit",
-      "path": "agent/orchestrator.md",
+      "path": "agents/orchestrator.md",
       "requires": {
         "skills": {
           "architecture": "^2.0.0",
@@ -246,6 +247,7 @@
           "brainstorming": "^1.0.0",
           "clean-code": "^1.0.0",
           "lint-and-validate": "^2.0.0",
+          "memory-system": "^2.0.0",
           "parallel-agents": "^1.0.0",
           "plan-writing": "^2.0.0",
           "powershell-windows": "^2.0.0"
@@ -264,7 +266,7 @@
     },
     "penetration-tester": {
       "model": "inherit",
-      "path": "agent/penetration-tester.md",
+      "path": "agents/penetration-tester.md",
       "requires": {
         "skills": {
           "anti-reversing-techniques": "^1.0.0",
@@ -291,7 +293,7 @@
     },
     "performance-optimizer": {
       "model": "inherit",
-      "path": "agent/performance-optimizer.md",
+      "path": "agents/performance-optimizer.md",
       "requires": {
         "skills": {
           "bazel-build-optimization": "^1.0.0",
@@ -313,7 +315,7 @@
     },
     "product-manager": {
       "model": "inherit",
-      "path": "agent/product-manager.md",
+      "path": "agents/product-manager.md",
       "requires": {
         "skills": {
           "brainstorming": "^1.0.0",
@@ -331,7 +333,7 @@
     },
     "product-owner": {
       "model": "inherit",
-      "path": "agent/product-owner.md",
+      "path": "agents/product-owner.md",
       "requires": {
         "skills": {
           "brainstorming": "^1.0.0",
@@ -349,7 +351,7 @@
     },
     "project-planner": {
       "model": "inherit",
-      "path": "agent/project-planner.md",
+      "path": "agents/project-planner.md",
       "requires": {
         "skills": {
           "app-builder": "^1.0.0",
@@ -361,6 +363,7 @@
           "c4-container": "^1.0.0",
           "c4-context": "^1.0.0",
           "clean-code": "^1.0.0",
+          "memory-system": "^2.0.0",
           "plan-writing": "^2.0.0"
         }
       },
@@ -376,7 +379,7 @@
     },
     "qa-automation-engineer": {
       "model": "inherit",
-      "path": "agent/qa-automation-engineer.md",
+      "path": "agents/qa-automation-engineer.md",
       "requires": {
         "skills": {
           "api-mocking": "^1.0.0",
@@ -400,7 +403,7 @@
     },
     "security-auditor": {
       "model": "inherit",
-      "path": "agent/security-auditor.md",
+      "path": "agents/security-auditor.md",
       "requires": {
         "skills": {
           "api-patterns": "^2.0.0",
@@ -428,7 +431,7 @@
     },
     "seo-specialist": {
       "model": "inherit",
-      "path": "agent/seo-specialist.md",
+      "path": "agents/seo-specialist.md",
       "requires": {
         "skills": {
           "clean-code": "^1.0.0",
@@ -448,7 +451,7 @@
     },
     "test-engineer": {
       "model": "inherit",
-      "path": "agent/test-engineer.md",
+      "path": "agents/test-engineer.md",
       "requires": {
         "skills": {
           "clean-code": "^1.0.0",
@@ -1254,12 +1257,14 @@
       "allowedTools": [
         "Read",
         "Write",
+        "Edit",
         "Grep",
-        "Glob"
+        "Glob",
+        "Bash"
       ],
       "path": "skills/memory-system/SKILL.md",
       "scripts": [],
-      "version": "1.0.0"
+      "version": "2.0.0"
     },
     "mobile-design": {
       "allowedTools": [
@@ -1353,6 +1358,7 @@
       ],
       "path": "skills/performance-profiling/SKILL.md",
       "scripts": [
+        "skills/performance-profiling/scripts/bundle_analyzer.py",
         "skills/performance-profiling/scripts/lighthouse_audit.py"
       ],
       "version": "2.0.0"
@@ -1717,6 +1723,7 @@
       ],
       "path": "skills/vulnerability-scanner/SKILL.md",
       "scripts": [
+        "skills/vulnerability-scanner/scripts/dependency_analyzer.py",
         "skills/vulnerability-scanner/scripts/security_scan.py"
       ],
       "version": "2.1.0"

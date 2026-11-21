@@ -51,6 +51,10 @@ def is_page_file(file_path: Path) -> bool:
     # Skip config/utility files
     if any(skip in name for skip in SKIP_FILES):
         return False
+
+    # Skip Next.js layouts, templates, and error boundaries
+    if any(skip in name for skip in ('layout', 'template', 'loading', 'error', 'not-found')):
+        return False
     
     # Skip test files
     if name.endswith('.test') or name.endswith('.spec'):
@@ -85,8 +89,16 @@ def find_web_pages(project_path: Path) -> list:
     files = []
     for pattern in patterns:
         for f in project_path.glob(pattern):
-            # Skip excluded directories
-            if any(skip in f.parts for skip in SKIP_DIRS):
+            # Skip excluded directories, but allow route paths inside app/pages (like app/docs/...)
+            is_app_route = any(p.lower() in ('app', 'pages', 'routes') for p in f.parts)
+            should_skip = False
+            for skip in SKIP_DIRS:
+                if skip in f.parts:
+                    if skip in ('docs', 'documentation') and is_app_route:
+                        continue
+                    should_skip = True
+                    break
+            if should_skip:
                 continue
             
             # Check if it's likely a page
@@ -96,7 +108,7 @@ def find_web_pages(project_path: Path) -> list:
     return files[:30]  # Limit to 30 pages
 
 
-def check_page(file_path: Path) -> dict:
+def check_page(file_path: Path, project_path: Path = None) -> dict:
     """Check a single web page for GEO elements."""
     try:
         content = file_path.read_text(encoding='utf-8', errors='ignore')
@@ -119,9 +131,24 @@ def check_page(file_path: Path) -> dict:
     else:
         issues.append("No JSON-LD structured data (AI engines prefer structured content)")
     
+    # Follow imported local MDX/MD files if page is a wrapper
+    if file_path.suffix.lower() in ('.tsx', '.jsx', '.js', '.ts'):
+        import_matches = re.findall(r'import\s+(\w+)\s+from\s+["\'](\./[^"\']+\.mdx?)["\']', content)
+        primary_match = None
+        for name, imp in import_matches:
+            if '.en.' in imp or primary_match is None:
+                primary_match = imp
+        if primary_match:
+            imp_path = file_path.parent / primary_match
+            if imp_path.is_file():
+                try:
+                    content += "\n" + imp_path.read_text(encoding='utf-8', errors='ignore')
+                except Exception:
+                    pass
+
     # 2. Heading Structure
-    h1_count = len(re.findall(r'<h1[^>]*>', content, re.I))
-    h2_count = len(re.findall(r'<h2[^>]*>', content, re.I))
+    h1_count = len(re.findall(r'<h1[^>]*>|^#\s+[^\n]+', content, re.I | re.M))
+    h2_count = len(re.findall(r'<h2[^>]*>|^##\s+[^\n]+', content, re.I | re.M))
     
     if h1_count == 1:
         passed.append("Single H1 heading (clear topic)")
@@ -135,12 +162,14 @@ def check_page(file_path: Path) -> dict:
     else:
         issues.append("Add more H2 subheadings for scannable content")
     
+    is_doc = any(p in str(file_path).lower() for p in ('docs', 'documentation', '.mdx'))
+    
     # 3. Author Attribution (E-E-A-T signal)
     author_patterns = ['author', 'byline', 'written-by', 'contributor', 'rel="author"']
     has_author = any(p in content.lower() for p in author_patterns)
     if has_author:
         passed.append("Author attribution found")
-    else:
+    elif not is_doc:
         issues.append("No author info (AI prefers attributed content)")
     
     # 4. Publication Date (Freshness signal)
@@ -148,7 +177,7 @@ def check_page(file_path: Path) -> dict:
     has_date = any(re.search(p, content, re.I) for p in date_patterns)
     if has_date:
         passed.append("Publication date found")
-    else:
+    elif not is_doc:
         issues.append("No publication date (freshness matters for AI)")
     
     # 5. FAQ Section (Highly citable)
