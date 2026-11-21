@@ -148,6 +148,20 @@
         ctx.stroke();
         break;
 
+      case "episode":
+      case "episodes": // Clock / History session journal
+        ctx.beginPath();
+        ctx.arc(x, y, s * 0.8, 0, Math.PI * 2);
+        ctx.stroke();
+        // Clock hands
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x, y - s * 0.45);
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + s * 0.35, y);
+        ctx.stroke();
+        break;
+
       default: // Minimal diamond / Node dot
         ctx.beginPath();
         ctx.moveTo(x, y - s * 0.7);
@@ -227,6 +241,7 @@
       skill: 0,
       concept: 0,
       decision: 0,
+      episode: 0,
       moc: 0
     };
     nodes.forEach(n => {
@@ -236,6 +251,7 @@
       else if (t.includes("skill")) typeCounts.skill++;
       else if (t.includes("concept")) typeCounts.concept++;
       else if (t.includes("decision")) typeCounts.decision++;
+      else if (t.includes("episode")) typeCounts.episode++;
       else if (t.includes("moc") || t.includes("root")) typeCounts.moc++;
     });
 
@@ -246,7 +262,8 @@
       skill: `beceriler (${typeCounts.skill})`,
       concept: `kavramlar (${typeCounts.concept})`,
       decision: `kararlar (${typeCounts.decision})`,
-      moc: `ana indeks (${typeCounts.moc})`
+      episode: `oturumlar (${typeCounts.episode})`,
+      moc: `kök dizin (${typeCounts.moc})`
     };
 
     document.querySelectorAll(".filter-btn").forEach(btn => {
