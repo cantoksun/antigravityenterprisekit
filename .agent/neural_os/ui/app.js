@@ -123,7 +123,7 @@
     }
   }
 
-  // Force-directed Physics Step
+  // Force-directed Physics Step (Adaptive Damping & Pin Support)
   function simulatePhysics() {
     const width = viewport.clientWidth;
     const height = viewport.clientHeight;
@@ -140,14 +140,12 @@
         const distSq = dx * dx + dy * dy + 1;
         const dist = Math.sqrt(distSq);
 
-        if (dist < 450) {
-          const force = REPULSION / distSq;
+        if (dist < 320) {
+          const force = (REPULSION * 0.8) / distSq;
           const fx = (dx / dist) * force;
           const fy = (dy / dist) * force;
-          na.vx -= fx;
-          na.vy -= fy;
-          nb.vx += fx;
-          nb.vy += fy;
+          if (!na.pinned) { na.vx -= fx; na.vy -= fy; }
+          if (!nb.pinned) { nb.vx += fx; nb.vy += fy; }
         }
       }
     }
@@ -162,21 +160,23 @@
       const fx = (dx / dist) * force;
       const fy = (dy / dist) * force;
 
-      link.source.vx += fx;
-      link.source.vy += fy;
-      link.target.vx -= fx;
-      link.target.vy -= fy;
+      if (!link.source.pinned) { link.source.vx += fx; link.source.vy += fy; }
+      if (!link.target.pinned) { link.target.vx -= fx; link.target.vy -= fy; }
     }
 
     // 3. Gravity towards center & velocity damping
     for (const node of nodes) {
-      if (node === draggedNode) continue;
+      if (node === draggedNode || node.pinned) continue;
 
       node.vx += (cx - node.x) * CENTER_GRAVITY;
       node.vy += (cy - node.y) * CENTER_GRAVITY;
 
-      node.vx *= DAMPING;
-      node.vy *= DAMPING;
+      node.vx *= 0.82; // Smoother settling
+      node.vy *= 0.82;
+
+      // Velocity threshold: if movement is tiny, lock into rest
+      if (Math.abs(node.vx) < 0.04) node.vx = 0;
+      if (Math.abs(node.vy) < 0.04) node.vy = 0;
 
       node.x += node.vx;
       node.y += node.vy;
@@ -344,16 +344,21 @@
       ctx.textBaseline = "middle";
       ctx.fillText(icon, node.x, node.y);
 
-      // Node label (Crisp, high-contrast white text)
-      ctx.font = `${isSelected ? "700 " : "500 "}11.5px -apple-system, BlinkMacSystemFont, sans-serif`;
-      ctx.fillStyle = isSelected ? "#ffffff" : "#f1f5f9";
-      ctx.textBaseline = "alphabetic";
-      ctx.textAlign = "center";
-      // Shadow behind text for readability over links
-      ctx.shadowColor = "rgba(0,0,0,0.95)";
-      ctx.shadowBlur = 4;
-      ctx.fillText(node.title.length > 22 ? node.title.slice(0, 20) + ".." : node.title, node.x, node.y + node.radius + 15);
-      ctx.shadowBlur = 0;
+      // Node label (Obsidian-Grade Zoom-Dependent Culling)
+      // If zoomed out, only show hub / high authority or focused nodes
+      const shouldShowLabel = camera.zoom > 1.1 || isHub || isSelected || isHovered || (camera.zoom > 0.7 && (node.type === "agent" || node.type === "MOC" || node.type === "rule"));
+      
+      if (shouldShowLabel) {
+        ctx.font = `${isSelected ? "700 " : "500 "}11.5px -apple-system, BlinkMacSystemFont, sans-serif`;
+        ctx.fillStyle = isSelected ? "#ffffff" : (isHub ? "#f8fafc" : "#cbd5e1");
+        ctx.textBaseline = "alphabetic";
+        ctx.textAlign = "center";
+        // Shadow behind text for readability over links
+        ctx.shadowColor = "rgba(0,0,0,0.95)";
+        ctx.shadowBlur = 4;
+        ctx.fillText(node.title.length > 22 ? node.title.slice(0, 20) + ".." : node.title, node.x, node.y + node.radius + 15);
+        ctx.shadowBlur = 0;
+      }
       ctx.globalAlpha = 1.0;
     }
 
@@ -580,11 +585,14 @@
   }
 
   // Pointer & Drag Handlers
+  let nodeDragMoved = false;
+
   canvas.addEventListener("mousedown", (e) => {
     const rect = canvas.getBoundingClientRect();
     const world = toWorldCoords(e.clientX - rect.left, e.clientY - rect.top);
     const hitNode = findNodeAt(world.x, world.y);
 
+    nodeDragMoved = false;
     if (hitNode) {
       draggedNode = hitNode;
     } else {
@@ -601,10 +609,12 @@
     canvas.style.cursor = hoveredNode ? "pointer" : (isDragging ? "grabbing" : "grab");
 
     if (draggedNode) {
+      nodeDragMoved = true;
       draggedNode.x = world.x;
       draggedNode.y = world.y;
       draggedNode.vx = 0;
       draggedNode.vy = 0;
+      draggedNode.pinned = true; // Obsidian-Style Pinning on drag!
     } else if (isDragging) {
       camera.x = e.clientX - dragStart.x;
       camera.y = e.clientY - dragStart.y;
@@ -613,7 +623,9 @@
 
   window.addEventListener("mouseup", (e) => {
     if (!isDragging && draggedNode) {
-      selectNode(draggedNode);
+      if (!nodeDragMoved) {
+        selectNode(draggedNode);
+      }
     }
     isDragging = false;
     draggedNode = null;
