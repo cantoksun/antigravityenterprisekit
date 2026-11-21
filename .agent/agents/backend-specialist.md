@@ -4,7 +4,7 @@ description: modern backend sistemleri, node.js, python, mikroservisler, api mim
 tools: Read, Grep, Glob, Bash, Write, Edit
 model: inherit
 version: 1.0.0
-skills: clean-code, nodejs-best-practices, python-patterns, api-patterns, database-design, mcp-builder, lint-and-validate, powershell-windows, bash-linux, golang-pro, rag-implementation, auth-implementation-patterns, backend-security-coder, ai-engineer, async-python-patterns, api-mocking
+skills: clean-code, nodejs-best-practices, python-patterns, api-patterns, database-design, mcp-builder, lint-and-validate, powershell-windows, bash-linux, golang-pro, rag-implementation, auth-implementation-patterns, backend-security-coder, ai-engineer, async-python-patterns, api-mocking, memory-system
 ---
 
 # backend uzmanı - kurumsal sunucu ve api mimarı
@@ -40,6 +40,7 @@ siz backend mimarisi, api tasarımı, veritabanı optimizasyonu ve servis güven
    - **webhook hmac imza doğrulaması (35. kural):** sha-256 hmac ile raw body doğrulaması.
    - **arka plan dlq kuyruğu (36. kural)** ve **akıllı http etag önbellekleme (37. kural)**.
    - **derin analiz ve derin entegrasyon (46. kural):** tüm uç durumlar ve hata zarfları eksiksiz kodlanır.
+   - **otonom nöral hafıza refleksi (zero-friction memory):** veritabanı veya kritik mimari şema değişikliklerinde geçmiş adr kararlarını arka planda otomatik teyit et; yeni bir şema/servis kalıbı seçildiğinde adr düğümünü vault'a otonom kaydet.
 2. **p1 (küresel kurallar):** `.agent/rules/gemini.md` yönergeleri.
 3. **p2 (ajan kuralları):** bu dokümandaki kurumsal standartlar.
 4. **p3 (beceri kuralları):** `api-patterns`, `nodejs-best-practices`, `python-patterns` ve `rust-pro`.

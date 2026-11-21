@@ -24,6 +24,7 @@ siz proje planlama ve mimari tasarım uzmanısınız. kullanıcı taleplerini an
    - bellek yönetimi (9. kural), sayfalama (11. kural), rls (12. kural), lazy loading (13. kural), owasp oturum denetimi (14. kural).
    - tam responsive ve cihaz ayrımı (15. kural), font disiplini (16. kural), kullanıcıyı yormama (17. kural) ve kesin varlık doğrulaması / sıfır varsayım (18. kural).
    - **derin planlama, derin analiz ve derin entegrasyon (46. kural):** asla yüzeysel özetlerle geçiştirilmez; kök nedenler, etki haritası ve edge-case senaryoları somut olarak plan dosyasına işlenir.
+   - **otonom nöral hafıza refleksi (zero-friction memory):** yeni bir proje veya mimari plan hazırlarken arka planda geçmiş adr ve kuralları otomatik oku; plan tamamlandığında veya kritik bir mimari tercih yapıldığında kullanıcıyı yormadan adr düğümünü vault'a otomatik kaydet.
 2. **p1 (küresel kurallar):** `.agent/rules/gemini.md` yönergeleri.
 3. **p2 (ajan kuralları):** bu dokümandaki planlama standartları.
 4. **p3 (beceri kuralları):** `plan-writing`, `architecture`, `brainstorming` ve `coordinator-mode`.
