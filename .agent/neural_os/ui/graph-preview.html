@@ -6,30 +6,34 @@
   <title>antigravity enterprise neural-os</title>
   <style>
 :root {
-  --bg-primary: #090d16;
-  --bg-secondary: #0f172a;
-  --bg-panel: rgba(15, 23, 42, 0.78);
-  --bg-card: rgba(30, 41, 59, 0.65);
-  --border-color: rgba(148, 163, 184, 0.14);
-  --border-active: rgba(99, 102, 241, 0.45);
+  /* Katı Monokrom Disiplin: Sadece Siyah ve Koyu Gri */
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-panel: rgba(14, 14, 14, 0.92);
+  --bg-card: rgba(22, 22, 22, 0.85);
+  --border-color: rgba(255, 255, 255, 0.10);
+  --border-active: rgba(255, 255, 255, 0.35);
   
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
+  --text-main: #f5f5f5;
+  --text-muted: #a3a3a3;
+  --text-dim: #737373;
   
-  --accent-purple: #8b5cf6;
-  --accent-blue: #3b82f6;
-  --accent-cyan: #06b6d4;
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
-  --accent-orange: #f97316;
-  --accent-rose: #ef4444;
+  /* Gri Ton Skalası (İki Renk Kuralı: Siyah & Gri Tonları) */
+  --gray-100: #e5e5e5;
+  --gray-200: #d4d4d4;
+  --gray-300: #a3a3a3;
+  --gray-400: #737373;
+  --gray-500: #525252;
+  --gray-600: #404040;
+  --gray-700: #262626;
+  --gray-800: #171717;
+  --gray-900: #0a0a0a;
 
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --radius-lg: 16px;
-  --radius-md: 10px;
-  --radius-sm: 6px;
-  --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
+  --transition: all 0.20s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -51,7 +55,7 @@ body {
 
 /* Header */
 .top-header {
-  height: 56px;
+  height: 54px;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
   display: flex;
@@ -68,21 +72,19 @@ body {
 }
 
 .brand-logo {
-  font-size: 20px;
-  background: linear-gradient(135deg, #38bdf8, #818cf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 17px;
+  color: #ffffff;
   font-weight: 700;
   letter-spacing: -0.5px;
 }
 
 .brand-badge {
-  background: rgba(99, 102, 241, 0.16);
-  border: 1px solid rgba(99, 102, 241, 0.35);
-  color: #a5b4fc;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--text-muted);
   font-size: 11px;
   padding: 2px 8px;
-  border-radius: 12px;
+  border-radius: 4px;
   font-weight: 500;
 }
 
@@ -90,7 +92,7 @@ body {
   display: flex;
   align-items: center;
   position: relative;
-  width: 380px;
+  width: 360px;
 }
 
 .search-input {
@@ -106,15 +108,15 @@ body {
 }
 
 .search-input:focus {
-  border-color: #818cf8;
-  box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
 }
 
 .search-icon {
   position: absolute;
   left: 12px;
   color: var(--text-dim);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .header-actions {
@@ -137,9 +139,9 @@ body {
 }
 
 .btn-icon:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.10);
   color: var(--text-main);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Layout */
@@ -154,7 +156,7 @@ body {
 .graph-viewport {
   flex: 1;
   position: relative;
-  background: radial-gradient(circle at center, #111827 0%, #090d16 100%);
+  background: #000000;
   cursor: grab;
 }
 
@@ -185,7 +187,7 @@ body {
 
 .filter-btn {
   background: none;
-  border: none;
+  border: 1px solid transparent;
   color: var(--text-muted);
   font-size: 11px;
   font-weight: 500;
@@ -201,9 +203,9 @@ body {
 }
 
 .filter-btn.active {
-  background: rgba(99, 102, 241, 0.25);
-  color: #a5b4fc;
-  border: 1px solid rgba(99, 102, 241, 0.4);
+  background: #262626;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Radar Minimap */
@@ -220,7 +222,6 @@ body {
   flex-direction: column;
   gap: 6px;
   z-index: 20;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .radar-header {
@@ -228,19 +229,16 @@ body {
   text-transform: uppercase;
   color: var(--text-dim);
   letter-spacing: 0.5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 #radarCanvas {
-  background: rgba(10, 15, 30, 0.85);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: #050505;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
   display: block;
 }
 
-/* Floating Graph Controls */
+/* Floating HUD Controls */
 .graph-hud {
   position: absolute;
   bottom: 20px;
@@ -268,15 +266,7 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-}
-
-.controls-cluster {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  gap: 6px;
-  z-index: 20;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Side Inspection Panel */
@@ -288,7 +278,7 @@ body {
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 30;
 }
 
@@ -307,7 +297,7 @@ body {
 .drawer-title-group h2 {
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-main);
+  color: #ffffff;
   line-height: 1.3;
 }
 
@@ -319,6 +309,9 @@ body {
   font-weight: 600;
   padding: 2px 6px;
   border-radius: 4px;
+  background: #1f1f1f;
+  color: #d4d4d4;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .close-btn {
@@ -333,8 +326,8 @@ body {
 }
 
 .close-btn:hover {
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.10);
 }
 
 .drawer-body {
@@ -363,7 +356,7 @@ body {
 .metric-val {
   font-size: 15px;
   font-weight: 700;
-  color: #38bdf8;
+  color: #ffffff;
 }
 
 .metric-lbl {
@@ -386,7 +379,7 @@ body {
   line-height: 1.6;
   color: var(--text-muted);
   white-space: pre-wrap;
-  background: rgba(15, 23, 42, 0.5);
+  background: #0a0a0a;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 14px;
@@ -400,11 +393,11 @@ body {
 }
 
 .link-pill {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: #93c5fd;
+  background: #171717;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e5e5e5;
   padding: 4px 10px;
-  border-radius: 12px;
+  border-radius: 4px;
   font-size: 11px;
   cursor: pointer;
   text-decoration: none;
@@ -412,28 +405,28 @@ body {
 }
 
 .link-pill:hover {
-  background: rgba(59, 130, 246, 0.2);
-  border-color: #60a5fa;
-  color: #fff;
+  background: #262626;
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
 }
 
 /* Search Dropdown Modal */
 .search-results-overlay {
   position: absolute;
-  top: 60px;
+  top: 58px;
   left: 50%;
   transform: translateX(-50%);
   width: 520px;
   max-height: 400px;
-  background: var(--bg-panel);
+  background: rgba(14, 14, 14, 0.95);
   backdrop-filter: blur(20px);
   border: 1px solid var(--border-active);
   border-radius: var(--radius-lg);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
   overflow-y: auto;
   display: none;
   z-index: 60;
-  padding: 10px;
+  padding: 8px;
 }
 
 .search-results-overlay.open {
@@ -448,23 +441,25 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  border: 1px solid transparent;
 }
 
 .search-item:hover {
-  background: rgba(99, 102, 241, 0.15);
+  background: #1c1c1c;
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .search-item-title {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-main);
+  color: #ffffff;
   display: flex;
   justify-content: space-between;
 }
 
 .search-item-score {
   font-size: 11px;
-  color: #38bdf8;
+  color: #a3a3a3;
 }
 
 .search-item-snippet {
@@ -473,7 +468,7 @@ body {
   line-height: 1.4;
 }
 
-/* Responsive UX (Rule 15) */
+/* Responsive UX */
 @media (max-width: 768px) {
   .search-container {
     width: 200px;
@@ -485,7 +480,7 @@ body {
     top: auto;
     height: 75vh;
     border-top: 1px solid var(--border-color);
-    border-radius: 20px 20px 0 0;
+    border-radius: 16px 16px 0 0;
     transform: translateY(100%);
   }
   .side-drawer.open {
@@ -543,13 +538,13 @@ body {
         <canvas id="radarCanvas" width="130" height="90"></canvas>
       </div>
 
-      <!-- HUD & Legend -->
+      <!-- HUD & Legend (Strict Monochrome) -->
       <div class="graph-hud">
-        <div class="legend-item"><span class="legend-dot" style="background: #8b5cf6;"></span> ana indeks (MOC)</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #3b82f6;"></span> kavramlar (concepts)</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #f97316;"></span> mimari kararlar (ADR)</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #10b981;"></span> operasyon rehberleri (playbooks)</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #ef4444;"></span> epizodik hafıza (episodes)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #262626;"></span> ana indeks (MOC)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #1c1c1c;"></span> kavramlar (concepts)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #222222;"></span> mimari kararlar (ADR)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #1a1a1a;"></span> operasyon rehberleri (playbooks)</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #141414;"></span> epizodik hafıza (episodes)</div>
       </div>
     </div>
 
@@ -605,7 +600,7 @@ body {
   <script>
 
   // Embedded Offline Knowledge Base
-  window.__EMBEDDED_GRAPH_DATA__ = {"total_nodes": 8, "total_edges": 23, "nodes": [{"id": "index", "title": "antigravity nöral bilgi ağı ve otonom ikinci beyin", "type": "MOC", "tags": ["moc", "root", "neural-vault"], "path": "INDEX.md", "summary": "bu vault, harici hiçbir üçüncü parti uygulamaya ihtiyaç duymaksızın, antigravity ai-os kitine özgü yerel web zihin grafiği (`http://127.0.0.1:8990`), çift yönlü bağlantılı (`[[wikilink]]`) ve 20 yapay zeka ajanının ortak zekasıyla yaşayan o...", "in_degree": 7, "out_degree": 5, "centrality": 1.7143, "pagerank": 27.135, "color": "#64748b", "val": 54}, {"id": "architecture-overview", "title": "kurumsal sistem mimarisi ve bileşen haritası", "type": "concept", "tags": ["architecture", "c4-model", "enterprise"], "path": "concepts/architecture-overview.md", "summary": "bu düğüm, antigravity ekosisteminin çekirdek mimari bileşenlerini, ajan sorumluluklarını ve veri akış hiyerarşisini tanımlar.", "in_degree": 5, "out_degree": 3, "centrality": 1.1429, "pagerank": 18.774, "color": "#3b82f6", "val": 38}, {"id": "clean-code-principles", "title": "yalın kodlama ve katı kurumsal standartlar", "type": "concept", "tags": ["clean-code", "performance", "security"], "path": "concepts/clean-code-principles.md", "summary": "antigravity çatısı altında üretilen tüm kodların uymak zorunda olduğu mutlak kurallardır.", "in_degree": 5, "out_degree": 3, "centrality": 1.1429, "pagerank": 17.767, "color": "#3b82f6", "val": 36}, {"id": "adr-001-autonomous-neural-vault", "title": "adr 001: antigravity kitine özgü bağımsız nöral bilgi ağının (neural vault) benimsenmesi", "type": "decisions", "tags": ["adr", "architecture", "memory"], "path": "decisions/adr-001-autonomous-neural-vault.md", "summary": "harici üçüncü parti masaüstü uygulamaları kullanıcının ortam değiştirmesini gerektirir ve kite bağımlılık getirir. çoklu ajan mimarimizde ajanların bağımsız olarak bilgi kaydettiği, `[[wikilink]]` ile çift yönlü bağ kurduğu ve kitin kendi i...", "in_degree": 3, "out_degree": 2, "centrality": 0.7143, "pagerank": 14.565, "color": "#f97316", "val": 27}, {"id": "episode-2026-11-21-kolektif-hafiza-kancasi", "title": "kolektif-hafiza-kancasi", "type": "episode", "tags": ["episode", "memory"], "path": "episodes/episode-2026-11-21-kolektif-hafiza-kancasi.md", "summary": "- **tarih:** 2026-11-21", "in_degree": 0, "out_degree": 3, "centrality": 0.4286, "pagerank": 1.875, "color": "#ef4444", "val": 6}, {"id": "episode-2026-11-21-otonom-hafiza-tamamlandi", "title": "otonom-hafiza-tamamlandi", "type": "episode", "tags": ["episode", "memory", "auto-recorded"], "path": "episodes/episode-2026-11-21-otonom-hafiza-tamamlandi.md", "summary": "- **tarih:** 2026-11-21", "in_degree": 0, "out_degree": 3, "centrality": 0.4286, "pagerank": 1.875, "color": "#ef4444", "val": 6}, {"id": "episode-2026-11-21-vault-bootstrap", "title": "oturum kaydı: nöral bilgi ağının kurulumu ve omurga entegrasyonu", "type": "episode", "tags": ["episode", "bootstrap", "log"], "path": "episodes/episode-2026-11-21-vault-bootstrap.md", "summary": "- **tarih:** 2026-11-21", "in_degree": 1, "out_degree": 2, "centrality": 0.4286, "pagerank": 6.488, "color": "#ef4444", "val": 11}, {"id": "playbook-clean-architecture", "title": "temiz mimari ve servis katmanı uygulama rehberi", "type": "playbook", "tags": ["playbook", "patterns", "backend"], "path": "playbooks/playbook-clean-architecture.md", "summary": "bu playbook, yeni bir servis veya backend bileşeni inşa edilirken izlenecek standartları tanımlar.", "in_degree": 2, "out_degree": 2, "centrality": 0.5714, "pagerank": 11.522, "color": "#10b981", "val": 21}], "links": [{"source": "index", "target": "architecture-overview", "type": "outlink"}, {"source": "index", "target": "episode-2026-11-21-vault-bootstrap", "type": "outlink"}, {"source": "index", "target": "clean-code-principles", "type": "outlink"}, {"source": "index", "target": "playbook-clean-architecture", "type": "outlink"}, {"source": "index", "target": "adr-001-autonomous-neural-vault", "type": "outlink"}, {"source": "architecture-overview", "target": "index", "type": "outlink"}, {"source": "architecture-overview", "target": "clean-code-principles", "type": "outlink"}, {"source": "architecture-overview", "target": "adr-001-autonomous-neural-vault", "type": "outlink"}, {"source": "clean-code-principles", "target": "architecture-overview", "type": "outlink"}, {"source": "clean-code-principles", "target": "index", "type": "outlink"}, {"source": "clean-code-principles", "target": "playbook-clean-architecture", "type": "outlink"}, {"source": "adr-001-autonomous-neural-vault", "target": "architecture-overview", "type": "outlink"}, {"source": "adr-001-autonomous-neural-vault", "target": "index", "type": "outlink"}, {"source": "episode-2026-11-21-kolektif-hafiza-kancasi", "target": "architecture-overview", "type": "outlink"}, {"source": "episode-2026-11-21-kolektif-hafiza-kancasi", "target": "index", "type": "outlink"}, {"source": "episode-2026-11-21-kolektif-hafiza-kancasi", "target": "clean-code-principles", "type": "outlink"}, {"source": "episode-2026-11-21-otonom-hafiza-tamamlandi", "target": "architecture-overview", "type": "outlink"}, {"source": "episode-2026-11-21-otonom-hafiza-tamamlandi", "target": "index", "type": "outlink"}, {"source": "episode-2026-11-21-otonom-hafiza-tamamlandi", "target": "clean-code-principles", "type": "outlink"}, {"source": "episode-2026-11-21-vault-bootstrap", "target": "index", "type": "outlink"}, {"source": "episode-2026-11-21-vault-bootstrap", "target": "adr-001-autonomous-neural-vault", "type": "outlink"}, {"source": "playbook-clean-architecture", "target": "index", "type": "outlink"}, {"source": "playbook-clean-architecture", "target": "clean-code-principles", "type": "outlink"}]};
+  window.__EMBEDDED_GRAPH_DATA__ = {"total_nodes": 8, "total_edges": 23, "nodes": [{"id": "index", "title": "antigravity nöral bilgi ağı ve otonom ikinci beyin", "type": "MOC", "tags": ["moc", "root", "neural-vault"], "path": "INDEX.md", "summary": "bu vault, harici hiçbir üçüncü parti uygulamaya ihtiyaç duymaksızın, antigravity ai-os kitine özgü yerel web zihin grafiği (`http://127.0.0.1:8990`), çift yönlü bağlantılı (`[[wikilink]]`) ve 20 yapay zeka ajanının ortak zekasıyla yaşayan o...", "in_degree": 7, "out_degree": 5, "centrality": 1.7143, "pagerank": 27.135, "color": "#64748b", "val": 54}, {"id": "architecture-overview", "title": "kurumsal sistem mimarisi ve bileşen haritası", "type": "concept", "tags": ["architecture", "c4-model", "enterprise"], "path": "concepts/architecture-overview.md", "summary": "bu düğüm, antigravity ekosisteminin çekirdek mimari bileşenlerini, ajan sorumluluklarını ve veri akış hiyerarşisini tanımlar.", "in_degree": 5, "out_degree": 3, "centrality": 1.1429, "pagerank": 18.774, "color": "#1c1c1c", "val": 38}, {"id": "clean-code-principles", "title": "yalın kodlama ve katı kurumsal standartlar", "type": "concept", "tags": ["clean-code", "performance", "security"], "path": "concepts/clean-code-principles.md", "summary": "antigravity çatısı altında üretilen tüm kodların uymak zorunda olduğu mutlak kurallardır.", "in_degree": 5, "out_degree": 3, "centrality": 1.1429, "pagerank": 17.767, "color": "#1c1c1c", "val": 36}, {"id": "adr-001-autonomous-neural-vault", "title": "adr 001: antigravity kitine özgü bağımsız nöral bilgi ağının (neural vault) benimsenmesi", "type": "decisions", "tags": ["adr", "architecture", "memory"], "path": "decisions/adr-001-autonomous-neural-vault.md", "summary": "harici üçüncü parti masaüstü uygulamaları kullanıcının ortam değiştirmesini gerektirir ve kite bağımlılık getirir. çoklu ajan mimarimizde ajanların bağımsız olarak bilgi kaydettiği, `[[wikilink]]` ile çift yönlü bağ kurduğu ve kitin kendi i...", "in_degree": 3, "out_degree": 2, "centrality": 0.7143, "pagerank": 14.565, "color": "#222222", "val": 27}, {"id": "episode-2026-11-21-kolektif-hafiza-kancasi", "title": "kolektif-hafiza-kancasi", "type": "episode", "tags": ["episode", "memory"], "path": "episodes/episode-2026-11-21-kolektif-hafiza-kancasi.md", "summary": "- **tarih:** 2026-11-21", "in_degree": 0, "out_degree": 3, "centrality": 0.4286, "pagerank": 1.875, "color": "#141414", "val": 6}, {"id": "episode-2026-11-21-otonom-hafiza-tamamlandi", "title": "otonom-hafiza-tamamlandi", "type": "episode", "tags": ["episode", "memory", "auto-recorded"], "path": "episodes/episode-2026-11-21-otonom-hafiza-tamamlandi.md", "summary": "- **tarih:** 2026-11-21", "in_degree": 0, "out_degree": 3, "centrality": 0.4286, "pagerank": 1.875, "color": "#141414", "val": 6}, {"id": "episode-2026-11-21-vault-bootstrap", "title": "oturum kaydı: nöral bilgi ağının kurulumu ve omurga entegrasyonu", "type": "episode", "tags": ["episode", "bootstrap", "log"], "path": "episodes/episode-2026-11-21-vault-bootstrap.md", "summary": "- **tarih:** 2026-11-21", "in_degree": 1, "out_degree": 2, "centrality": 0.4286, "pagerank": 6.488, "color": "#141414", "val": 11}, {"id": "playbook-clean-architecture", "title": "temiz mimari ve servis katmanı uygulama rehberi", "type": "playbook", "tags": ["playbook", "patterns", "backend"], "path": "playbooks/playbook-clean-architecture.md", "summary": "bu playbook, yeni bir servis veya backend bileşeni inşa edilirken izlenecek standartları tanımlar.", "in_degree": 2, "out_degree": 2, "centrality": 0.5714, "pagerank": 11.522, "color": "#1a1a1a", "val": 21}], "links": [{"source": "index", "target": "playbook-clean-architecture", "type": "outlink"}, {"source": "index", "target": "clean-code-principles", "type": "outlink"}, {"source": "index", "target": "episode-2026-11-21-vault-bootstrap", "type": "outlink"}, {"source": "index", "target": "architecture-overview", "type": "outlink"}, {"source": "index", "target": "adr-001-autonomous-neural-vault", "type": "outlink"}, {"source": "architecture-overview", "target": "clean-code-principles", "type": "outlink"}, {"source": "architecture-overview", "target": "index", "type": "outlink"}, {"source": "architecture-overview", "target": "adr-001-autonomous-neural-vault", "type": "outlink"}, {"source": "clean-code-principles", "target": "playbook-clean-architecture", "type": "outlink"}, {"source": "clean-code-principles", "target": "index", "type": "outlink"}, {"source": "clean-code-principles", "target": "architecture-overview", "type": "outlink"}, {"source": "adr-001-autonomous-neural-vault", "target": "index", "type": "outlink"}, {"source": "adr-001-autonomous-neural-vault", "target": "architecture-overview", "type": "outlink"}, {"source": "episode-2026-11-21-kolektif-hafiza-kancasi", "target": "clean-code-principles", "type": "outlink"}, {"source": "episode-2026-11-21-kolektif-hafiza-kancasi", "target": "index", "type": "outlink"}, {"source": "episode-2026-11-21-kolektif-hafiza-kancasi", "target": "architecture-overview", "type": "outlink"}, {"source": "episode-2026-11-21-otonom-hafiza-tamamlandi", "target": "clean-code-principles", "type": "outlink"}, {"source": "episode-2026-11-21-otonom-hafiza-tamamlandi", "target": "index", "type": "outlink"}, {"source": "episode-2026-11-21-otonom-hafiza-tamamlandi", "target": "architecture-overview", "type": "outlink"}, {"source": "episode-2026-11-21-vault-bootstrap", "target": "index", "type": "outlink"}, {"source": "episode-2026-11-21-vault-bootstrap", "target": "adr-001-autonomous-neural-vault", "type": "outlink"}, {"source": "playbook-clean-architecture", "target": "clean-code-principles", "type": "outlink"}, {"source": "playbook-clean-architecture", "target": "index", "type": "outlink"}]};
   window.__EMBEDDED_NODE_DETAILS__ = {"index": {"id": "index", "title": "antigravity nöral bilgi ağı ve otonom ikinci beyin", "type": "MOC", "path": "INDEX.md", "tags": ["moc", "root", "neural-vault"], "outlinks": ["adr-001-autonomous-neural-vault", "architecture-overview", "clean-code-principles", "episode-2026-11-21-vault-bootstrap", "playbook-clean-architecture"], "backlinks": ["adr-001-autonomous-neural-vault", "architecture-overview", "clean-code-principles", "episode-2026-11-21-kolektif-hafiza-kancasi", "episode-2026-11-21-otonom-hafiza-tamamlandi", "episode-2026-11-21-vault-bootstrap", "playbook-clean-architecture"], "summary": "bu vault, harici hiçbir üçüncü parti uygulamaya ihtiyaç duymaksızın, antigravity ai-os kitine özgü yerel web zihin grafiği (`http://127.0.0.1:8990`), çift yönlü bağlantılı (`[[wikilink]]`) ve 20 yapay zeka ajanının ortak zekasıyla yaşayan o...", "content": "---\nid: index\ntitle: \"antigravity nöral bilgi ağı ve otonom ikinci beyin\"\ntype: MOC\ntags:\n  - moc\n  - root\n  - neural-vault\ncreated: 2026-11-21\nupdated: 2026-11-21\nlinks:\n  - \"[[architecture-overview]]\"\n  - \"[[adr-001-autonomous-neural-vault]]\"\n  - \"[[playbook-clean-architecture]]\"\n---\n\n# 🧠 antigravity nöral bilgi ağı (neural vault)\n\n> bu vault, harici hiçbir üçüncü parti uygulamaya ihtiyaç duymaksızın, antigravity ai-os kitine özgü yerel web zihin grafiği (`http://127.0.0.1:8990`), çift yönlü bağlantılı (`[[wikilink]]`) ve 20 yapay zeka ajanının ortak zekasıyla yaşayan otonom bir bilgi işletim sistemidir.\n\n---\n\n## 🗺️ harita ve içerik düğümleri (maps of content - MOC)\n\n### 1. 🧬 kavramlar ve mimari kurallar (`concepts/`)\n- [[architecture-overview]] — kurumsal sistem mimarisi, katmanlar ve veri akış diyagramı.\n- [[clean-code-principles]] — yalın kodlama, n+1 engelleme ve katı api güvenliği standartları.\n\n### 2. ⚖️ mimari karar kayıtları (`decisions/`)\n- [[adr-001-autonomous-neural-vault]] — kite özgü bağımsız nöral işletim sisteminin benimsenmesi.\n\n### 3. 📖 uygulama rehberleri ve kalıplar (`playbooks/`)\n- [[playbook-clean-architecture]] — kurumsal temiz mimari, servis katmanı ve repository kalıpları.\n\n### 4. 📜 epizodik oturum kayıtları (`episodes/`)\n- [[episode-2026-11-21-vault-bootstrap]] — nöral bilgi ağının başlangıç ve omurga kurulumu.\n\n---\n\n## 🔗 görselleştirme ve grafik bağlantıları (graph view)\nbu zihin haritası tarayıcıda doğrudan antigravity web arayüzü ile görüntülenir:\n- adres: `http://127.0.0.1:8990` veya `.agent/neural_os/ui/graph-preview.html`\n- renk grupları (`concepts`, `decisions`, `playbooks`, `episodes`) otomatik boyanır.\n- tüm ajanların oluşturduğu bağlantılar canlı fizik motorlu zihin haritası olarak izlenebilir.\n", "in_degree": 7, "out_degree": 5, "pagerank": 27.135}, "architecture-overview": {"id": "architecture-overview", "title": "kurumsal sistem mimarisi ve bileşen haritası", "type": "concept", "path": "concepts/architecture-overview.md", "tags": ["architecture", "c4-model", "enterprise"], "outlinks": ["adr-001-autonomous-neural-vault", "clean-code-principles", "index"], "backlinks": ["adr-001-autonomous-neural-vault", "clean-code-principles", "episode-2026-11-21-kolektif-hafiza-kancasi", "episode-2026-11-21-otonom-hafiza-tamamlandi", "index"], "summary": "bu düğüm, antigravity ekosisteminin çekirdek mimari bileşenlerini, ajan sorumluluklarını ve veri akış hiyerarşisini tanımlar.", "content": "---\nid: architecture-overview\ntitle: \"kurumsal sistem mimarisi ve bileşen haritası\"\ntype: concept\ntags:\n  - architecture\n  - c4-model\n  - enterprise\ncreated: 2026-11-21\nupdated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[clean-code-principles]]\"\n  - \"[[adr-001-autonomous-neural-vault]]\"\n---\n\n# 🏛️ kurumsal sistem mimarisi (architecture overview)\n\nbu düğüm, antigravity ekosisteminin çekirdek mimari bileşenlerini, ajan sorumluluklarını ve veri akış hiyerarşisini tanımlar.\n\n---\n\n## 🧩 mimari bileşenler ve etkileşim şeması\n\n```mermaid\nflowchart TD\n    user[\"kullanıcı talebi / komut\"] --> router[\"intelligent routing\"]\n    router --> orch[\"orchestrator (ana koordinatör)\"]\n    \n    subgraph agents [\"uzman yapay zeka ajanları\"]\n        orch --> front[\"frontend-specialist\"]\n        orch --> back[\"backend-specialist\"]\n        orch --> sec[\"security-auditor\"]\n        orch --> db[\"database-architect\"]\n    end\n    \n    subgraph neural_vault [\"🧠 antigravity neural-os (yerel bilgi ağı)\"]\n        front <--> vault_concepts[\"concepts / bilgi düğümleri\"]\n        back <--> vault_decisions[\"decisions / adr kayıtları\"]\n        sec <--> vault_playbooks[\"playbooks / güvenlik & tasarım\"]\n        db <--> vault_episodes[\"episodes / oturum hafızası\"]\n    end\n    \n    agents --> delivery[\"sıfır kesintili dağıtım & doğrulama\"]\n```\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n- kodlama ilkeleri: [[clean-code-principles]]\n- mimari karar: [[adr-001-autonomous-neural-vault]]\n", "in_degree": 5, "out_degree": 3, "pagerank": 18.774}, "clean-code-principles": {"id": "clean-code-principles", "title": "yalın kodlama ve katı kurumsal standartlar", "type": "concept", "path": "concepts/clean-code-principles.md", "tags": ["clean-code", "performance", "security"], "outlinks": ["architecture-overview", "index", "playbook-clean-architecture"], "backlinks": ["architecture-overview", "episode-2026-11-21-kolektif-hafiza-kancasi", "episode-2026-11-21-otonom-hafiza-tamamlandi", "index", "playbook-clean-architecture"], "summary": "antigravity çatısı altında üretilen tüm kodların uymak zorunda olduğu mutlak kurallardır.", "content": "---\nid: clean-code-principles\ntitle: \"yalın kodlama ve katı kurumsal standartlar\"\ntype: concept\ntags:\n  - clean-code\n  - performance\n  - security\ncreated: 2026-11-21\nupdated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[architecture-overview]]\"\n  - \"[[playbook-clean-architecture]]\"\n---\n\n# 🧹 yalın kodlama ve kurumsal standartlar (clean code principles)\n\nantigravity çatısı altında üretilen tüm kodların uymak zorunda olduğu mutlak kurallardır.\n\n---\n\n## ⚡ temel ilkeler\n1. **aşırı mühendislik yasağı (anti-overengineering):** ihtiyacın ötesinde soyutlama veya hayali yapılar eklenemez.\n2. **katı api güvenliği:** girdi doğrulama, rate limit ve idor/bola kontrolleri zorunludur.\n3. **bellek hijyeni:** kapatılmamış soketler ve event listener bellek sızıntıları engellenir.\n4. **n+1 sorgu engeli:** eager loading veya batch fetching uygulanır.\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n- sistem mimarisi: [[architecture-overview]]\n- uygulama rehberi: [[playbook-clean-architecture]]\n", "in_degree": 5, "out_degree": 3, "pagerank": 17.767}, "adr-001-autonomous-neural-vault": {"id": "adr-001-autonomous-neural-vault", "title": "adr 001: antigravity kitine özgü bağımsız nöral bilgi ağının (neural vault) benimsenmesi", "type": "decisions", "path": "decisions/adr-001-autonomous-neural-vault.md", "tags": ["adr", "architecture", "memory"], "outlinks": ["architecture-overview", "index"], "backlinks": ["architecture-overview", "episode-2026-11-21-vault-bootstrap", "index"], "summary": "harici üçüncü parti masaüstü uygulamaları kullanıcının ortam değiştirmesini gerektirir ve kite bağımlılık getirir. çoklu ajan mimarimizde ajanların bağımsız olarak bilgi kaydettiği, `[[wikilink]]` ile çift yönlü bağ kurduğu ve kitin kendi i...", "content": "---\nid: adr-001-autonomous-neural-vault\ntitle: \"adr 001: antigravity kitine özgü bağımsız nöral bilgi ağının (neural vault) benimsenmesi\"\nstatus: accepted\ndate: 2026-11-21\ntags:\n  - adr\n  - architecture\n  - memory\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[architecture-overview]]\"\n---\n\n# ⚖️ adr 001: kite özgü otonom nöral bilgi ağının benimsenmesi\n\n## 1. bağlam (context)\nharici üçüncü parti masaüstü uygulamaları kullanıcının ortam değiştirmesini gerektirir ve kite bağımlılık getirir. çoklu ajan mimarimizde ajanların bağımsız olarak bilgi kaydettiği, `[[wikilink]]` ile çift yönlü bağ kurduğu ve kitin kendi içindeki web sunucusu üzerinden görselleştirilebilen bağımsız bir ikinci beyin gerekmektedir.\n\n## 2. karar (decision)\n`.agent/vault/` dizini altında harici hiçbir masaüstü aracına ihtiyaç duymayan, tamamen kitin kendi web canvas motoruyla çalışan yerel bir vault yapısının kurulmasına karar verilmiştir.\n- çift yönlü bağlantı: `[[dosya-adi]]` standardı.\n- klasör yapısı: `concepts/`, `decisions/`, `playbooks/`, `episodes/`.\n- grafik arayüzü: kitin yerleşik `http://127.0.0.1:8990` web paneli üzerinden kuvvet odaklı fizik motoru.\n\n## 3. sonuçlar (consequences)\n- **olumlu:** kullanıcı harici hiçbir uygulama kurmadan doğrudan tarayıcıdan interaktif zihin haritasını izleyebilir.\n- **olumlu:** token tasarruflu, yalnızca ilgili düğümleri çağıran yerel nöral bellek altyapısı kazanıldı.\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n- sistem mimarisi: [[architecture-overview]]\n", "in_degree": 3, "out_degree": 2, "pagerank": 14.565}, "episode-2026-11-21-kolektif-hafiza-kancasi": {"id": "episode-2026-11-21-kolektif-hafiza-kancasi", "title": "kolektif-hafiza-kancasi", "type": "episode", "path": "episodes/episode-2026-11-21-kolektif-hafiza-kancasi.md", "tags": ["episode", "memory"], "outlinks": ["architecture-overview", "clean-code-principles", "index"], "backlinks": [], "summary": "- **tarih:** 2026-11-21", "content": "---\nid: episode-2026-11-21-kolektif-hafiza-kancasi\ntitle: \"kolektif-hafiza-kancasi\"\ntype: episode\ntags:\n  - episode\n  - memory\ncreated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[architecture-overview]]\"\n  - \"[[clean-code-principles]]\"\n---\n\n# 📜 kolektif-hafiza-kancasi\n\n- **tarih:** 2026-11-21\n- **özet:** ajanlar arasi nobet degisimi ve otomatik oturum hafizasi kancasi devreye alindi\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n", "in_degree": 0, "out_degree": 3, "pagerank": 1.875}, "episode-2026-11-21-otonom-hafiza-tamamlandi": {"id": "episode-2026-11-21-otonom-hafiza-tamamlandi", "title": "otonom-hafiza-tamamlandi", "type": "episode", "path": "episodes/episode-2026-11-21-otonom-hafiza-tamamlandi.md", "tags": ["episode", "memory", "auto-recorded"], "outlinks": ["architecture-overview", "clean-code-principles", "index"], "backlinks": [], "summary": "- **tarih:** 2026-11-21", "content": "---\nid: episode-2026-11-21-otonom-hafiza-tamamlandi\ntitle: \"otonom-hafiza-tamamlandi\"\ntype: episode\nagent: \"orchestrator\"\ntags:\n  - episode\n  - memory\n  - auto-recorded\ncreated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[clean-code-principles]]\"\n  - \"[[architecture-overview]]\"\n---\n\n# 📜 otonom-hafiza-tamamlandi\n\n- **tarih:** 2026-11-21\n- **icra eden ajan:** @[orchestrator]\n- **özet:** kullanici eforu sifirlandi, checklist ve otonom hafiza kancalari birlestirildi\n\n---\n\n## 📌 ilgili bağlantılar\n- [[INDEX]]\n- [[clean-code-principles]]\n- [[architecture-overview]]\n", "in_degree": 0, "out_degree": 3, "pagerank": 1.875}, "episode-2026-11-21-vault-bootstrap": {"id": "episode-2026-11-21-vault-bootstrap", "title": "oturum kaydı: nöral bilgi ağının kurulumu ve omurga entegrasyonu", "type": "episode", "path": "episodes/episode-2026-11-21-vault-bootstrap.md", "tags": ["episode", "bootstrap", "log"], "outlinks": ["adr-001-autonomous-neural-vault", "index"], "backlinks": ["index"], "summary": "- **tarih:** 2026-11-21", "content": "---\nid: episode-2026-11-21-vault-bootstrap\ntitle: \"oturum kaydı: nöral bilgi ağının kurulumu ve omurga entegrasyonu\"\ntype: episode\ntags:\n  - episode\n  - bootstrap\n  - log\ncreated: 2026-11-21\nupdated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[adr-001-autonomous-neural-vault]]\"\n---\n\n# 📜 oturum kaydı: vault bootstrap\n\n- **tarih:** 2026-11-21\n- **işlem:** antigravity kitine özgü yerel nöral bilgi ağı mimarisinin (`.agent/vault/`) sıfırdan kurulması.\n- **kapsam:** kavram düğümleri, adr kararları ve oturum kayıtlarının çift yönlü ilişkilendirilmesi.\n- **durum:** 1. modül başarıyla tamamlandı.\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n- mimari karar kaydı: [[adr-001-autonomous-neural-vault]]\n", "in_degree": 1, "out_degree": 2, "pagerank": 6.488}, "playbook-clean-architecture": {"id": "playbook-clean-architecture", "title": "temiz mimari ve servis katmanı uygulama rehberi", "type": "playbook", "path": "playbooks/playbook-clean-architecture.md", "tags": ["playbook", "patterns", "backend"], "outlinks": ["clean-code-principles", "index"], "backlinks": ["clean-code-principles", "index"], "summary": "bu playbook, yeni bir servis veya backend bileşeni inşa edilirken izlenecek standartları tanımlar.", "content": "---\nid: playbook-clean-architecture\ntitle: \"temiz mimari ve servis katmanı uygulama rehberi\"\ntype: playbook\ntags:\n  - playbook\n  - patterns\n  - backend\ncreated: 2026-11-21\nupdated: 2026-11-21\nlinks:\n  - \"[[INDEX]]\"\n  - \"[[clean-code-principles]]\"\n---\n\n# 📖 temiz mimari uygulama rehberi (playbook)\n\nbu playbook, yeni bir servis veya backend bileşeni inşa edilirken izlenecek standartları tanımlar.\n\n---\n\n## 🏗️ katman düzeni\n```text\nsrc/\n├── domain/       # saf iş mantığı ve tipler (harici bağımlılık yok)\n├── services/     # kullanım senaryoları ve orkestrasyon\n├── repositories/ # veritabanı ve dış kaynak erişimi\n└── api/          # uç noktalar, girdi doğrulama (zod) ve güvenlik\n```\n\n---\n\n## 📌 ilgili bağlantılar\n- ana indeks: [[INDEX]]\n- temiz kod kuralları: [[clean-code-principles]]\n", "in_degree": 2, "out_degree": 2, "pagerank": 11.522}};
 
   // Override fetch for offline mode
@@ -826,15 +821,15 @@ body {
     }
   }
 
-  // Draw Cyber Grid & Starfield
+  // Draw Cyber Grid & Starfield (Strict Monochrome)
   function drawCyberBackground(width, height) {
-    // 1. Perspective Cyber Grid
+    // 1. Monochromatic Grid (Dark Gray lines on Black)
     const gridSize = 48 * camera.zoom;
     const offsetX = (camera.x % gridSize);
     const offsetY = (camera.y % gridSize);
 
     ctx.save();
-    ctx.strokeStyle = "rgba(99, 102, 241, 0.05)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
     ctx.lineWidth = 1;
 
     // Vertical lines
@@ -852,11 +847,11 @@ body {
       ctx.stroke();
     }
 
-    // 2. Stars
+    // 2. Subtle Monochrome Stars (White/Light Gray specs)
     for (const s of stars) {
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(165, 180, 252, ${s.alpha})`;
+      ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha * 0.4})`;
       ctx.fill();
       s.y -= s.speed;
       if (s.y < 0) s.y = height;
@@ -882,7 +877,7 @@ body {
     ctx.translate(camera.x, camera.y);
     ctx.scale(camera.zoom, camera.zoom);
 
-    // 1. Draw Links & Animated Energy Pulses
+    // 1. Draw Links & Animated Energy Pulses (Monochrome)
     pulseOffset = (pulseOffset + 0.007) % 1.0;
 
     for (const link of links) {
@@ -890,26 +885,26 @@ body {
       ctx.beginPath();
       ctx.moveTo(link.source.x, link.source.y);
       ctx.lineTo(link.target.x, link.target.y);
-      ctx.strokeStyle = isConnectedToActive ? "rgba(129, 140, 248, 0.85)" : "rgba(148, 163, 184, 0.16)";
-      ctx.lineWidth = isConnectedToActive ? 2.5 : 1.2;
+      ctx.strokeStyle = isConnectedToActive ? "rgba(255, 255, 255, 0.70)" : "rgba(255, 255, 255, 0.12)";
+      ctx.lineWidth = isConnectedToActive ? 2.0 : 1.0;
       ctx.stroke();
 
-      // Energy packet animation (flowing photon)
+      // Energy packet animation (flowing white/light gray photon)
       const dx = link.target.x - link.source.x;
       const dy = link.target.y - link.source.y;
       const px = link.source.x + dx * pulseOffset;
       const py = link.source.y + dy * pulseOffset;
 
       ctx.beginPath();
-      ctx.arc(px, py, isConnectedToActive ? 3.0 : 1.8, 0, Math.PI * 2);
-      ctx.fillStyle = isConnectedToActive ? "#38bdf8" : "rgba(129, 140, 248, 0.65)";
-      ctx.shadowColor = "#38bdf8";
-      ctx.shadowBlur = 6;
+      ctx.arc(px, py, isConnectedToActive ? 2.5 : 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = isConnectedToActive ? "#ffffff" : "rgba(200, 200, 200, 0.55)";
+      ctx.shadowColor = "#ffffff";
+      ctx.shadowBlur = isConnectedToActive ? 5 : 2;
       ctx.fill();
       ctx.shadowBlur = 0; // reset
     }
 
-    // 2. Draw Nodes
+    // 2. Draw Nodes (Strict Monochrome: Siyah ve Koyu Gri)
     const now = Date.now() * 0.003;
     const typeIcons = {
       "moc": "🧠",
@@ -930,36 +925,36 @@ body {
       const isHovered = node === hoveredNode;
       const isHub = (node.pagerank || 0) > 18;
 
-      // Holographic Pulsing Outer Rings for Hub / High PageRank nodes
+      // Holographic Pulsing Outer Rings for Hub / High PageRank nodes (Monochrome)
       if (isHub || isSelected) {
-        const pulseSize = Math.sin(now + node.radius) * 4;
+        const pulseSize = Math.sin(now + node.radius) * 3;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius + 10 + pulseSize, 0, Math.PI * 2);
-        ctx.strokeStyle = isSelected ? "rgba(56, 189, 248, 0.7)" : `${node.color}55`;
-        ctx.lineWidth = 1.2;
-        ctx.setLineDash([4, 4]);
+        ctx.arc(node.x, node.y, node.radius + 8 + pulseSize, 0, Math.PI * 2);
+        ctx.strokeStyle = isSelected ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.22)";
+        ctx.lineWidth = 1.0;
+        ctx.setLineDash([3, 3]);
         ctx.stroke();
         ctx.setLineDash([]); // reset dash
       }
 
-      // Glow halo
+      // Glow halo (White/Gray bloom)
       if (isSelected || isHovered || isHub) {
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius + (isSelected ? 10 : 6), 0, Math.PI * 2);
-        ctx.fillStyle = isSelected ? "rgba(56, 189, 248, 0.3)" : `${node.color}25`;
-        ctx.shadowColor = node.color || "#8b5cf6";
-        ctx.shadowBlur = isSelected ? 16 : 8;
+        ctx.arc(node.x, node.y, node.radius + (isSelected ? 8 : 4), 0, Math.PI * 2);
+        ctx.fillStyle = isSelected ? "rgba(255, 255, 255, 0.16)" : "rgba(255, 255, 255, 0.06)";
+        ctx.shadowColor = "#ffffff";
+        ctx.shadowBlur = isSelected ? 12 : 6;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
 
-      // Outer circle (Glass node container)
+      // Outer circle (Dark Gray node container)
       ctx.beginPath();
       ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-      ctx.fillStyle = node.color || "#64748b";
+      ctx.fillStyle = isSelected ? "#2d2d2d" : (node.color || "#1c1c1c");
       ctx.fill();
-      ctx.lineWidth = isSelected ? 2.5 : (isHub ? 2.0 : 1.2);
-      ctx.strokeStyle = isSelected ? "#38bdf8" : "rgba(255, 255, 255, 0.6)";
+      ctx.lineWidth = isSelected ? 2.0 : (isHub ? 1.5 : 1.0);
+      ctx.strokeStyle = isSelected ? "#ffffff" : "rgba(255, 255, 255, 0.35)";
       ctx.stroke();
 
       // Node Icon (Type symbol)
@@ -971,7 +966,7 @@ body {
 
       // Node label
       ctx.font = `${isSelected ? "600 " : ""}11px -apple-system, sans-serif`;
-      ctx.fillStyle = isSelected ? "#fff" : "#cbd5e1";
+      ctx.fillStyle = isSelected ? "#ffffff" : "#a3a3a3";
       ctx.textBaseline = "alphabetic";
       ctx.textAlign = "center";
       ctx.fillText(node.title.length > 20 ? node.title.slice(0, 18) + ".." : node.title, node.x, node.y + node.radius + 14);
@@ -1011,13 +1006,13 @@ body {
     const toRadarX = (wx) => 6 + (wx - minX) * scale;
     const toRadarY = (wy) => 6 + (wy - minY) * scale;
 
-    // Draw minimap nodes
+    // Draw minimap nodes (Monochrome)
     for (const n of nodes) {
       const rx = toRadarX(n.x);
       const ry = toRadarY(n.y);
       radarCtx.beginPath();
-      radarCtx.arc(rx, ry, n === activeNode ? 3.5 : 2.0, 0, Math.PI * 2);
-      radarCtx.fillStyle = n === activeNode ? "#38bdf8" : (n.color || "#64748b");
+      radarCtx.arc(rx, ry, n === activeNode ? 3.0 : 1.8, 0, Math.PI * 2);
+      radarCtx.fillStyle = n === activeNode ? "#ffffff" : "#525252";
       radarCtx.fill();
     }
 
@@ -1029,7 +1024,7 @@ body {
     const rvw = (camWorldBottomRight.x - camWorldTopLeft.x) * scale;
     const rvh = (camWorldBottomRight.y - camWorldTopLeft.y) * scale;
 
-    radarCtx.strokeStyle = "rgba(56, 189, 248, 0.65)";
+    radarCtx.strokeStyle = "rgba(255, 255, 255, 0.50)";
     radarCtx.lineWidth = 1;
     radarCtx.strokeRect(rvx, rvy, rvw, rvh);
   }

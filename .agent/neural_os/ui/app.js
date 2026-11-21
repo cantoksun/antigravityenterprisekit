@@ -183,15 +183,15 @@
     }
   }
 
-  // Draw Cyber Grid & Starfield
+  // Draw Cyber Grid & Starfield (Strict Monochrome)
   function drawCyberBackground(width, height) {
-    // 1. Perspective Cyber Grid
+    // 1. Monochromatic Grid (Dark Gray lines on Black)
     const gridSize = 48 * camera.zoom;
     const offsetX = (camera.x % gridSize);
     const offsetY = (camera.y % gridSize);
 
     ctx.save();
-    ctx.strokeStyle = "rgba(99, 102, 241, 0.05)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
     ctx.lineWidth = 1;
 
     // Vertical lines
@@ -209,11 +209,11 @@
       ctx.stroke();
     }
 
-    // 2. Stars
+    // 2. Subtle Monochrome Stars (White/Light Gray specs)
     for (const s of stars) {
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(165, 180, 252, ${s.alpha})`;
+      ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha * 0.4})`;
       ctx.fill();
       s.y -= s.speed;
       if (s.y < 0) s.y = height;
@@ -239,7 +239,7 @@
     ctx.translate(camera.x, camera.y);
     ctx.scale(camera.zoom, camera.zoom);
 
-    // 1. Draw Links & Animated Energy Pulses
+    // 1. Draw Links & Animated Energy Pulses (Monochrome)
     pulseOffset = (pulseOffset + 0.007) % 1.0;
 
     for (const link of links) {
@@ -247,26 +247,26 @@
       ctx.beginPath();
       ctx.moveTo(link.source.x, link.source.y);
       ctx.lineTo(link.target.x, link.target.y);
-      ctx.strokeStyle = isConnectedToActive ? "rgba(129, 140, 248, 0.85)" : "rgba(148, 163, 184, 0.16)";
-      ctx.lineWidth = isConnectedToActive ? 2.5 : 1.2;
+      ctx.strokeStyle = isConnectedToActive ? "rgba(255, 255, 255, 0.70)" : "rgba(255, 255, 255, 0.12)";
+      ctx.lineWidth = isConnectedToActive ? 2.0 : 1.0;
       ctx.stroke();
 
-      // Energy packet animation (flowing photon)
+      // Energy packet animation (flowing white/light gray photon)
       const dx = link.target.x - link.source.x;
       const dy = link.target.y - link.source.y;
       const px = link.source.x + dx * pulseOffset;
       const py = link.source.y + dy * pulseOffset;
 
       ctx.beginPath();
-      ctx.arc(px, py, isConnectedToActive ? 3.0 : 1.8, 0, Math.PI * 2);
-      ctx.fillStyle = isConnectedToActive ? "#38bdf8" : "rgba(129, 140, 248, 0.65)";
-      ctx.shadowColor = "#38bdf8";
-      ctx.shadowBlur = 6;
+      ctx.arc(px, py, isConnectedToActive ? 2.5 : 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = isConnectedToActive ? "#ffffff" : "rgba(200, 200, 200, 0.55)";
+      ctx.shadowColor = "#ffffff";
+      ctx.shadowBlur = isConnectedToActive ? 5 : 2;
       ctx.fill();
       ctx.shadowBlur = 0; // reset
     }
 
-    // 2. Draw Nodes
+    // 2. Draw Nodes (Strict Monochrome: Siyah ve Koyu Gri)
     const now = Date.now() * 0.003;
     const typeIcons = {
       "moc": "🧠",
@@ -287,36 +287,36 @@
       const isHovered = node === hoveredNode;
       const isHub = (node.pagerank || 0) > 18;
 
-      // Holographic Pulsing Outer Rings for Hub / High PageRank nodes
+      // Holographic Pulsing Outer Rings for Hub / High PageRank nodes (Monochrome)
       if (isHub || isSelected) {
-        const pulseSize = Math.sin(now + node.radius) * 4;
+        const pulseSize = Math.sin(now + node.radius) * 3;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius + 10 + pulseSize, 0, Math.PI * 2);
-        ctx.strokeStyle = isSelected ? "rgba(56, 189, 248, 0.7)" : `${node.color}55`;
-        ctx.lineWidth = 1.2;
-        ctx.setLineDash([4, 4]);
+        ctx.arc(node.x, node.y, node.radius + 8 + pulseSize, 0, Math.PI * 2);
+        ctx.strokeStyle = isSelected ? "rgba(255, 255, 255, 0.85)" : "rgba(255, 255, 255, 0.22)";
+        ctx.lineWidth = 1.0;
+        ctx.setLineDash([3, 3]);
         ctx.stroke();
         ctx.setLineDash([]); // reset dash
       }
 
-      // Glow halo
+      // Glow halo (White/Gray bloom)
       if (isSelected || isHovered || isHub) {
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius + (isSelected ? 10 : 6), 0, Math.PI * 2);
-        ctx.fillStyle = isSelected ? "rgba(56, 189, 248, 0.3)" : `${node.color}25`;
-        ctx.shadowColor = node.color || "#8b5cf6";
-        ctx.shadowBlur = isSelected ? 16 : 8;
+        ctx.arc(node.x, node.y, node.radius + (isSelected ? 8 : 4), 0, Math.PI * 2);
+        ctx.fillStyle = isSelected ? "rgba(255, 255, 255, 0.16)" : "rgba(255, 255, 255, 0.06)";
+        ctx.shadowColor = "#ffffff";
+        ctx.shadowBlur = isSelected ? 12 : 6;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
 
-      // Outer circle (Glass node container)
+      // Outer circle (Dark Gray node container)
       ctx.beginPath();
       ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-      ctx.fillStyle = node.color || "#64748b";
+      ctx.fillStyle = isSelected ? "#2d2d2d" : (node.color || "#1c1c1c");
       ctx.fill();
-      ctx.lineWidth = isSelected ? 2.5 : (isHub ? 2.0 : 1.2);
-      ctx.strokeStyle = isSelected ? "#38bdf8" : "rgba(255, 255, 255, 0.6)";
+      ctx.lineWidth = isSelected ? 2.0 : (isHub ? 1.5 : 1.0);
+      ctx.strokeStyle = isSelected ? "#ffffff" : "rgba(255, 255, 255, 0.35)";
       ctx.stroke();
 
       // Node Icon (Type symbol)
@@ -328,7 +328,7 @@
 
       // Node label
       ctx.font = `${isSelected ? "600 " : ""}11px -apple-system, sans-serif`;
-      ctx.fillStyle = isSelected ? "#fff" : "#cbd5e1";
+      ctx.fillStyle = isSelected ? "#ffffff" : "#a3a3a3";
       ctx.textBaseline = "alphabetic";
       ctx.textAlign = "center";
       ctx.fillText(node.title.length > 20 ? node.title.slice(0, 18) + ".." : node.title, node.x, node.y + node.radius + 14);
@@ -368,13 +368,13 @@
     const toRadarX = (wx) => 6 + (wx - minX) * scale;
     const toRadarY = (wy) => 6 + (wy - minY) * scale;
 
-    // Draw minimap nodes
+    // Draw minimap nodes (Monochrome)
     for (const n of nodes) {
       const rx = toRadarX(n.x);
       const ry = toRadarY(n.y);
       radarCtx.beginPath();
-      radarCtx.arc(rx, ry, n === activeNode ? 3.5 : 2.0, 0, Math.PI * 2);
-      radarCtx.fillStyle = n === activeNode ? "#38bdf8" : (n.color || "#64748b");
+      radarCtx.arc(rx, ry, n === activeNode ? 3.0 : 1.8, 0, Math.PI * 2);
+      radarCtx.fillStyle = n === activeNode ? "#ffffff" : "#525252";
       radarCtx.fill();
     }
 
@@ -386,7 +386,7 @@
     const rvw = (camWorldBottomRight.x - camWorldTopLeft.x) * scale;
     const rvh = (camWorldBottomRight.y - camWorldTopLeft.y) * scale;
 
-    radarCtx.strokeStyle = "rgba(56, 189, 248, 0.65)";
+    radarCtx.strokeStyle = "rgba(255, 255, 255, 0.50)";
     radarCtx.lineWidth = 1;
     radarCtx.strokeRect(rvx, rvy, rvw, rvh);
   }
