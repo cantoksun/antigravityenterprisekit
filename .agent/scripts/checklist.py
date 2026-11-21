@@ -56,6 +56,7 @@ def print_error(text: str):
 
 # Define priority-ordered checks
 CORE_CHECKS = [
+    ("Neural Vault Audit", ".agent/scripts/neural_memory.py", True),
     ("Security Scan", ".agent/skills/vulnerability-scanner/scripts/security_scan.py", True),
     ("Clean-Room Audit", ".agent/skills/reverse-engineering/scripts/cleanroom_auditor.py", True),
     ("Lint Check", ".agent/skills/lint-and-validate/scripts/lint_runner.py", True),
@@ -88,9 +89,12 @@ def run_script(name: str, script_path: Path, project_path: str, url: Optional[st
     print_step(f"Running: {name}")
     
     # Build command
-    cmd = ["python", str(script_path), project_path]
-    if url and ("lighthouse" in script_path.name.lower() or "playwright" in script_path.name.lower()):
-        cmd.append(url)
+    if "neural_memory" in script_path.name.lower():
+        cmd = ["python", str(script_path), "--audit"]
+    else:
+        cmd = ["python", str(script_path), project_path]
+        if url and ("lighthouse" in script_path.name.lower() or "playwright" in script_path.name.lower()):
+            cmd.append(url)
     
     # Run script
     try:
