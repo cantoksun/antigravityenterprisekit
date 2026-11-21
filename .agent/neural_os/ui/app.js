@@ -219,6 +219,50 @@
       type: l.type
     })).filter(l => typeof l.source === "object" && typeof l.target === "object");
 
+    // Dynamic Filter Counts based on actual node database
+    const typeCounts = {
+      all: nodes.length,
+      rule: 0,
+      agent: 0,
+      skill: 0,
+      concept: 0,
+      decision: 0,
+      moc: 0
+    };
+    nodes.forEach(n => {
+      const t = (n.type || "").toLowerCase();
+      if (t.includes("rule")) typeCounts.rule++;
+      else if (t.includes("agent")) typeCounts.agent++;
+      else if (t.includes("skill")) typeCounts.skill++;
+      else if (t.includes("concept")) typeCounts.concept++;
+      else if (t.includes("decision")) typeCounts.decision++;
+      else if (t.includes("moc") || t.includes("root")) typeCounts.moc++;
+    });
+
+    const labels = {
+      all: `tümü (${typeCounts.all})`,
+      rule: `anayasa (${typeCounts.rule})`,
+      agent: `ajanlar (${typeCounts.agent})`,
+      skill: `beceriler (${typeCounts.skill})`,
+      concept: `kavramlar (${typeCounts.concept})`,
+      decision: `kararlar (${typeCounts.decision})`,
+      moc: `ana indeks (${typeCounts.moc})`
+    };
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      const type = btn.getAttribute("data-type");
+      if (labels[type]) {
+        const dot = btn.querySelector(".btn-dot");
+        if (dot) {
+          btn.innerHTML = "";
+          btn.appendChild(dot);
+          btn.appendChild(document.createTextNode(` ${labels[type]}`));
+        } else {
+          btn.textContent = labels[type];
+        }
+      }
+    });
+
     console.log(`[Neural-OS] Grafik yuklendi: ${nodes.length} dugum, ${links.length} baglanti.`);
     recenter();
   }
