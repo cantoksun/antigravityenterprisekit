@@ -108,6 +108,19 @@ class QualityGatesEngine:
             severity="warning",
         ))
 
+        # 1.4 Context Budget Optimization
+        budget_script = self.toolkit_root / "scripts" / "context_budget.py"
+        if budget_script.is_file():
+            code, out, _ = self.run_command([sys.executable, str(budget_script), "--json"])
+            budget_pass = (code == 0)
+            msg = "Context baseline within ceiling (< 4,000 tokens)" if budget_pass else "Context budget exceeded ceiling"
+            checks.append(GateCheckResult(
+                name="Context Budget Optimization (context_budget)",
+                passed=budget_pass,
+                message=msg,
+                severity="warning",
+            ))
+
         passed = all(c.passed for c in checks if c.severity == "error")
         return GateReport(
             gate="session-start",
