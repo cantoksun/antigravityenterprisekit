@@ -52,11 +52,12 @@
   const btnReload = document.getElementById("btnReload");
 
   // Physics Simulation Dynamic Variables (Obsidian Grade)
-  let repulsion = 2800;
-  let springLength = 140;
-  const SPRING_STRENGTH = 0.045;
-  const DAMPING = 0.88;
-  let centerGravity = 0.015;
+  let repulsion = 2200;
+  let springLength = 130;
+  const SPRING_STRENGTH = 0.005; // Gentle, numerically stable spring force
+  const MAX_VELOCITY = 14;       // Prevents physics explosion / infinite drift
+  const DAMPING = 0.84;
+  let centerGravity = 0.016;
 
   function resizeCanvas() {
     canvas.width = viewport.clientWidth * window.devicePixelRatio;
@@ -168,11 +169,18 @@
     for (const node of nodes) {
       if (node === draggedNode || node.pinned) continue;
 
+      // Velocity Clamping to prevent numerical explosion
+      const speed = Math.sqrt(node.vx * node.vx + node.vy * node.vy);
+      if (speed > MAX_VELOCITY) {
+        node.vx = (node.vx / speed) * MAX_VELOCITY;
+        node.vy = (node.vy / speed) * MAX_VELOCITY;
+      }
+
       node.vx += (cx - node.x) * centerGravity;
       node.vy += (cy - node.y) * centerGravity;
 
-      node.vx *= 0.82; // Smoother settling
-      node.vy *= 0.82;
+      node.vx *= DAMPING;
+      node.vy *= DAMPING;
 
       // Velocity threshold: if movement is tiny, lock into rest
       if (Math.abs(node.vx) < 0.04) node.vx = 0;
