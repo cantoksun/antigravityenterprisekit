@@ -29,8 +29,8 @@
   const radarCanvas = document.getElementById("radarCanvas");
   const radarCtx = radarCanvas.getContext("2d");
 
-  // Filtering state
-  let currentFilter = "all";
+  // Filtering state (Multi-Select Enabled)
+  let activeFilters = new Set(); // Empty means show all
 
   // UI Drawer elements
   const sideDrawer = document.getElementById("sideDrawer");
@@ -757,21 +757,54 @@
     }, 180);
   });
 
-  // Filter Button Listeners
-  document.querySelectorAll(".filter-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      currentFilter = btn.getAttribute("data-type");
+  // Filter Button Listeners (Multi-Select Enabled)
+  const btnAll = document.querySelector('.filter-btn[data-type="all"]');
+  const typeButtons = document.querySelectorAll('.filter-btn:not([data-type="all"])');
 
-      // Filter nodes visibility/opacity
-      nodes.forEach(n => {
-        if (currentFilter === "all") {
-          n.filtered = false;
+  function updateNodeFiltering() {
+    if (activeFilters.size === 0) {
+      if (btnAll) btnAll.classList.add("active");
+      typeButtons.forEach(b => b.classList.remove("active"));
+      nodes.forEach(n => { n.filtered = false; });
+    } else {
+      if (btnAll) btnAll.classList.remove("active");
+      typeButtons.forEach(b => {
+        const type = b.getAttribute("data-type");
+        if (activeFilters.has(type)) {
+          b.classList.add("active");
         } else {
-          n.filtered = !n.type.toLowerCase().includes(currentFilter);
+          b.classList.remove("active");
         }
       });
+      nodes.forEach(n => {
+        const nType = (n.type || "").toLowerCase();
+        // Check if node matches any active filter
+        let matched = false;
+        for (const f of activeFilters) {
+          if (nType.includes(f)) {
+            matched = true;
+            break;
+          }
+        }
+        n.filtered = !matched;
+      });
+    }
+  }
+
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const type = btn.getAttribute("data-type");
+
+      if (type === "all") {
+        activeFilters.clear();
+      } else {
+        if (activeFilters.has(type)) {
+          activeFilters.delete(type);
+        } else {
+          activeFilters.add(type);
+        }
+      }
+      updateNodeFiltering();
     });
   });
 
